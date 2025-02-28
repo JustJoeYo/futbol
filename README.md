@@ -47,6 +47,7 @@ We will analyze team performance in a fictional soccer league across seasons, id
   <ol>
       <ul>
         <li><a>Using Trello to manage project tasks.</a></li>
+        <li><a href="https://trello.com/invite/b/67c2340bd0160bfb3a178207/ATTIf59e54a7d9bf1dd3271508d5d9a6f4c2FE3C86F9/mod-1-final-project">Click me to visit project board!</a></li>
         <li><a>Plan to distribute tasks evenly between our three team members.</a></li>
         <li><a>Check in frequently via Slack or Zoom.</a></li>
         <li><a>Follow red, green, refactoring process</a></li>
@@ -77,9 +78,16 @@ We will analyze team performance in a fictional soccer league across seasons, id
       </ul>
   </ol>
 
-Include link to your initial DTR document and the date it was completed. If you do additional DTRs later in the project, you should link the revised versions here as well with the date. New versions should be listed alongside older versions. Do not delete old DTRs.
+## Our DTR documents
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+  <ol>
+      <ul>
+        <li><a href="https://docs.google.com/document/d/1p25a3jL93fg868aQRc19drl-PbqwYSI6V0IO3B3Sr0M/edit?tab=t.0">DTR 02/28/2025</a></li>
+        <li><a>later revision here</a></li>
+      </ul>
+  </ol>
+
+<p align="right">(<a href="">back to top</a>)</p>
 
 <!-- ROADMAP -->
 
@@ -135,7 +143,5 @@ Katya's [![Katya's LinkedIn][linkedin-shield]][linkedin-url3]
 [product-screenshot]: images/screenshot.png
 [Ruby]: https://img.shields.io/badge/ruby-%23CC342D.svg?style=for-the-badge&logo=ruby&logoColor=white
 [Ruby-url]: https://www.ruby-lang.org/en/
-
-Trello Board: https://trello.com/invite/b/67c2340bd0160bfb3a178207/ATTIf59e54a7d9bf1dd3271508d5d9a6f4c2FE3C86F9/mod-1-final-project
-
-DTR: https://docs.google.com/document/d/1p25a3jL93fg868aQRc19drl-PbqwYSI6V0IO3B3Sr0M/edit?tab=t.0
+[Trello Board]: https://trello.com/invite/b/67c2340bd0160bfb3a178207/ATTIf59e54a7d9bf1dd3271508d5d9a6f4c2FE3C86F9/mod-1-final-project
+[DTR]: https://docs.google.com/document/d/1p25a3jL93fg868aQRc19drl-PbqwYSI6V0IO3B3Sr0M/edit?tab=t.0
