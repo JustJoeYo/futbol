@@ -98,13 +98,20 @@ See the [open issues](https://github.com/JustJoeYo/futbol/issues) for a full lis
 
 ### Contributors:
 
-<a href="https://github.com/JustJoeYo/futbol/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=JustJoeYo/futbol" alt="contrib.rocks image" />
+<a href="https://github.com/JustJoeYo">
+  <img src="https://avatars.githubusercontent.com/u/53631725?v=4" alt="contrib.rocks image" width="128" height="128" />
+</a>
+<a href="https://github.com/Andrew-Snyder627">
+  <img src="https://avatars.githubusercontent.com/u/197684533?v=4" alt="contrib.rocks image" width="128" height="128" />
+</a>
+<a href="https://github.com/KatyaW-01">
+  <img src="https://avatars.githubusercontent.com/u/195077509?v=4" alt="contrib.rocks image" width="128" height="128" />
 </a>
 
-[![Joe's LinkedIn][linkedin-shield]][linkedin-url]
-[![Andrew's LinkedIn][linkedin-shield]][linkedin-url2]
-[![Katya's LinkedIn][linkedin-shield]][linkedin-url3]
+
+Joe's [![Joe's LinkedIn][linkedin-shield]][linkedin-url]
+Andrew's [![Andrew's LinkedIn][linkedin-shield]][linkedin-url2]
+Katya's [![Katya's LinkedIn][linkedin-shield]][linkedin-url3]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
