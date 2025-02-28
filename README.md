@@ -36,8 +36,7 @@ We will analyze team performance in a fictional soccer league across seasons, id
 
   <ol>
       <ul>
-        <li><a>one</a></li>
-        <li><a>two</a></li>
+        <li><a>Planning to check in Monday after work time and as needed throughout the project.</a></li>
       </ul>
   </ol>
 
@@ -47,10 +46,10 @@ We will analyze team performance in a fictional soccer league across seasons, id
 
   <ol>
       <ul>
-        <li><a>one</a></li>
-        <li><a>two</a></li>
-        <li><a>three</a></li>
-        <li><a>four</a></li>
+        <li><a>Using Trello to manage project tasks.</a></li>
+        <li><a>Plan to distribute tasks evenly between our three team members.</a></li>
+        <li><a>Check in frequently via Slack or Zoom.</a></li>
+        <li><a>Follow red, green, refactoring process</a></li>
       </ul>
   </ol>
 
@@ -60,9 +59,9 @@ We will analyze team performance in a fictional soccer league across seasons, id
 
   <ol>
       <ul>
-        <li><a>one</a></li>
-        <li><a>two</a></li>
-        <li><a>three</a></li>
+        <li><a>We decided to use Trello to manage our project and delegate tasks. It seemed easy to use and quick to start.</a></li>
+        <li><a>Planning to create three lists, one for each team member where we will create tasks for each person.</a></li>
+        <li><a>Each task that each team member is responsible for will be completed by that team member. We can also comment and share on each others tasks as needed.</a></li>
       </ul>
   </ol>
 
@@ -72,9 +71,9 @@ We will analyze team performance in a fictional soccer league across seasons, id
 
   <ol>
       <ul>
-        <li><a>one</a></li>
-        <li><a>two</a></li>
-        <li><a>three</a></li>
+        <li><a>Decided on a consistent test structure so we can easily read each others tests.</a></li>
+        <li><a>Determined a consistent class structure to easily reach each others code.</a></li>
+        <li><a>Using lib and spec folders in our directory to keep our files organized.</a></li>
       </ul>
   </ol>
 
@@ -108,7 +107,6 @@ See the [open issues](https://github.com/JustJoeYo/futbol/issues) for a full lis
   <img src="https://avatars.githubusercontent.com/u/195077509?v=4" alt="contrib.rocks image" width="128" height="128" />
 </a>
 
-
 Joe's [![Joe's LinkedIn][linkedin-shield]][linkedin-url]
 Andrew's [![Andrew's LinkedIn][linkedin-shield]][linkedin-url2]
 Katya's [![Katya's LinkedIn][linkedin-shield]][linkedin-url3]
@@ -137,3 +135,7 @@ Katya's [![Katya's LinkedIn][linkedin-shield]][linkedin-url3]
 [product-screenshot]: images/screenshot.png
 [Ruby]: https://img.shields.io/badge/ruby-%23CC342D.svg?style=for-the-badge&logo=ruby&logoColor=white
 [Ruby-url]: https://www.ruby-lang.org/en/
+
+Trello Board: https://trello.com/invite/b/67c2340bd0160bfb3a178207/ATTIf59e54a7d9bf1dd3271508d5d9a6f4c2FE3C86F9/mod-1-final-project
+
+DTR: https://docs.google.com/document/d/1p25a3jL93fg868aQRc19drl-PbqwYSI6V0IO3B3Sr0M/edit?tab=t.0

@@ -1,5 +1,9 @@
 require 'spec_helper'  # Requires the spec_helper file for configuration and setup
 
+# run `rspec` in the terminal to run the tests
+# run `rspec spec/example_spec.rb` in the terminal to run only the tests in this file
+# run 'open coverage/index.html' in the terminal to view the test coverage report
+
 # Configures RSpec to use the documentation formatter
 RSpec.configure do |config|
   config.formatter = :documentation
