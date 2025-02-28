@@ -107,7 +107,6 @@ See the [open issues](https://github.com/JustJoeYo/futbol/issues) for a full lis
   <img src="https://avatars.githubusercontent.com/u/195077509?v=4" alt="contrib.rocks image" width="128" height="128" />
 </a>
 
-
 Joe's [![Joe's LinkedIn][linkedin-shield]][linkedin-url]
 Andrew's [![Andrew's LinkedIn][linkedin-shield]][linkedin-url2]
 Katya's [![Katya's LinkedIn][linkedin-shield]][linkedin-url3]
