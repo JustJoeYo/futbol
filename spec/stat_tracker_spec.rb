@@ -5,7 +5,7 @@ RSpec.configure do |config|
   config.formatter = :documentation
 end
 
-RSpec.describe Stat_Tracker do
+RSpec.describe StatTracker do
   before(:each) do # we are just going to use the default CSV files that we have here from now (copy pasted from runner.rb)
     @game_path = './data/games.csv'
     @team_path = './data/teams.csv'
@@ -17,18 +17,18 @@ RSpec.describe Stat_Tracker do
       game_teams: @game_teams_path
     }
 
-    @stat_tracker = Stat_Tracker.from_csv(@locations)
+    @StatTracker = StatTracker.from_csv(@locations)
   end
 
   describe 'initialization' do
     it '#initialize' do
-      expect(@stat_tracker).to be_an_instance_of(Stat_Tracker)
+      expect(@StatTracker).to be_an_instance_of(StatTracker)
     end
 
     it '#attributes' do
-      expect(@stat_tracker.games).not_to be_empty
-      expect(@stat_tracker.teams).not_to be_empty
-      expect(@stat_tracker.game_teams).not_to be_empty
+      expect(@StatTracker.games).not_to be_empty
+      expect(@StatTracker.teams).not_to be_empty
+      expect(@StatTracker.game_teams).not_to be_empty
     end
   end
 
@@ -40,10 +40,10 @@ RSpec.describe Stat_Tracker do
   # class methods only (keyword 'self')
   describe 'class methods' do
     it '::from_csv' do
-      expect(@stat_tracker).to be_an_instance_of(Stat_Tracker)
-      expect(@stat_tracker.games).not_to be_empty
-      expect(@stat_tracker.teams).not_to be_empty
-      expect(@stat_tracker.game_teams).not_to be_empty
+      expect(@StatTracker).to be_an_instance_of(StatTracker)
+      expect(@StatTracker.games).not_to be_empty
+      expect(@StatTracker.teams).not_to be_empty
+      expect(@StatTracker.game_teams).not_to be_empty
     end
   end
 end
