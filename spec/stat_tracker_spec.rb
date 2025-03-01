@@ -29,6 +29,7 @@ RSpec.describe StatTracker do
       expect(@StatTracker.games).not_to be_empty
       expect(@StatTracker.teams).not_to be_empty
       expect(@StatTracker.game_teams).not_to be_empty
+      expect(@StatTracker.game_statistics).not_to be_empty
     end
   end
 
