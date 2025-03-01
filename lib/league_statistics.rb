@@ -1,9 +1,10 @@
 class LeagueStatistics
-
-    def initialize
-
-    end
+    attr_reader :teams
     
+    def initialize(teams)
+        @teams = teams
+    end
+
     def count_of_teams
     
     end
