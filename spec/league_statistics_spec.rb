@@ -11,13 +11,19 @@ RSpec.describe LeagueStatistics do
         @team_path = CSV.read('./data/teams.csv', headers: true, header_converters: :symbol)
         @game_teams = CSV.read('./data/game_teams_spec.csv', headers: true, header_converters: :symbol)
 
-        @league_statistics = LeagueStatistics.new(@team_path)
+        @league_statistics = LeagueStatistics.new(@team_path, @game_teams)
       end
 
     describe '#initialize' do
         it 'exists' do
 
             expect(@league_statistics).to be_a(LeagueStatistics)
+        end
+
+        it '#attributes' do
+
+            expect(@league_statistics.team_path).not_to be_empty
+            expect(@league_statistics.game_teams).not_to be_empty
         end
     end
 
@@ -48,4 +54,27 @@ RSpec.describe LeagueStatistics do
             expect(@league_statistics.highest_scoring_visitor).to eq("Houston Dynamo")
         end
     end
+
+    describe '#highest_scoring_home_team' do
+        it 'returns the team with the highest average score per game when at home' do
+
+            expect(@league_statistics.highest_scoring_home_team).to eq('FC Dallas')
+        end
+    end
+
+    describe '#lowest_scoring_visitor' do
+        it 'returns the team with the lowest average score per game when away' do
+
+            expect(@league_statistics.lowest_scoring_visitor).to eq('Houston Dynamo')
+        end
+    end
+
+    describe '#lowest_scoring_home_team' do
+        it 'returns the team with the lowest average score per game when at home' do
+
+            expect(@league_statistics.lowest_scoring_home_team).to eq('FC Dallas')
+        end
+    end
+
+    # Add in helper method tests as needed
 end
