@@ -5,27 +5,48 @@ class SeasonStatistics
         @games = games
     end
 
+    #helper method
+    def games_in_season(season_id)
+        game_ids = []
+        @games.each do |game|
+            if game[:season] == season_id
+               game_ids << game[:game_id]
+            end
+        end
+
+        season_games = []
+        @game_teams.find_all do |games|
+            if game_ids.include?(games[:game_id])
+                season_games << games
+            end
+        end
+        season_games
+    end
+
     def winningest_coach(season_id)
+        games = games_in_season(season_id)
+
+        
         
     end
   
-    def worst_coach(season_id)
+    # def worst_coach(season_id)
       
-    end
+    # end
   
-    def most_accurate_team(season_id)
+    # def most_accurate_team(season_id)
       
-    end
+    # end
   
-    def least_accurate_team(season_id)
+    # def least_accurate_team(season_id)
       
-    end
+    # end
   
-    def most_tackles(season_id)
+    # def most_tackles(season_id)
       
-    end
+    # end
   
-    def fewest_tackles(season_id)
+    # def fewest_tackles(season_id)
       
-    end
+    # end
 end
