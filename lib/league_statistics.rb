@@ -1,7 +1,8 @@
 class LeagueStatistics
-    attr_reader :teams, :game_teams
+    attr_reader :games, :teams, :game_teams
 
-    def initialize(teams, game_teams)
+    def initialize(games, teams, game_teams)
+        @games = games
         @teams = teams
         @game_teams = game_teams
     end
@@ -20,7 +21,18 @@ class LeagueStatistics
         end
     end
 
-    def calculate_avg_goals
+    def calculate_avg_goals(team_id)
+        games_played = @games.select do |game|
+            game[:away_team_id] == team_id || game[:home_team_id] == team_id
+        end
+
+        total_goals = games_played.sum do |game|
+            if game[:home_team_id] == team_id
+                game[:home_goals].to_i
+            else
+                game[:away_goals].to_i
+            end
+        end
        
     end
 

@@ -8,6 +8,7 @@ end
 RSpec.describe LeagueStatistics do
     before(:each) do # we are just going to use the default CSV files that we have here from now (copy pasted from runner.rb)
 
+        @games = CSV.read('./data/games_spec.csv', headers: true, header_converters: :symbol)
         @team_path = CSV.read('./data/teams.csv', headers: true, header_converters: :symbol)
         @game_teams = CSV.read('./data/game_teams_spec.csv', headers: true, header_converters: :symbol)
 
@@ -22,6 +23,7 @@ RSpec.describe LeagueStatistics do
 
         it '#attributes' do
 
+            expect(@league_statistics.games).not_to be_empty
             expect(@league_statistics.teams).not_to be_empty
             expect(@league_statistics.game_teams).not_to be_empty
         end
