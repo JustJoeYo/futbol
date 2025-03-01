@@ -77,4 +77,6 @@ RSpec.describe LeagueStatistics do
     end
 
     # Add in helper method tests as needed
+
+    # Team name helper method test
 end
