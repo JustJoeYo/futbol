@@ -43,6 +43,34 @@ class LeagueStatistics
         end
     end
 
+    def team_avg_goals_by_hoa(hoa) # Starts with the hoa argument to determine home or away games
+        #filters the games dataset and keeps the home or away data based on the hoa argument. .select based on this condition.
+        filtered_games = @games.select do |game|
+            if hoa == 'home'
+                game[:home_team_id]
+            else
+                game[:away_team_id]
+            end
+        end.group_by do |game| # Next I want to group the data by team id.
+            if hoa == 'home' # If hoa = home, group by home_team_id
+                game[:home_team_id]
+            else # If hoa = away, group by away_team_id
+                game[:away_team_id]
+            end
+        end
+
+        #At this point, I'm expecting a hash with the home/away team id as keys, 
+        ## and the values are arrays with game data.
+
+        filtered_games.transform_keys do |team_id| #Converting team id keys to team names.
+            team_name(team_id)
+        end.transform_values do |games| #Converting the array values to the teams average goals per game.
+            calculate_avg_goals(games.first[:home_team_id] || games.first[:away_team_id]) #takes the first home/away team id and passes into calculate avg goals.
+        end
+
+        #Final result, hash with keys team names, and values of average goals, based on the argument of hoa
+    end
+
     # Methods
 
     def count_of_teams #counts number of teams in the csv
