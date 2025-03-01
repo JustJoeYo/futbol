@@ -8,7 +8,9 @@ RSpec.describe SeasonStatistics do
     before(:each) do # we are just going to use the default CSV files that we have here from now (copy pasted from runner.rb)
 
         @game_teams_path = CSV.read('./data/game_teams.csv', headers: true, header_converters: :symbol)
-        @season_statistics = SeasonStatistics.new(@game_teams_path)
+        @games_path = CSV.read('./data/games.csv', headers: true, header_converters: :symbol)
+
+        @season_statistics = SeasonStatistics.new(@game_teams_path,@games_path)
         
       end
     describe 'initialization' do
@@ -17,6 +19,7 @@ RSpec.describe SeasonStatistics do
         end
         it '#attributes' do
             expect(@season_statistics.game_teams).not_to be_empty
+            expect(@season_statistics.games).not_to be_empty
         end
     end
     describe 'instance methods' do
@@ -39,7 +42,7 @@ RSpec.describe SeasonStatistics do
         it 'has most tackles' do
 
         end
-        
+
         it 'has fewest tackles' do
 
         end
