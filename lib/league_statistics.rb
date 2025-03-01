@@ -6,12 +6,12 @@ class LeagueStatistics
         @game_teams = game_teams
     end
 
-    def count_of_teams
-    
+    def count_of_teams #counts unique team ids for a count of teams
+        @teams['team_id'].uniq.count
     end
   
     def best_offense
-      
+        
     end
   
     def worst_offense
