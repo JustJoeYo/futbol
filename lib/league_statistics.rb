@@ -33,7 +33,14 @@ class LeagueStatistics
                 game[:away_goals].to_i
             end
         end
-       
+
+        total_games = games_played.size
+
+        if total_games.zero? #Guard against zero
+            0.0
+        else
+            total_goals.to_f / total_games
+        end
     end
 
     # Methods
