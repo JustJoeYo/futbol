@@ -29,6 +29,19 @@ RSpec.describe LeagueStatistics do
         end
     end
 
+    describe '#team_name' do
+        it 'returns the correct team name when given a valid team ID' do
+            
+            expect(@league_statistics.team_name('6')).to eq('FC Dallas')
+            expect(@league_statistics.team_name('3')).to eq('Houston Dynamo')
+        end
+
+        it 'returns "Unknown Team" when given an invalid team ID' do
+            
+            expect(@league_statistics.team_name('99999')).to eq('Unknown Team')
+        end
+    end
+
     describe '#count_of_teams' do
         it 'returns the total number of teams' do
 
@@ -77,8 +90,4 @@ RSpec.describe LeagueStatistics do
             expect(@league_statistics.lowest_scoring_home_team).to eq('FC Dallas')
         end
     end
-
-    # Add in helper method tests as needed
-
-    # Team name helper method test
 end
