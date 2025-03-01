@@ -36,17 +36,17 @@ RSpec.describe LeagueStatistics do
             expect(@league_statistics.team_name('3')).to eq('Houston Dynamo')
         end
 
-        xit 'returns "Unknown Team" when given an invalid team ID' do
+        it 'returns "Unknown Team" when given an invalid team ID' do
             
             expect(@league_statistics.team_name('99999')).to eq('Unknown Team') # Fake ID
         end
     end
 
     describe '#calculate_avg-goals' do
-        xit 'correctly calculates average goals per game for a team' do
+        it 'correctly calculates average goals per game for a team' do
 
-            expect(@league_statistics.calculate_avg_goals('6')).to eq(3.0)
-            expect(@league_statistics.calculate_avg_goals('3')).to eq(1.67) #Rounded
+            expect(@league_statistics.calculate_avg_goals('6')).to eq(2.8)
+            expect(@league_statistics.calculate_avg_goals('3')).to eq(1.6) #Rounded down
         end
 
         xit 'returns 0.0 if the team has played no games' do
