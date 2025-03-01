@@ -26,12 +26,81 @@ RSpec.describe SeasonStatistics do
         it 'has an array of games' do
             @season_statistics.games_in_season("20152016")
             
-            expected_result_array = [2015030141,3,away,LOSS,REG,Alain Vigneault,2,9,50,10,5,1,48.5,2,3]
+            expected_result_array = [
+                {
+                  game_id: "2015030141",
+                  team_id: "3",
+                  hoa: "away",
+                  result: "LOSS",
+                  settled_in: "REG",
+                  head_coach: "Alain Vigneault",
+                  goals: "2",
+                  shots: "9",
+                  tackles: "50",
+                  pim: "10",
+                  powerplayopportunities: "5",
+                  powerplaygoals: "1",
+                  faceoffwinpercentage: "48.5",
+                  giveaways: "2",
+                  takeaways: "3"
+                },
+                {
+                  game_id: "2015030141",
+                  team_id: "5",
+                  hoa: "home",
+                  result: "WIN",
+                  settled_in: "REG",
+                  head_coach: "Mike Sullivan",
+                  goals: "3",
+                  shots: "7",
+                  tackles: "35",
+                  pim: "10",
+                  powerplayopportunities: "5",
+                  powerplaygoals: "1",
+                  faceoffwinpercentage: "51.5",
+                  giveaways: "10",
+                  takeaways: "4"
+                },
+                {
+                  game_id: "2015030142",
+                  team_id: "3",
+                  hoa: "away",
+                  result: "TIE",
+                  settled_in: "REG",
+                  head_coach: "Alain Vigneault",
+                  goals: "2",
+                  shots: "7",
+                  tackles: "57",
+                  pim: "19",
+                  powerplayopportunities: "3",
+                  powerplaygoals: "0",
+                  faceoffwinpercentage: "44.3",
+                  giveaways: "3",
+                  takeaways: "3"
+                },
+                {
+                  game_id: "2015030142",
+                  team_id: "5",
+                  hoa: "home",
+                  result: "TIE",
+                  settled_in: "REG",
+                  head_coach: "Mike Sullivan",
+                  goals: "2",
+                  shots: "7",
+                  tackles: "25",
+                  pim: "15",
+                  powerplayopportunities: "5",
+                  powerplaygoals: "2",
+                  faceoffwinpercentage: "55.7",
+                  giveaways: "10",
+                  takeaways: "2"
+                }
+              ]
 
-            expect(@season_statistics.games_in_season("20152016")).to eq([expected_result_array])
+            expect(@season_statistics.games_in_season("20152016")).to eq(expected_result_array)
         end
         it 'has a winningest_coach' do
-            #expect(@season_statistics.winningest_coach("20122013")).to eq("Claude Julien")
+            expect(@season_statistics.winningest_coach("20122013")).to eq("Claude Julien")
         end
 
         it 'has a worst coach' do

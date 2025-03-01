@@ -17,7 +17,7 @@ class SeasonStatistics
         season_games = []
         @game_teams.find_all do |games|
             if game_ids.include?(games[:game_id])
-                season_games << games
+                season_games << games.to_h
             end
         end
         season_games
@@ -26,7 +26,7 @@ class SeasonStatistics
     def winningest_coach(season_id)
         games = games_in_season(season_id)
 
-        
+
         
     end
   
