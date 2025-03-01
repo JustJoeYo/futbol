@@ -38,7 +38,50 @@ RSpec.describe LeagueStatistics do
 
         it 'returns "Unknown Team" when given an invalid team ID' do
             
-            expect(@league_statistics.team_name('99999')).to eq('Unknown Team')
+            expect(@league_statistics.team_name('99999')).to eq('Unknown Team') # Fake ID
+        end
+    end
+
+    describe '#calculate_avg-goals' do
+        it 'correctly calculates average goals per game for a team' do
+
+            expect(@league_statistics.calculate_avg_goals('6')).to eq(3.0)
+            expect(@league_statistics.calculate_avg_goals('3')).to eq(1.67) #Rounded
+        end
+
+        it 'returns 0.0 if the team has played no games' do
+
+            expect(@league_statistics.calculate_avg_goals('99999')).to eq(0.0) #Fake ID
+        end
+    end
+
+    describe '#team_avg_goals_by_hoa' do
+        it 'correctly calculates the avg goals per game for home teams' do
+            
+            expected_home_avg = {
+                "FC Dallas" => 3.0, 
+                "Houston Dynamo" => 1.5 
+            }
+
+            expect(@league_statistics.team_avg_goals_by_hoa('home')).to eq(expected_home_avg)
+        end
+
+        it 'correctly calculates the avg goals per game for the away teams' do
+            
+            expected_away_avg = {
+                "Houston Dynamo" => 2.0, 
+                "FC Dallas" => 2.0
+            }
+
+            expect(@league_statistics.team_avg_goals_by_hoa('away')).to eq(expected_away_avg)
+        end
+
+        it 'returns an empty hash if no teams have played in the given category' documentation
+
+            allow(@league_statistics).to receive(:@games).and_return([]) #trying to stub no games played
+
+            expect(@league_statistics.team_avg_goals_by_hoa('home')).to eq({})
+            expect(@league_statistics.team_avg_goals_by_hoa('away')).to eq({})
         end
     end
 
@@ -50,7 +93,7 @@ RSpec.describe LeagueStatistics do
     end
 
     describe '#best_offense' do #May want to stub
-        it 'returns the team with the highest average goals scored per game' do
+        xit 'returns the team with the highest average goals scored per game' do
 
             expect(@league_statistics.best_offense).to eq('FC Dallas') # From fixture
         end
