@@ -6,7 +6,7 @@ class SeasonStatistics
     end
 
     def winningest_coach(season_id)
-    
+        
     end
   
     def worst_coach(season_id)

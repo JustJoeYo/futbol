@@ -5,14 +5,12 @@ RSpec.configure do |config|
   end
 
 RSpec.describe SeasonStatistics do
-    before(:each) do # we are just going to use the default CSV files that we have here from now (copy pasted from runner.rb)
+    before(:each) do 
 
         @game_teams_path = CSV.read('./data/game_team_fixture.csv', headers: true, header_converters: :symbol)
-        @games_path = CSV.read('./data/games.csv', headers: true, header_converters: :symbol)
+        @games_path = CSV.read('./data/games_fixture.csv', headers: true, header_converters: :symbol)
 
         @season_statistics = SeasonStatistics.new(@game_teams_path,@games_path)
-
-        #binding.pry
         
       end
     describe 'initialization' do
@@ -26,11 +24,11 @@ RSpec.describe SeasonStatistics do
     end
     describe 'instance methods' do
         it 'has a winningest_coach' do
-            #expect(@season_statistics.winningest_coach())
+            expect(@season_statistics.winningest_coach("20122013")).to eq("Claude Julien")
         end
 
         it 'has a worst coach' do
-
+            expect(@season_statistics.worst_coach("20122013")).to eq("John Tortorella")
         end
 
         it 'has a most accurate team' do
