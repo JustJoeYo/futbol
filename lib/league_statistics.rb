@@ -6,8 +6,28 @@ class LeagueStatistics
         @game_teams = game_teams
     end
 
-    def count_of_teams #counts unique team ids for a count of teams
-        @teams['team_id'].uniq.count
+    # Helpers
+
+    def team_name(team_id) # Finds the team name based on the team_id
+        team = @teams.find do |team|
+            team[:team_id] == team_id
+        end
+
+        if team.nil?
+            'Unknown Team'
+        else
+            team[:teamName]
+        end
+    end
+
+    def calculate_avg_goals
+       
+    end
+
+    # Methods
+
+    def count_of_teams #counts number of teams in the csv
+        @teams.size
     end
   
     def best_offense
