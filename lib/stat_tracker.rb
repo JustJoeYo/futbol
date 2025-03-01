@@ -9,7 +9,7 @@ class StatTracker
     @games = games
     @teams = teams
     @game_teams = game_teams
-    @league_statistics = LeagueStatistics.new(teams)
+    @league_statistics = LeagueStatistics.new(games, teams, game_teams)
   end
 
   # Class method to create a new instance of StatTracker from CSV files

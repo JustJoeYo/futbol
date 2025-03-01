@@ -10,14 +10,14 @@ class LeagueStatistics
     # Helpers
 
     def team_name(team_id) # Finds the team name based on the team_id
-        team = @teams.find do |team|
+        team_names = @teams.find do |team|
             team[:team_id] == team_id
         end
 
-        if team.nil?
+        if team_names.nil?
             'Unknown Team'
         else
-            team[:teamName]
+            team_names[:teamname]
         end
     end
 
@@ -85,7 +85,7 @@ class LeagueStatistics
 
         #Step 4, Calculate average goals per game for each team
         team_avg_goals = {}
-        
+
         team_games.each do |team_name, games|
             team_id = nil
 
