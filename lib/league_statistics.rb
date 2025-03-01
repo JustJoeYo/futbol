@@ -22,20 +22,22 @@ class LeagueStatistics
     end
 
     def calculate_avg_goals(team_id)
+        #Step 1, find all games where the team played (home or away)
         games_played = @games.select do |game|
             game[:away_team_id] == team_id || game[:home_team_id] == team_id
         end
-
-        total_goals = games_played.sum do |game|
+        #Step 2, sum all goals scored by this team in those games
+        total_goals = games_played.sum do |game| #loops through the games_played.
             if game[:home_team_id] == team_id
-                game[:home_goals].to_i
+                game[:home_goals].to_i #Add home goals if the team was the home team
             else
-                game[:away_goals].to_i
+                game[:away_goals].to_i #Add away goals if the team was the away team
             end
         end
+        # Step 3, count the number of games the team played
+        total_games = games_played.size # Counts the total number of games played by the team
 
-        total_games = games_played.size
-
+        #Step 4, calculate average goals per game, avoiding zero division
         if total_games.zero? #Guard against zero
             0.0
         else
@@ -43,32 +45,60 @@ class LeagueStatistics
         end
     end
 
-    def team_avg_goals_by_hoa(hoa) # Starts with the hoa argument to determine home or away games
-        #filters the games dataset and keeps the home or away data based on the hoa argument. .select based on this condition.
+    def team_avg_goals_by_hoa(hoa)
+        #Step 1, filter the games by home/away
         filtered_games = @games.select do |game|
             if hoa == 'home'
-                game[:home_team_id]
+                game[:home_team_id] != nil #Ensures only home teams are selected
             else
-                game[:away_team_id]
-            end
-        end.group_by do |game| # Next I want to group the data by team id.
-            if hoa == 'home' # If hoa = home, group by home_team_id
-                game[:home_team_id]
-            else # If hoa = away, group by away_team_id
-                game[:away_team_id]
+                game[:away_team_id] != nil #Ensures only away teams are selected
             end
         end
 
-        #At this point, I'm expecting a hash with the home/away team id as keys, 
-        ## and the values are arrays with game data.
+        #Step 2, group the filtered games by team ID
+        grouped_games = {}
 
-        filtered_games.transform_keys do |team_id| #Converting team id keys to team names.
-            team_name(team_id)
-        end.transform_values do |games| #Converting the array values to the teams average goals per game.
-            calculate_avg_goals(games.first[:home_team_id] || games.first[:away_team_id]) #takes the first home/away team id and passes into calculate avg goals.
+        filtered_games.each do |game|
+            team_id = nil
+
+            if hoa == 'home'
+                team_id = game[:home_team_id]
+            else
+                team_id = game[:away_team_id]
+            end
+
+            if grouped_games[team_id].nil?
+                grouped_games[team_id] = []
+            end
+
+            grouped_games[team_id] << game
         end
 
-        #Final result, hash with keys team names, and values of average goals, based on the argument of hoa
+        #Step 3, convert team ids to team names
+        team_games = {}
+
+        grouped_games.each do |team_id, games|
+            team_name_string = team_name(team_id)
+
+            team_games[team_name_string] = games
+        end
+
+        #Step 4, Calculate average goals per game for each team
+        team_avg_goals = {}
+        
+        team_games.each do |team_name, games|
+            team_id = nil
+
+            if hoa == 'home'
+                team_id = games.first[:home_team_id]
+            else
+                team_id = games.first[:away_team_id]
+            end
+
+            team_avg_goals[team_name] = calculate_avg_goals(team_id)
+        end
+
+        team_avg_goals
     end
 
     # Methods
