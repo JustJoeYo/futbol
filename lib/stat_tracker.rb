@@ -1,13 +1,15 @@
 require 'csv'  # Requires the CSV library to handle CSV file operations
+require './lib/season_statistics'
 
 class StatTracker
-  attr_reader :games, :teams, :game_teams  # Defines getter methods for games, teams, and game_teams
+  attr_reader :games, :teams, :game_teams, :season_statistics  # Defines getter methods for games, teams, and game_teams
 
   # Initializes a new instance of StatTracker with games, teams, and game_teams data
   def initialize(games, teams, game_teams)
     @games = games
     @teams = teams
     @game_teams = game_teams
+    @season_statistics = SeasonStatistics.new(game_teams)
   end
 
   # Class method to create a new instance of StatTracker from CSV files
