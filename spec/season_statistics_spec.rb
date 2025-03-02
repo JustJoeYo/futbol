@@ -24,8 +24,6 @@ RSpec.describe SeasonStatistics do
     end
     describe 'instance methods' do
         it 'has an array of games' do
-            @season_statistics.games_in_season("20152016")
-            
             expected_result_array = [
                 {
                   game_id: "2015030141",
@@ -100,7 +98,6 @@ RSpec.describe SeasonStatistics do
             expect(@season_statistics.games_in_season("20152016")).to eq(expected_result_array)
         end
         it 'can group the data set by coach' do
-            @season_statistics.group_by_coach("20122013")
             expected_array = [[{ 
                                 game_id: "2012030221", 
                                 team_id: "3", 
@@ -149,7 +146,8 @@ RSpec.describe SeasonStatistics do
                                 powerplaygoals: "0", 
                                 faceoffwinpercentage: "38.2", 
                                 giveaways: "7", 
-                                takeaways: "9" } ], 
+                                takeaways: "9" 
+                                }], 
                                 [{ 
                                 game_id: "2012030221", 
                                 team_id: "6", 
@@ -347,7 +345,7 @@ RSpec.describe SeasonStatistics do
             expect(@season_statistics.games_in_season("20122013")).to eq(expected_result_array)
               
 
-            #expect(@season_statistics.winningest_coach("20122013")).to eq("Claude Julien")
+            expect(@season_statistics.winningest_coach("20122013")).to eq("Claude Julien")
         end
 
         it 'has a worst coach' do

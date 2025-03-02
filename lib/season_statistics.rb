@@ -23,7 +23,7 @@ class SeasonStatistics
         season_games
     end
 
-    #helper method two - makes a nested array of he data grouped by coach
+    #helper method two - makes a nested array of the data grouped by coach
     def group_by_coach(season_id)
         games = games_in_season(season_id)
 
@@ -33,17 +33,15 @@ class SeasonStatistics
         grouped_arrays
     end
 
-    #Main Methods
     def winningest_coach(season_id)
-        games = games_in_season(season_id)
-
-        games.each do |game|
-            game
-           
-        end
-
-
+        grouped_array = group_by_coach(season_id)
         
+        grouped_array.each do |coach_array|  #coach array is the array of hashes [ {}, {} ]
+            coach_array.map do |row| #this gives access to each row for the coaches in hash form {}
+            
+            end
+        end
+    
     end
   
     # def worst_coach(season_id)
