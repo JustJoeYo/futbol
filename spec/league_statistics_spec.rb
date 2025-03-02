@@ -76,9 +76,9 @@ RSpec.describe LeagueStatistics do
             expect(@league_statistics.team_avg_goals_by_hoa('away')).to eq(expected_away_avg)
         end
 
-        xit 'returns an empty hash if no teams have played in the given category' do
+        it 'returns an empty hash if no teams have played in the given category' do
 
-            allow(@league_statistics).to receive(:@games).and_return([]) #trying to stub no games played
+            @league_statistics.instance_variable_set(:@games, []) #trying to stub no games played, had to research a new stub method to directly hit the instance variable.
 
             expect(@league_statistics.team_avg_goals_by_hoa('home')).to eq({})
             expect(@league_statistics.team_avg_goals_by_hoa('away')).to eq({})

@@ -52,6 +52,8 @@ class LeagueStatistics
     end
 
     def team_avg_goals_by_hoa(hoa)
+
+        return {} if @games.empty? #Guard against empty
         #Step 1, filter the games by home/away
         filtered_games = @games.select do |game|
             if hoa == 'home'
