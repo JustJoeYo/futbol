@@ -50,7 +50,7 @@ class SeasonStatistics
         end
 
         best_coach = coach_stats.max_by do |coach,stats|
-            (stats[:wins] / stats[:games]) * 100
+            (stats[:wins].to_f / stats[:games].to_f) * 100
             
         end
         
@@ -75,10 +75,10 @@ class SeasonStatistics
         end
 
         worst_coach = coach_stats.min_by do |coach,stats|
-            (stats[:wins] / stats[:games]) * 100
+            (stats[:wins].to_f / stats[:games].to_f) * 100
             
         end
-        
+    
         return worst_coach[0]
       
     end

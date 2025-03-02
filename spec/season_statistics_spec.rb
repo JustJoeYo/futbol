@@ -351,7 +351,10 @@ RSpec.describe SeasonStatistics do
         end
 
         it 'has a worst coach' do
+            
             expect(@season_statistics.worst_coach("20122013")).to eq("John Tortorella")
+            expect(@season_statistics.worst_coach("20142015")).to eq("Joel Quenneville")
+    
         end
 
         it 'has a most accurate team' do
