@@ -49,28 +49,28 @@ RSpec.describe LeagueStatistics do
             expect(@league_statistics.calculate_avg_goals('3')).to eq(1.6) #Rounded down
         end
 
-        xit 'returns 0.0 if the team has played no games' do
+        it 'returns 0.0 if the team has played no games' do
 
             expect(@league_statistics.calculate_avg_goals('99999')).to eq(0.0) #Fake ID
         end
     end
 
     describe '#team_avg_goals_by_hoa' do
-        xit 'correctly calculates the avg goals per game for home teams' do
+        it 'correctly calculates the avg goals per game for home teams' do
             
             expected_home_avg = {
                 "FC Dallas" => 3.0, 
-                "Houston Dynamo" => 1.5 
+                "Houston Dynamo" => 1.5
             }
 
             expect(@league_statistics.team_avg_goals_by_hoa('home')).to eq(expected_home_avg)
         end
 
-        xit 'correctly calculates the avg goals per game for the away teams' do
+        it 'correctly calculates the avg goals per game for the away teams' do
             
             expected_away_avg = {
-                "Houston Dynamo" => 2.0, 
-                "FC Dallas" => 2.0
+                "Houston Dynamo" => 1.67, 
+                "FC Dallas" => 2.5
             }
 
             expect(@league_statistics.team_avg_goals_by_hoa('away')).to eq(expected_away_avg)

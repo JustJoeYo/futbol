@@ -21,10 +21,16 @@ class LeagueStatistics
         end
     end
 
-    def calculate_avg_goals(team_id)
+    def calculate_avg_goals(team_id, hoa = nil) #Adding hoa argument to handle separation of values logic
         #Step 1, find all games where the team played (home or away)
         games_played = @games.select do |game|
-            game[:away_team_id] == team_id || game[:home_team_id] == team_id
+            if hoa == 'home'
+                game[:home_team_id] == team_id #Only home games
+            elsif hoa == 'away'
+                game[:away_team_id] == team_id #Only away games
+            else
+                game[:home_team_id] == team_id || game[:away_team_id] == team_id #All games
+            end
         end
         #Step 2, sum all goals scored by this team in those games
         total_goals = games_played.sum do |game| #loops through the games_played.
@@ -41,7 +47,7 @@ class LeagueStatistics
         if total_games.zero? #Guard against zero
             0.0
         else
-            total_goals.to_f / total_games
+            (total_goals.to_f / total_games).round(2) # Rounding to handle large decimals. ex 2/3 = .67
         end
     end
 
@@ -59,18 +65,9 @@ class LeagueStatistics
         grouped_games = {}
 
         filtered_games.each do |game|
-            team_id = nil
+            team_id = hoa == 'home' ? game[:home_team_id] : game[:away_team_id] #Turnery for if else
 
-            if hoa == 'home'
-                team_id = game[:home_team_id]
-            else
-                team_id = game[:away_team_id]
-            end
-
-            if grouped_games[team_id].nil?
-                grouped_games[team_id] = []
-            end
-
+            grouped_games[team_id] ||= []
             grouped_games[team_id] << game
         end
 
@@ -87,15 +84,8 @@ class LeagueStatistics
         team_avg_goals = {}
 
         team_games.each do |team_name, games|
-            team_id = nil
-
-            if hoa == 'home'
-                team_id = games.first[:home_team_id]
-            else
-                team_id = games.first[:away_team_id]
-            end
-
-            team_avg_goals[team_name] = calculate_avg_goals(team_id)
+            team_id = hoa == 'home' ? games.first[:home_team_id] : games.first[:away_team_id] #Turnery for if else
+            team_avg_goals[team_name] = calculate_avg_goals(team_id, hoa)
         end
 
         team_avg_goals
