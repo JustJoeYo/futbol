@@ -108,7 +108,14 @@ class LeagueStatistics
     end
   
     def worst_offense
-      
+        lowest_avg = @teams.map do |team|
+            [team_name(team[:team_id]), calculate_avg_goals(team[:team_id])]
+        end.to_h
+
+        #Removing teams with 0.0 from the return
+        filtered_avg = lowest_avg.reject { |_, avg| avg == 0.0}
+
+        filtered_avg.min_by { |_, avg| avg }[0]
     end
   
     def highest_scoring_visitor
