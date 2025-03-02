@@ -36,17 +36,52 @@ class SeasonStatistics
     def winningest_coach(season_id)
         grouped_array = group_by_coach(season_id)
         
+        coach_stats = {}
         grouped_array.each do |coach_array|  #coach array is the array of hashes [ {}, {} ]
+            wins = 0
+            games = 0
             coach_array.map do |row| #this gives access to each row for the coaches in hash form {}
-            
+                if row[:result] == "WIN"
+                    wins += 1
+                end
+                games += 1
+                coach_stats[row[:head_coach]] = {wins: wins, games: games}
             end
         end
+
+        best_coach = coach_stats.max_by do |coach,stats|
+            (stats[:wins] / stats[:games]) * 100
+            
+        end
+        
+        return best_coach[0]
     
     end
   
-    # def worst_coach(season_id)
+    def worst_coach(season_id)
+        grouped_array = group_by_coach(season_id)
+        
+        coach_stats = {}
+        grouped_array.each do |coach_array|  
+            wins = 0
+            games = 0
+            coach_array.map do |row| 
+                if row[:result] == "WIN"
+                    wins += 1
+                end
+                games += 1
+                coach_stats[row[:head_coach]] = {wins: wins, games: games}
+            end
+        end
+
+        worst_coach = coach_stats.min_by do |coach,stats|
+            (stats[:wins] / stats[:games]) * 100
+            
+        end
+        
+        return worst_coach[0]
       
-    # end
+    end
   
     # def most_accurate_team(season_id)
       
