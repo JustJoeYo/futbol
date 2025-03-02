@@ -5,7 +5,7 @@ class SeasonStatistics
         @games = games
     end
 
-    #helper method
+    #helper method one - makes an array of all the games in a season
     def games_in_season(season_id)
         game_ids = []
         @games.each do |game|
@@ -23,8 +23,24 @@ class SeasonStatistics
         season_games
     end
 
+    #helper method two - makes a nested array of he data grouped by coach
+    def group_by_coach(season_id)
+        games = games_in_season(season_id)
+
+        grouped_arrays = games.group_by do |row|
+            row[:head_coach]
+        end.values
+        grouped_arrays
+    end
+
+    #Main Methods
     def winningest_coach(season_id)
         games = games_in_season(season_id)
+
+        games.each do |game|
+            game
+           
+        end
 
 
         
