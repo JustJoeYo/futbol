@@ -113,13 +113,17 @@ class LeagueStatistics
         end.to_h
 
         #Removing teams with 0.0 from the return
-        filtered_avg = lowest_avg.reject { |_, avg| avg == 0.0}
+        filtered_avg = lowest_avg.reject {|_, avg| avg == 0.0}
 
-        filtered_avg.min_by { |_, avg| avg }[0]
+        return "No teams have played games" if filtered_avg.empty? # Return this if no teams have played games
+
+        filtered_avg.min_by {|_, avg| avg}[0]
     end
   
     def highest_scoring_visitor
-       
+        away_goals = team_avg_goals_by_hoa("away")
+        
+        away_goals.max_by { |_, avg| avg }[0]
     end
   
     def highest_scoring_home_team

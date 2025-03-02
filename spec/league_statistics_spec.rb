@@ -107,9 +107,9 @@ RSpec.describe LeagueStatistics do
     end
 
     describe '#highest_scoring_visitor' do
-        xit 'returns the team with the highest average score per game when away' do
+        it 'returns the team with the highest average score per game when away' do
 
-            expect(@league_statistics.highest_scoring_visitor).to eq("Houston Dynamo")
+            expect(@league_statistics.highest_scoring_visitor).to eq("FC Dallas")
         end
     end
 
