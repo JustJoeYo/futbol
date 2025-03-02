@@ -100,7 +100,11 @@ class LeagueStatistics
     end
   
     def best_offense
-        
+        highest_avg = @teams.map do |team|
+            [team_name(team[:team_id]), calculate_avg_goals(team[:team_id])]
+        end.to_h
+
+        highest_avg.max_by { |_, avg| avg }[0] #Using throw away value, could also do |team, avg| if needed.
     end
   
     def worst_offense

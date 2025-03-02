@@ -86,14 +86,14 @@ RSpec.describe LeagueStatistics do
     end
 
     describe '#count_of_teams' do
-        xit 'returns the total number of teams' do
+        it 'returns the total number of teams' do
 
             expect(@league_statistics.count_of_teams).to eq(32)
         end
     end
 
     describe '#best_offense' do #May want to stub
-        xit 'returns the team with the highest average goals scored per game' do
+        it 'returns the team with the highest average goals scored per game' do
 
             expect(@league_statistics.best_offense).to eq('FC Dallas') # From fixture
         end
