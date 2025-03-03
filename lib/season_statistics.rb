@@ -111,12 +111,13 @@ class SeasonStatistics
         most_accurate = team_stats.min_by do |team,stats| #lower ratio means more accurate
             stats[:shots].to_f / stats[:goals].to_f
         end
-        most_accurate[0] #this returns the team_id "6"
+        
+        most_accurate[0] #this returns the team_id
 
         team_name_row = @teams.find do |row| #returns row that has the teamname for team_id
             most_accurate[0] == row[:team_id].to_s
         end
-        
+
         team_name = team_name_row[:teamname]
         return team_name
     end
