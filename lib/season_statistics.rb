@@ -71,14 +71,16 @@ class SeasonStatistics
 
         grouped_array.each do |team_array|
             total_stat = team_array.sum { |row| row[stat].to_i }
-            team_stats[team_array.first[:team_id]] = {stat: total_stat}
+            team_stats[team_array.first[:team_id]] = {stat => total_stat}
         end
 
         team_stats
-        binding.pry
+        
     
     end
 
+    #Season Statistics Methods
+    
     def winningest_coach(season_id)
         coach_stats = calculate_coach_stats(season_id)
 
@@ -103,16 +105,7 @@ class SeasonStatistics
       
     end
 
-    # def most_accurate_team(season_id)
-    #     shots_stats = calculate_team_stats(season_id, :shots) #{"3"=>23, "6"=>38}
-    #     goal_stats = calculate_team_stats(season_id, :goal) #{"3"=>0, "6"=>0}
 
-    #     accuracy = team_stats.transform_values { |shots| shots.to_f / goals_stats[shots].to_f }
-    #     # ["6", {:shots=>38, :goals=>11}]
-
-    #     binding.pry
-
-    # end
     
   
     def most_accurate_team(season_id)
@@ -130,10 +123,11 @@ class SeasonStatistics
                 
             end
         end
+        #binding.pry
         most_accurate = team_stats.min_by do |team,stats| #lower ratio means more accurate
             stats[:shots].to_f / stats[:goals].to_f
         end
-        #binding.pry
+        
 
         most_accurate[0] #this returns the team_id
 
@@ -178,21 +172,12 @@ class SeasonStatistics
    
 
     def most_tackles(season_id)
-        grouped_array = group_by_team(season_id)
+        team_stats = calculate_team_stats(season_id,:tackles)
 
-        team_stats = {} #{"3"=>{:tackles=>114}, "6"=>{:tackles=>139}}
-        grouped_array.each do |team_array|
-            tackles = 0
-            team_array.map do |row|
-                tackles += row[:tackles].to_i
-
-                team_stats[row[:team_id]] = {tackles: tackles}
-            end
-        end
         most_tackles = team_stats.max_by do |team,stats|
              stats[:tackles]
         end
-        binding.pry
+        
         team_name_row = @teams.find do |row|
             most_tackles[0] == row[:team_id].to_s
         end
@@ -201,18 +186,10 @@ class SeasonStatistics
         return team_name
     end
   
+
     def fewest_tackles(season_id)
-        grouped_array = group_by_team(season_id)
+        team_stats = calculate_team_stats(season_id,:tackles)
 
-        team_stats = {}
-        grouped_array.each do |team_array|
-            tackles = 0
-            team_array.map do |row|
-                tackles += row[:tackles].to_i
-
-                team_stats[row[:team_id]] = {tackles: tackles}
-            end
-        end
         least_tackles = team_stats.min_by do |team,stats|
              stats[:tackles]
         end

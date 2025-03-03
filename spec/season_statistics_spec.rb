@@ -358,6 +358,7 @@ RSpec.describe SeasonStatistics do
 
         it 'can calculate team stats' do
             expect(@season_statistics.calculate_team_stats("20122013",:tackles)).to eq({"3"=>{tackles: 114}, "6"=>{tackles: 139}} )
+            expect(@season_statistics.calculate_team_stats("20152016",:goals)).to eq({"3"=>{goals: 4}, "5"=>{goals: 5}} )
         end
 
         it 'has a worst coach' do
