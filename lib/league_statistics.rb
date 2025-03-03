@@ -93,6 +93,23 @@ class LeagueStatistics
         team_avg_goals
     end
 
+    def highest_avg_team(method)
+        avg_goals = @teams.map { |team| [team_name(team[:team_id]), calculate_avg_goals(team[:team_id])]}.to_h
+
+        avg_goals.send(method) { |_, avg| avg }[0]
+    end
+
+    def lowest_avg_team(method)
+        avg_goals = @teams.map { |team| [team_name(team[:team_id]), calculate_avg_goals(team[:team_id])] }.to_h
+
+        #Removing teams with 0.0 from the return
+        filtered_avg = avg_goals.reject { |_, avg| avg == 0.0 }
+
+        return "No teams have played games" if filtered_avg.empty? # Return this if no teams have played games
+
+        filtered_avg.send(method) { |_, avg| avg }[0]
+    end
+
     # Methods
 
     def count_of_teams #counts number of teams in the csv
@@ -100,24 +117,11 @@ class LeagueStatistics
     end
   
     def best_offense
-        highest_avg = @teams.map do |team|
-            [team_name(team[:team_id]), calculate_avg_goals(team[:team_id])]
-        end.to_h
-
-        highest_avg.max_by { |_, avg| avg }[0] #Using throw away value, could also do |team, avg| if needed.
+        highest_avg_team(:max)
     end
   
     def worst_offense
-        lowest_avg = @teams.map do |team|
-            [team_name(team[:team_id]), calculate_avg_goals(team[:team_id])]
-        end.to_h
-
-        #Removing teams with 0.0 from the return
-        filtered_avg = lowest_avg.reject {|_, avg| avg == 0.0}
-
-        return "No teams have played games" if filtered_avg.empty? # Return this if no teams have played games
-
-        filtered_avg.min_by {|_, avg| avg}[0]
+        lowest_avg_team(:min)
     end
   
     def highest_scoring_visitor
