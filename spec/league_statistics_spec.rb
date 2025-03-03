@@ -86,32 +86,40 @@ RSpec.describe LeagueStatistics do
     end
 
     describe '#highest_avg_team' do
+        it 'can calculate the highest avg goals scored' do
+
+            expect(@league_statistics.highest_avg_team(:max_by)).to eq('FC Dallas')
+        end
         
     end
 
     describe '#lowest_avg_team' do
+        it 'can calculate the lowest avg goals scored' do
+
+            expect(@league_statistics.lowest_avg_team(:min_by)).to eq('Houston Dynamo')
+        end
     
     end
 
     describe '#highest_avg_team_by_hoa' do
         it 'can calculate highest avg goals scored when home' do
 
-            expect(@league_statistics.highest_avg_team_by_hoa('home', :max)).to eq('data')
+            expect(@league_statistics.highest_avg_team_by_hoa('home', :max_by)).to eq('FC Dallas')
         end
 
         it 'can calculate highest avg goals scored when away' do
 
-            expect(@league_statistics.highest_avg_team_by_hoa('away', :max)).to eq('data')
+            expect(@league_statistics.highest_avg_team_by_hoa('away', :max_by)).to eq('FC Dallas')
         end
 
         it 'can calculate lowest avg goals when home' do
 
-            expect(@league_statistics.highest_avg_team_by_hoa('home', :min)).to eq('data')
+            expect(@league_statistics.highest_avg_team_by_hoa('home', :min_by)).to eq('Houston Dynamo')
         end
 
         it 'can calculate lowest avg goals when away' do
-            
-            expect(@league_statistics.highest_avg_team_by_hoa('away', :min)).to eq('data')
+
+            expect(@league_statistics.highest_avg_team_by_hoa('away', :min_by)).to eq('Houston Dynamo')
         end
     end
 
