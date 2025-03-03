@@ -8,14 +8,22 @@ class GameStatistics
     count = @games.count { |game| yield(game) }
     (count.to_f / @games.size).round(2)
   end
-  
-  # Game Statistics
-  def highest_total_score
+
+  def highest_score # Unnecessary methods but if these values are required in the future, they are already here! DRY!
     @games.map { |game| game[:home_goals].to_i + game[:away_goals].to_i }.max
   end
 
-  def lowest_total_score
+  def lowest_score
     @games.map { |game| game[:home_goals].to_i + game[:away_goals].to_i }.min
+  end
+  
+  # Game Statistics
+  def highest_total_score
+    highest_score
+  end
+
+  def lowest_total_score
+    lowest_score
   end
 
   def percentage_home_wins
