@@ -1,8 +1,9 @@
 class SeasonStatistics
-    attr_reader :game_teams, :games
-    def initialize(game_teams,games)
+    attr_reader :game_teams, :games, :teams
+    def initialize(game_teams,games,teams)
         @game_teams = game_teams
         @games = games
+        @teams = teams
     end
 
     #helper method one - makes an array of all the games in a season
@@ -82,10 +83,43 @@ class SeasonStatistics
         return worst_coach[0]
       
     end
+
+    def group_by_team(season_id)
+        games = games_in_season(season_id)
+
+        grouped_arrays = games.group_by do |row|
+            row[:team_id]
+        end.values
+        grouped_arrays
+    end
   
-    # def most_accurate_team(season_id)
-      
-    # end
+    def most_accurate_team(season_id)
+        grouped_array = group_by_team(season_id)
+
+        team_stats = {}
+        grouped_array.each do |team_array|
+            shots = 0
+            goals = 0
+            team_array.map do |row|
+                shots += row[:shots].to_i
+                goals += row[:goals].to_i
+
+                team_stats[row[:team_id]] = {shots: shots, goals: goals}
+                
+            end
+        end
+        most_accurate = team_stats.min_by do |team,stats| #lower ratio means more accurate
+            stats[:shots].to_f / stats[:goals].to_f
+        end
+        most_accurate[0] #this returns the team_id "6"
+
+        team_name_row = @teams.find do |row| #returns row that has the teamname for team_id
+            most_accurate[0] == row[:team_id].to_s
+        end
+        
+        team_name = team_name_row[:teamname]
+        return team_name
+    end
   
     # def least_accurate_team(season_id)
       
