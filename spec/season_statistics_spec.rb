@@ -492,11 +492,13 @@ RSpec.describe SeasonStatistics do
         end
 
         it 'has most tackles' do
-
+            expect(@season_statistics.most_tackles("20122013")).to eq("FC Dallas")
+            expect(@season_statistics.most_tackles("20142015")).to eq("DC United")
         end
 
         it 'has fewest tackles' do
-
+            expect(@season_statistics.fewest_tackles("20122013")).to eq("Houston Dynamo")
+            expect(@season_statistics.fewest_tackles("20142015")).to eq("New England Revolution")
         end
     end
 end

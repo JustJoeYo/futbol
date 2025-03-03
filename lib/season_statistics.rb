@@ -151,11 +151,32 @@ class SeasonStatistics
         return team_name
     end
   
-    # def most_tackles(season_id)
-      
-    # end
+    def most_tackles(season_id)
+        grouped_array = group_by_team(season_id)
+
+        team_stats = {}
+
+        grouped_array.each do |team_array|
+            tackles = 0
+            team_array.map do |row|
+                tackles += row[:tackles].to_i
+
+                team_stats[row[:team_id]] = {tackles: tackles}
+            end
+        end
+        most_tackles = team_stats.max_by do |team,stats|
+             stats[:tackles]
+        end
+        
+        team_name_row = @teams.find do |row|
+            most_tackles[0] == row[:team_id].to_s
+        end
+
+        team_name = team_name_row[:teamname]
+        return team_name
+    end
   
-    # def fewest_tackles(season_id)
+    def fewest_tackles(season_id)
       
-    # end
+    end
 end
