@@ -346,16 +346,18 @@ RSpec.describe SeasonStatistics do
               
 
             expect(@season_statistics.winningest_coach("20122013")).to eq("Claude Julien")
-
             expect(@season_statistics.winningest_coach("20142015")).to eq("Jon Cooper")
+            expect(@season_statistics.winningest_coach("20152016")).to eq("Mike Sullivan")
         end
 
         it 'has a worst coach' do
 
             expect(@season_statistics.worst_coach("20122013")).to eq("John Tortorella")
             expect(@season_statistics.worst_coach("20142015")).to eq("Joel Quenneville")
-    
+            expect(@season_statistics.worst_coach("20152016")).to eq("Alain Vigneault")
         end
+    
+        
         it 'can group by team id' do
             expected_array = [[{
                     game_id: "2012030221",
@@ -484,21 +486,26 @@ RSpec.describe SeasonStatistics do
         it 'has a most accurate team' do
             expect(@season_statistics.most_accurate_team("20122013")).to eq("FC Dallas")
             expect(@season_statistics.most_accurate_team("20142015")).to eq("DC United")
+            expect(@season_statistics.most_accurate_team("20152016")).to eq("Sporting Kansas City")
+
         end
 
         it 'has a least accurate team' do
             expect(@season_statistics.least_accurate_team("20122013")).to eq("Houston Dynamo")
             expect(@season_statistics.least_accurate_team("20142015")).to eq("New England Revolution")
+            expect(@season_statistics.least_accurate_team("20152016")).to eq("Houston Dynamo")
         end
 
         it 'has most tackles' do
             expect(@season_statistics.most_tackles("20122013")).to eq("FC Dallas")
             expect(@season_statistics.most_tackles("20142015")).to eq("DC United")
+            expect(@season_statistics.most_tackles("20152016")).to eq("Houston Dynamo")
         end
 
         it 'has fewest tackles' do
             expect(@season_statistics.fewest_tackles("20122013")).to eq("Houston Dynamo")
             expect(@season_statistics.fewest_tackles("20142015")).to eq("New England Revolution")
+            expect(@season_statistics.fewest_tackles("20152016")).to eq("Sporting Kansas City")
         end
     end
 end
