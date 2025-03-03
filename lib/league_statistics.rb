@@ -123,26 +123,26 @@ class LeagueStatistics
     end
   
     def best_offense
-        highest_avg_team(:max)
+        highest_avg_team(:max_by)
     end
   
     def worst_offense
-        lowest_avg_team(:min)
+        lowest_avg_team(:min_by)
     end
   
     def highest_scoring_visitor
-        highest_avg_team_by_hoa('away', :max)
+        highest_avg_team_by_hoa('away', :max_by)
     end
   
     def highest_scoring_home_team
-        highest_avg_team_by_hoa('home', :max)
+        highest_avg_team_by_hoa('home', :max_by)
     end
   
     def lowest_scoring_visitor
-        highest_avg_team_by_hoa('away', :min)
+        highest_avg_team_by_hoa('away', :min_by)
     end
   
     def lowest_scoring_home_team
-        highest_avg_team_by_hoa('home', :min)
+        highest_avg_team_by_hoa('home', :min_by)
     end
 end
