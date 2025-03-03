@@ -350,6 +350,16 @@ RSpec.describe SeasonStatistics do
             expect(@season_statistics.winningest_coach("20152016")).to eq("Mike Sullivan")
         end
 
+        it 'can calculate coach stats' do
+            expected_hash = {"John Tortorella" => {wins: 0, games:3}, "Claude Julien" => {wins: 4, games: 4} }
+
+            expect(@season_statistics.calculate_coach_stats("20122013")).to eq(expected_hash)
+        end
+
+        it 'can calculate team stats' do
+            expect(@season_statistics.calculate_team_stats("20122013",:tackles)).to eq({"3"=>{tackles: 114}, "6"=>{tackles: 139}} )
+        end
+
         it 'has a worst coach' do
 
             expect(@season_statistics.worst_coach("20122013")).to eq("John Tortorella")
