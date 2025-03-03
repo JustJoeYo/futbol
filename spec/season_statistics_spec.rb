@@ -487,8 +487,8 @@ RSpec.describe SeasonStatistics do
         end
 
         it 'has a least accurate team' do
-            expect(@season_statistics.most_accurate_team("20122013")).to eq("Houston Dynamo")
-            expect(@season_statistics.most_accurate_team("20142015")).to eq("New England Revolution")
+            expect(@season_statistics.least_accurate_team("20122013")).to eq("Houston Dynamo")
+            expect(@season_statistics.least_accurate_team("20142015")).to eq("New England Revolution")
         end
 
         it 'has most tackles' do

@@ -123,7 +123,32 @@ class SeasonStatistics
     end
   
     def least_accurate_team(season_id)
-      
+        grouped_array = group_by_team(season_id)
+
+        team_stats = {}
+        grouped_array.each do |team_array|
+            shots = 0
+            goals = 0
+            team_array.map do |row|
+                shots += row[:shots].to_i
+                goals += row[:goals].to_i
+
+                team_stats[row[:team_id]] = {shots: shots, goals: goals}
+                
+            end
+        end
+        least_accurate = team_stats.max_by do |team,stats| #higher ratio means less accurate
+            stats[:shots].to_f / stats[:goals].to_f
+        end
+
+        least_accurate[0] #this returns the team_id
+
+        team_name_row = @teams.find do |row| #returns row that has the teamname for team_id
+            least_accurate[0] == row[:team_id].to_s
+        end
+
+        team_name = team_name_row[:teamname]
+        return team_name
     end
   
     # def most_tackles(season_id)
