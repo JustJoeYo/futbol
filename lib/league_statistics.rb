@@ -122,19 +122,25 @@ class LeagueStatistics
   
     def highest_scoring_visitor
         away_goals = team_avg_goals_by_hoa("away")
-        
-        away_goals.max_by { |_, avg| avg }[0]
+
+        away_goals.max_by {|_, avg| avg}[0]
     end
   
     def highest_scoring_home_team
-      
+        home_goals = team_avg_goals_by_hoa("home")
+
+        home_goals.max_by {|_, avg|}[0]
     end
   
     def lowest_scoring_visitor
-      
+        away_goals = team_avg_goals_by_hoa("away")
+
+        away_goals.min_by {|_, avg| avg}[0]
     end
   
     def lowest_scoring_home_team
-      
+        home_goals = team_avg_goals_by_hoa("home")
+
+        home_goals.min_by {|_, avg| avg}[0]
     end
 end

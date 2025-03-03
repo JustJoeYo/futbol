@@ -114,23 +114,23 @@ RSpec.describe LeagueStatistics do
     end
 
     describe '#highest_scoring_home_team' do
-        xit 'returns the team with the highest average score per game when at home' do
+        it 'returns the team with the highest average score per game when at home' do
 
             expect(@league_statistics.highest_scoring_home_team).to eq('FC Dallas')
         end
     end
 
     describe '#lowest_scoring_visitor' do
-        xit 'returns the team with the lowest average score per game when away' do
+        it 'returns the team with the lowest average score per game when away' do
 
             expect(@league_statistics.lowest_scoring_visitor).to eq('Houston Dynamo')
         end
     end
 
     describe '#lowest_scoring_home_team' do
-        xit 'returns the team with the lowest average score per game when at home' do
+        it 'returns the team with the lowest average score per game when at home' do
 
-            expect(@league_statistics.lowest_scoring_home_team).to eq('FC Dallas')
+            expect(@league_statistics.lowest_scoring_home_team).to eq('Houston Dynamo')
         end
     end
 end
