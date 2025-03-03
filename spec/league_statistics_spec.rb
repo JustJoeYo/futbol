@@ -85,6 +85,36 @@ RSpec.describe LeagueStatistics do
         end
     end
 
+    describe '#highest_avg_team' do
+        
+    end
+
+    describe '#lowest_avg_team' do
+    
+    end
+
+    describe '#highest_avg_team_by_hoa' do
+        it 'can calculate highest avg goals scored when home' do
+
+            expect(@league_statistics.highest_avg_team_by_hoa('home', :max)).to eq('data')
+        end
+
+        it 'can calculate highest avg goals scored when away' do
+
+            expect(@league_statistics.highest_avg_team_by_hoa('away', :max)).to eq('data')
+        end
+
+        it 'can calculate lowest avg goals when home' do
+
+            expect(@league_statistics.highest_avg_team_by_hoa('home', :min)).to eq('data')
+        end
+
+        it 'can calculate lowest avg goals when away' do
+            
+            expect(@league_statistics.highest_avg_team_by_hoa('away', :min)).to eq('data')
+        end
+    end
+
     describe '#count_of_teams' do
         it 'returns the total number of teams' do
 
