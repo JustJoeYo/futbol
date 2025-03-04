@@ -1,4 +1,4 @@
-require './lib/statistic_helper'
+require_relative 'statistic_helper'
 
 class GameStatistics
   include StatisticHelper

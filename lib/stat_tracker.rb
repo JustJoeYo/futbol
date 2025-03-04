@@ -1,7 +1,7 @@
 require 'csv'  # Requires the CSV library to handle CSV file operations
-require './lib/game_statistics'
-require './lib/season_statistics'
-require './lib/league_statistics'
+require_relative 'game_statistics'
+require_relative 'season_statistics'
+require_relative 'league_statistics'
 
 class StatTracker
   attr_reader :games, :teams, :game_teams, :game_statistics, :season_statistics, :league_statistics
@@ -28,4 +28,27 @@ class StatTracker
     # Creates and returns a new instance of StatTracker with the read data
     self.new(games, teams, game_teams)
   end
+
+  #Season Statistics
+  def winningest_coach(season_id)
+    @season_statistics.winningest_coach(season_id)
+  end
+  def worst_coach(season_id)
+    @season_statistics.worst_coach(season_id)
+  end
+  def most_accurate_team(season_id)
+    @season_statistics.most_accurate_team(season_id)
+  end
+  def least_accurate_team(season_id)
+    @season_statistics.least_accurate_team(season_id)
+  end
+  def most_tackles(season_id)
+    @season_statistics.most_tackles(season_id)
+  end
+  def fewest_tackles(season_id)
+    @season_statistics.fewest_tackles(season_id)
+  end
+
+  #League Statistics
+  
 end
