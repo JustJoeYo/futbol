@@ -4,7 +4,7 @@ require './lib/season_statistics'
 require './lib/league_statistics'
 
 class StatTracker
-  attr_reader :games, :teams, :game_teams, :game_statistics :season_statistics
+  attr_reader :games, :teams, :game_teams, :game_statistics, :season_statistics, :league_statistics
 
   # Initializes a new instance of StatTracker with games, teams, and game_teams data
   def initialize(games, teams, game_teams)
