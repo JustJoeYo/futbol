@@ -9,7 +9,6 @@ RSpec.describe SeasonStatistics do
         @game_teams_path = CSV.read('./data/game_team_fixture.csv', headers: true, header_converters: :symbol)
         @games_path = CSV.read('./data/games_fixture.csv', headers: true, header_converters: :symbol)
         @team_path = CSV.read('./data/teams.csv',headers:true, header_converters: :symbol)
-
         @season_statistics = SeasonStatistics.new(@game_teams_path,@games_path,@team_path)  
       end
 
@@ -17,7 +16,7 @@ RSpec.describe SeasonStatistics do
         it '#initialize' do
             expect(@season_statistics).to be_an_instance_of(SeasonStatistics)
         end
-        
+
         it '#attributes' do
             expect(@season_statistics.game_teams).not_to be_empty
             expect(@season_statistics.games).not_to be_empty
@@ -366,6 +365,13 @@ RSpec.describe SeasonStatistics do
             it 'can create a hash of team stats' do
                 expect(@season_statistics.calculate_team_stats("20122013",:tackles)).to eq({"3"=>{tackles: 114}, "6"=>{tackles: 139}} )
                 expect(@season_statistics.calculate_team_stats("20152016",:shots,:goals)).to eq({"3" =>{shots: 16, goals: 4}, "5"=>{shots: 14, goals: 5}} )
+            end
+        end
+
+        describe "#find_team_name" do
+            it 'can return a team name when given a team id' do
+                expect(@season_statistics.find_team_name(16)).to eq("New England Revolution")
+                expect(@season_statistics.find_team_name("2")).to eq("Seattle Sounders FC")
             end
         end
 
