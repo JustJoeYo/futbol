@@ -26,7 +26,7 @@
 
 ## About The Project
 
-We will analyze team performance in a fictional soccer league across seasons, identifying the best and worst performers and pulling statistics for individual teams. We will create a StatTracker class to provide the necessary information. The project will start with establishing group norms, including project organization, git workflow, and DTR. Next, we will plan and design the solution as a group, focusing on building the base statistics functionality through the StatTracker. (placeholder gpt answer)
+We will analyze team performance in a fictional soccer league across seasons, identifying the best and worst performers and pulling statistics for individual teams. We will create a StatTracker class to provide the necessary information. The project will start with establishing group norms, including project organization, git workflow, and DTR. Next, we will plan and design the solution as a group, focusing on building the base statistics functionality through the StatTracker.
 
 ### Built With
 
@@ -89,15 +89,27 @@ We will analyze team performance in a fictional soccer league across seasons, id
 
 <p align="right">(<a href="">back to top</a>)</p>
 
+## Deliverables
+
+<ol>
+    <ul>
+        <li><a href="https://docs.google.com/document/d/1p25a3jL93fg868aQRc19drl-PbqwYSI6V0IO3B3Sr0M/edit?tab=t.0">DTR 02/28/2025</a></li>
+        <li><a>blah blah blah</a></li>
+        <li><a>blah blah blah</a></li>
+        <li><a>blah blah blah</a></li>
+    </ul>
+</ol>
+
+
 <!-- ROADMAP -->
 
 ## Roadmap
 
 - [x] Add README.md
 - [x] Add back to top links
-- [ ] start iteration 1 as a group
-  - [ ] second required thing
-- [ ] do the "Include link to your initial DTR" thing in readme file
+- [x] start iteration 1 as a group
+  - [x] finish iteration 2 as a group
+- [x] do the "Include link to your initial DTR" thing in readme file
 
 See the [open issues](https://github.com/JustJoeYo/futbol/issues) for a full list of proposed features (and known issues).
 
