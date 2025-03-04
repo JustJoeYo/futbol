@@ -7,5 +7,17 @@ module StatisticHelper
     team[:teamname]
   end
 
-  # Add more helper methods as needed
+  # Add more helper methods below and add a comment saying what it does.
 end
+
+# this is how you would use this in your classes:
+
+
+
+#require './lib/statistic_helper'
+
+# class ExampleStatistics
+#   include StatisticHelper # within the class in order to use the helper methods
+
+#   # class methods here
+# end
