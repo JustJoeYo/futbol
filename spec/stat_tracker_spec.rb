@@ -37,7 +37,44 @@ RSpec.describe StatTracker do
 
   # Placeholder for instance methods tests
   describe 'instance methods' do
-    # Add tests for instance methods here
+
+    describe 'Game Statistics' do
+
+    end
+    
+    describe 'League Statistics' do
+      it '#count_of_teams' do
+        expect(@stat_tracker.count_of_teams).to eq 32
+      end
+
+      it '#best_offense' do
+        expect(@stat_tracker.best_offense).to eq 'FC Dallas'
+      end
+
+      it '#worst_offense' do
+        expect(@stat_tracker.worst_offense).to eq 'Houston Dynamo'
+      end
+
+      it '#highest_scoring_visitor' do
+        expect(@stat_tracker.highest_scoring_visitor).to eq 'FC Dallas'
+      end
+
+      it '#highest_scoring_home_team' do
+        expect(@stat_tracker.highest_scoring_home_team).to eq 'FC Dallas'
+      end
+
+      it '#lowest_scoring_visitor' do
+        expect(@stat_tracker.lowest_scoring_visitor).to eq 'Houston Dynamo'
+      end
+
+      it '#lowest_scoring_home_team' do
+        expect(@stat_tracker.lowest_scoring_home_team).to eq 'Houston Dynamo'
+      end
+    end
+
+    describe 'Season Statistics' do
+
+    end
   end
 
   # class methods only (keyword 'self')
