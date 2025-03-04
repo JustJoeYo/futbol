@@ -1,20 +1,10 @@
+require './lib/statistic_helper'
+
 class GameStatistics
+  include StatisticHelper
+
   def initialize(games)
     @games = games
-  end
-
-  # Helper Method
-  def calculate_percentage
-    count = @games.count { |game| yield(game) }
-    (count.to_f / @games.size).round(2)
-  end
-
-  def highest_score # Unnecessary methods but if these values are required in the future, they are already here! DRY!
-    @games.map { |game| game[:home_goals].to_i + game[:away_goals].to_i }.max
-  end
-
-  def lowest_score
-    @games.map { |game| game[:home_goals].to_i + game[:away_goals].to_i }.min
   end
   
   # Game Statistics
