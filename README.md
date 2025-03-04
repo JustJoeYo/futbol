@@ -93,13 +93,18 @@ We will analyze team performance in a fictional soccer league across seasons, id
 
 <ol>
     <ul>
-        <li><a href="https://docs.google.com/document/d/1p25a3jL93fg868aQRc19drl-PbqwYSI6V0IO3B3Sr0M/edit?tab=t.0">DTR 02/28/2025</a></li>
-        <li><a>blah blah blah</a></li>
-        <li><a>blah blah blah</a></li>
-        <li><a>blah blah blah</a></li>
+        <li><a href="https://example.com">name/link to tools used</a></li>
     </ul>
 </ol>
 
+- [x] Top 3 things that went well during your project
+  - [ ] 1
+  - [ ] 2
+  - [ ] 3
+- [x] Top 3 things your team would do differently next time
+  - [ ] 1
+  - [ ] 2
+  - [ ] 3
 
 <!-- ROADMAP -->
 
