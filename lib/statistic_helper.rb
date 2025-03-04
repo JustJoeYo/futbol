@@ -2,10 +2,10 @@ module StatisticHelper
   # Define all the helper methods here (primarily calculations etc, this is just a demo of usage)
 
   # Example helper method to find a team name by team_id
-  def team_name(teams, team_id)
-    team = teams.find { |row| row[:team_id].to_s == team_id.to_s }
-    team[:teamname]
-  end
+  # def find_team_name(teams, team_id)
+  #   team = teams.find { |row| row[:team_id].to_s == team_id.to_s }
+  #   team[:teamname]
+  # end
 
   # Helper method to calculate the percentage of games that meet a certain condition (yield)
   def calculate_percentage
