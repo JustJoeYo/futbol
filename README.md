@@ -89,22 +89,22 @@ We will analyze team performance in a fictional soccer league across seasons, id
 
 <p align="right">(<a href="">back to top</a>)</p>
 
-## Deliverables
+## Project Retro
 
 <ol>
     <ul>
-        <li><a href="https://example.com">name/link to tools used</a></li>
+        <li><a href="https://easyretro.io/publicboard/YODkuSmjVJQv8lA5jaeeTH5NBya2/2b636bd9-fb21-4655-937a-6c790205684b?list=false">Retro Board Link</a></li>
     </ul>
 </ol>
 
 - [x] Top 3 things that went well during your project
-  - [ ] 1
-  - [ ] 2
-  - [ ] 3
+  - [ ] We did a great job trouble shooting and asking for help when needed
+  - [ ] Felt like the work was split up well and evenly distributed between the team members
+  - [ ] 100% test coverage  :sunglasses:
 - [x] Top 3 things your team would do differently next time
-  - [ ] 1
-  - [ ] 2
-  - [ ] 3
+  - [ ] Improve planning by reading ahead and planning how we will structure the project.
+  - [ ] Could have built out the Trello board more, but given the project, seemed best to get started on the coding rather than get bogged down in the planning as we already had a plan in place.
+  - [ ] Make sure the code is DRY the first time around.
 
 <!-- ROADMAP -->
 
