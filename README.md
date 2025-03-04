@@ -115,6 +115,8 @@ We will analyze team performance in a fictional soccer league across seasons, id
 - [x] start iteration 1 as a group
   - [x] finish iteration 2 as a group
 - [x] do the "Include link to your initial DTR" thing in readme file
+- [ ] spec harness passing
+- [ ] read raw data and make into object
 
 See the [open issues](https://github.com/JustJoeYo/futbol/issues) for a full list of proposed features (and known issues).
 
