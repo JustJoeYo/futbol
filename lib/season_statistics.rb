@@ -60,37 +60,36 @@ class SeasonStatistics
                 coach_stats[row[:head_coach]] = {wins: wins, games: games}
             end
         end
-        coach_stats
-        
+        coach_stats   
     end
 
     #helper method five
-    def calculate_team_stats(season_id,stat)
+    def calculate_team_stats(season_id, *stats)
         grouped_array = group_by_team(season_id)
         team_stats = {}
 
         grouped_array.each do |team_array|
-            total_stat = team_array.sum { |row| row[stat].to_i }
-            team_stats[team_array.first[:team_id]] = {stat => total_stat}
-        end
+            team_id = team_array.first[:team_id]
+            team_stats[team_id] ||= {}
 
-        team_stats
-        
-    
+             stats.each do |stat|
+                total_stat = team_array.sum { |row| row[stat].to_i }
+                team_stats[team_id][stat] = total_stat
+            end
+        end
+        team_stats   
     end
 
     #Season Statistics Methods
-    
+
     def winningest_coach(season_id)
         coach_stats = calculate_coach_stats(season_id)
 
         best_coach = coach_stats.max_by do |coach,stats|
             (stats[:wins].to_f / stats[:games].to_f) * 100
-            
         end
         
-        return best_coach[0]
-    
+        best_coach[0]
     end
   
     def worst_coach(season_id)
@@ -98,75 +97,41 @@ class SeasonStatistics
 
         worst_coach = coach_stats.min_by do |coach,stats|
             (stats[:wins].to_f / stats[:games].to_f) * 100
-            
         end
-    
-        return worst_coach[0]
-      
+        worst_coach[0]  
     end
-
-
     
   
     def most_accurate_team(season_id)
-        grouped_array = group_by_team(season_id)
+        team_stats = calculate_team_stats(season_id, :shots, :goals)
 
-        team_stats = {}
-        grouped_array.each do |team_array|
-            shots = 0
-            goals = 0
-            team_array.map do |row|
-                shots += row[:shots].to_i
-                goals += row[:goals].to_i
-
-                team_stats[row[:team_id]] = {shots: shots, goals: goals}
-                
-            end
-        end
-        #binding.pry
         most_accurate = team_stats.min_by do |team,stats| #lower ratio means more accurate
             stats[:shots].to_f / stats[:goals].to_f
         end
         
-
-        most_accurate[0] #this returns the team_id
 
         team_name_row = @teams.find do |row| #returns row that has the teamname for team_id
             most_accurate[0] == row[:team_id].to_s
         end
 
         team_name = team_name_row[:teamname]
-        return team_name
+        team_name
     end
   
 
     def least_accurate_team(season_id)
-        grouped_array = group_by_team(season_id)
+        team_stats = calculate_team_stats(season_id, :shots, :goals)
 
-        team_stats = {}
-        grouped_array.each do |team_array|
-            shots = 0
-            goals = 0
-            team_array.map do |row|
-                shots += row[:shots].to_i
-                goals += row[:goals].to_i
-
-                team_stats[row[:team_id]] = {shots: shots, goals: goals}
-                
-            end
-        end
         least_accurate = team_stats.max_by do |team,stats| #higher ratio means less accurate
             stats[:shots].to_f / stats[:goals].to_f
         end
-
-        least_accurate[0] #this returns the team_id
 
         team_name_row = @teams.find do |row| #returns row that has the teamname for team_id
             least_accurate[0] == row[:team_id].to_s
         end
 
         team_name = team_name_row[:teamname]
-        return team_name
+        team_name
     end
     
    
@@ -183,7 +148,7 @@ class SeasonStatistics
         end
 
         team_name = team_name_row[:teamname]
-        return team_name
+        team_name
     end
   
 
@@ -199,7 +164,6 @@ class SeasonStatistics
         end
 
         team_name = team_name_row[:teamname]
-        return team_name
-    
+        team_name
     end
 end
