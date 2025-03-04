@@ -26,4 +26,8 @@ CSV.foreach('./data/games.csv',headers: true, header_converters: :symbol) do |ro
   game = Game.new(game_id,season,type,date_time,away_team_id,away_goals,home_goals,venue,venue_link)
 end
 
+CSV.foreach('./data/game_teams.csv',headers: true, header_converters: :symbol) do |row|
+  
+end
+
 require 'pry'; binding.pry

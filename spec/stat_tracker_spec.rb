@@ -39,41 +39,109 @@ RSpec.describe StatTracker do
   describe 'instance methods' do
 
     describe 'Game Statistics' do
+      it '#highest_total_score' do
+        expect(@StatTracker.highest_total_score).to eq 11
+      end
 
+      it '#lowest_total_score' do
+        expect(@StatTracker.lowest_total_score).to eq 0
+      end
+
+      it 'returns the percentage of home wins' do
+        expect(@StatTracker.percentage_home_wins).to eq 0.44
+      end
+
+      it '#percentage_visitor_wins' do
+        expect(@StatTracker.percentage_visitor_wins).to eq 0.36
+      end
+
+      it '#percentage_ties' do
+        expect(@StatTracker.percentage_ties).to eq 0.20
+      end
+
+      it '#count_of_games_by_season' do
+        expected = {
+          "20122013" => 806,
+          "20132014" => 1323,
+          "20142015" => 1319,
+          "20152016" => 1321,
+          "20162017" => 1317,
+          "20172018" => 1355
+        }
+        expect(@StatTracker.count_of_games_by_season).to eq expected
+      end
+
+      it '#average_goals_per_game' do
+        expect(@StatTracker.average_goals_per_game).to eq 4.22
+      end
+
+      it '#average_goals_by_season' do
+        expected = {
+          "20122013" => 4.12,
+          "20132014" => 4.19,
+          "20142015" => 4.14,
+          "20152016" => 4.16,
+          "20162017" => 4.23,
+          "20172018" => 4.44
+        }
+        expect(@StatTracker.average_goals_by_season).to eq expected
+      end
     end
     
     describe 'League Statistics' do
       it '#count_of_teams' do
-        expect(@stat_tracker.count_of_teams).to eq 32
+        expect(@StatTracker.count_of_teams).to eq 32
       end
 
       it '#best_offense' do
-        expect(@stat_tracker.best_offense).to eq 'FC Dallas'
+        expect(@StatTracker.best_offense).to eq 'Reign FC'
       end
 
       it '#worst_offense' do
-        expect(@stat_tracker.worst_offense).to eq 'Houston Dynamo'
+        expect(@StatTracker.worst_offense).to eq 'Utah Royals FC'
       end
 
       it '#highest_scoring_visitor' do
-        expect(@stat_tracker.highest_scoring_visitor).to eq 'FC Dallas'
+        expect(@StatTracker.highest_scoring_visitor).to eq 'FC Dallas'
       end
 
       it '#highest_scoring_home_team' do
-        expect(@stat_tracker.highest_scoring_home_team).to eq 'FC Dallas'
+        expect(@StatTracker.highest_scoring_home_team).to eq 'Reign FC'
       end
 
       it '#lowest_scoring_visitor' do
-        expect(@stat_tracker.lowest_scoring_visitor).to eq 'Houston Dynamo'
+        expect(@StatTracker.lowest_scoring_visitor).to eq 'San Jose Earthquakes'
       end
 
       it '#lowest_scoring_home_team' do
-        expect(@stat_tracker.lowest_scoring_home_team).to eq 'Houston Dynamo'
+        expect(@StatTracker.lowest_scoring_home_team).to eq 'Utah Royals FC'
       end
     end
 
     describe 'Season Statistics' do
+      it '#winningest_coach' do
+        expect(@StatTracker.winningest_coach("20132014")).to eq "Claude Julien"
+      end
 
+      it '#worst_coach' do
+          expect(@StatTracker.worst_coach("20132014")).to eq "Peter Laviolette"
+      end
+
+      it '#most_accurate_team' do
+          expect(@StatTracker.most_accurate_team("20132014")).to eq "Real Salt Lake"
+      end
+
+      it '#least_accurate_team' do
+          expect(@StatTracker.least_accurate_team("20132014")).to eq "New York City FC"
+      end
+
+      it '#most_tackles' do
+          expect(@StatTracker.most_tackles("20132014")).to eq "FC Cincinnati"
+      end
+
+      it '#fewest_tackles' do
+          expect(@StatTracker.fewest_tackles("20132014")).to eq "Atlanta United"
+      end
     end
   end
 
