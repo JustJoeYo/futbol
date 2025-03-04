@@ -10,7 +10,6 @@ RSpec.describe SeasonStatistics do
         @games_path = CSV.read('./data/games_fixture.csv', headers: true, header_converters: :symbol)
         @team_path = CSV.read('./data/teams.csv',headers:true, header_converters: :symbol)
         @season_statistics = SeasonStatistics.new(@game_teams_path,@games_path,@team_path)  
-
         @mock1_array = [[{
                         game_id: "2012030221",
                         team_id: "3",
@@ -216,7 +215,7 @@ RSpec.describe SeasonStatistics do
                     takeaways: "2"
                     }
                 ]
-
+                
                 expect(@season_statistics.games_in_season("20152016")).to eq(expected_result_array)
             end
         end
