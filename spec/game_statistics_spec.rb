@@ -6,7 +6,7 @@ end
 
 RSpec.describe GameStatistics do
   before(:each) do
-    @games = CSV.read('./data/games.csv', headers: true, header_converters: :symbol)
+    @games = CSV.read('./data/games.csv', headers: true, header_converters: :symbol).map { |row| Game.new(row) }
     @game_statistics = GameStatistics.new(@games)
   end
 
@@ -23,17 +23,17 @@ RSpec.describe GameStatistics do
   describe 'instance methods' do
     describe '#calculate_percentage' do
       it 'percentage of home wins' do
-        percentage = @game_statistics.calculate_percentage { |game| game[:home_goals].to_i > game[:away_goals].to_i }
+        percentage = @game_statistics.calculate_percentage { |game| game.home_goals.to_i > game.away_goals.to_i }
         expect(percentage).to eq(0.44) 
       end
 
       it 'percentage of visitor wins' do
-        percentage = @game_statistics.calculate_percentage { |game| game[:away_goals].to_i > game[:home_goals].to_i }
+        percentage = @game_statistics.calculate_percentage { |game| game.away_goals.to_i > game.home_goals.to_i }
         expect(percentage).to eq(0.36) 
       end
 
       it 'percentage of ties' do
-        percentage = @game_statistics.calculate_percentage { |game| game[:home_goals].to_i == game[:away_goals].to_i }
+        percentage = @game_statistics.calculate_percentage { |game| game.home_goals.to_i == game.away_goals.to_i }
         expect(percentage).to eq(0.2) 
       end
     end
