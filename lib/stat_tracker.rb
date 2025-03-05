@@ -2,6 +2,9 @@ require 'csv'  # Requires the CSV library to handle CSV file operations
 require_relative 'game_statistics'
 require_relative 'season_statistics'
 require_relative 'league_statistics'
+require_relative 'game'
+require_relative 'game_team'
+require_relative 'team'
 
 class StatTracker
   attr_reader :games, :teams, :game_teams, :game_statistics, :season_statistics, :league_statistics
@@ -19,11 +22,11 @@ class StatTracker
   # Class method to create a new instance of StatTracker from CSV files
   def self.from_csv(locations)
     # Reads the games CSV file and converts headers to symbols
-    games = CSV.read(locations[:games], headers: true, header_converters: :symbol)
+    games = CSV.read(locations[:games], headers: true, header_converters: :symbol).map { |row| Game.new(row) }
     # Reads the teams CSV file and converts headers to symbols
-    teams = CSV.read(locations[:teams], headers: true, header_converters: :symbol)
+    teams = CSV.read(locations[:teams], headers: true, header_converters: :symbol).map { |row| Team.new(row) }
     # Reads the game_teams CSV file and converts headers to symbols
-    game_teams = CSV.read(locations[:game_teams], headers: true, header_converters: :symbol)
+    game_teams = CSV.read(locations[:game_teams], headers: true, header_converters: :symbol).map { |row| GameTeam.new(row) }
     
     # Creates and returns a new instance of StatTracker with the read data
     self.new(games, teams, game_teams)
