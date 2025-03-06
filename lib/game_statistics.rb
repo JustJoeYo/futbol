@@ -1,4 +1,4 @@
-require './lib/statistic_helper'
+require_relative 'statistic_helper'
 
 class GameStatistics
   include StatisticHelper
@@ -17,30 +17,30 @@ class GameStatistics
   end
 
   def percentage_home_wins
-    calculate_percentage { |game| game[:home_goals].to_i > game[:away_goals].to_i }
+    calculate_percentage { |game| game.home_goals.to_i > game.away_goals.to_i }
   end
 
   def percentage_visitor_wins
-    calculate_percentage { |game| game[:away_goals].to_i > game[:home_goals].to_i }
+    calculate_percentage { |game| game.away_goals.to_i > game.home_goals.to_i }
   end
 
   def percentage_ties
-    calculate_percentage { |game| game[:home_goals].to_i == game[:away_goals].to_i }
+    calculate_percentage { |game| game.home_goals.to_i == game.away_goals.to_i }
   end
 
   def count_of_games_by_season
-    @games.group_by { |game| game[:season] }.transform_values(&:count)
+    @games.group_by { |game| game.season }.transform_values(&:count)
   end
 
   def average_goals_per_game
-    total_goals = @games.sum { |game| game[:home_goals].to_i + game[:away_goals].to_i }
+    total_goals = @games.sum { |game| game.home_goals.to_i + game.away_goals.to_i }
     (total_goals.to_f / @games.size).round(2)
   end
 
   def average_goals_by_season
-    goals_by_season = @games.group_by { |game| game[:season] }
+    goals_by_season = @games.group_by { |game| game.season }
     goals_by_season.transform_values do |games|
-      total_goals = games.sum { |game| game[:home_goals].to_i + game[:away_goals].to_i }
+      total_goals = games.sum { |game| game.home_goals.to_i + game.away_goals.to_i }
       (total_goals.to_f / games.size).round(2)
     end
   end

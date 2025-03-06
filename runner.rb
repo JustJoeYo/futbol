@@ -12,4 +12,6 @@ locations = { # all locations of the csv files we need
 
 stat_tracker = Stat_Tracker.from_csv(locations) # create a new instance of StatTracker and call the from_csv method on it
 
-require 'pry'; binding.pry
+
+
+#require 'pry'; binding.pry
