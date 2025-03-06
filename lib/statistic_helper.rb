@@ -154,7 +154,7 @@ module StatisticHelper
     games = games_in_season(season_id)
 
     grouped_arrays = games.group_by do |row|
-      row[:head_coach]
+      row.head_coach
     end.values
     grouped_arrays
   end
@@ -164,7 +164,7 @@ module StatisticHelper
     games = games_in_season(season_id)
 
     grouped_arrays = games.group_by do |row|
-      row[:team_id]
+      row.team_id
     end.values
     grouped_arrays
   end
@@ -178,11 +178,11 @@ module StatisticHelper
       wins = 0
       games = 0
       coach_array.map do |row|
-        if row[:result] == "WIN"
+        if row.result == "WIN"
           wins += 1
         end
         games += 1
-        coach_stats[row[:head_coach]] = { wins: wins, games: games }
+        coach_stats[row.head_coach] = { wins: wins, games: games }
       end
     end
     coach_stats
@@ -194,11 +194,11 @@ module StatisticHelper
     team_stats = {}
 
     grouped_array.each do |team_array|
-      team_id = team_array.first[:team_id]
+      team_id = team_array.first.team_id
       team_stats[team_id] ||= {}
 
       stats.each do |stat|
-        total_stat = team_array.sum { |row| row[stat].to_i }
+        total_stat = team_array.sum { |row| row.send(stat).to_i }
         team_stats[team_id][stat] = total_stat
       end
     end
@@ -208,9 +208,9 @@ module StatisticHelper
   # Helper method six
   def find_team_name(team_id)
     team_row = @teams.find do |row|
-      row[:team_id].to_s == team_id.to_s
+      row.team_id.to_s == team_id.to_s
     end
-    team_row[:teamname]
+    team_row.team_name
   end
 
   # Add more helper methods below and add a comment saying what it does.
