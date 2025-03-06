@@ -38,20 +38,20 @@ module StatisticHelper
     # Step 1, find all games where the team played (home or away)
     games_played = @games.select do |game|
       if hoa == 'home'
-        game[:home_team_id] == team_id # Only home games
+        game.home_team_id == team_id # Only home games
       elsif hoa == 'away'
-        game[:away_team_id] == team_id # Only away games
+        game.away_team_id == team_id # Only away games
       else
-        game[:home_team_id] == team_id || game[:away_team_id] == team_id # All games
+        game.home_team_id == team_id || game.away_team_id == team_id # All games
       end
     end
 
     # Step 2, sum all goals scored by this team in those games
     total_goals = games_played.sum do |game| # Loops through the games_played.
-      if game[:home_team_id] == team_id
-        game[:home_goals].to_i # Add home goals if the team was the home team
+      if game.home_team_id == team_id
+        game.home_goals.to_i # Add home goals if the team was the home team
       else
-        game[:away_goals].to_i # Add away goals if the team was the away team
+        game.away_goals.to_i # Add away goals if the team was the away team
       end
     end
 
@@ -72,9 +72,9 @@ module StatisticHelper
     # Step 1, filter the games by home/away
     filtered_games = @games.select do |game|
       if hoa == 'home'
-        game[:home_team_id] != nil # Ensures only home teams are selected
+        game.home_team_id != nil # Ensures only home teams are selected
       else
-        game[:away_team_id] != nil # Ensures only away teams are selected
+        game.away_team_id != nil # Ensures only away teams are selected
       end
     end
 
@@ -82,7 +82,7 @@ module StatisticHelper
     grouped_games = {}
 
     filtered_games.each do |game|
-      team_id = hoa == 'home' ? game[:home_team_id] : game[:away_team_id] # Ternary for if else
+      team_id = hoa == 'home' ? game.home_team_id : game.away_team_id # Ternary for if else
 
       grouped_games[team_id] ||= []
       grouped_games[team_id] << game
@@ -101,7 +101,7 @@ module StatisticHelper
     team_avg_goals = {}
 
     team_games.each do |team_name, games|
-      team_id = hoa == 'home' ? games.first[:home_team_id] : games.first[:away_team_id] # Ternary for if else
+      team_id = hoa == 'home' ? games.first.home_team_id : games.first.away_team_id # Ternary for if else
       team_avg_goals[team_name] = calculate_avg_goals(team_id, hoa)
     end
 
@@ -109,13 +109,13 @@ module StatisticHelper
   end
 
   def highest_avg_team(method)
-    avg_goals = @teams.map { |team| [team_name(team[:team_id]), calculate_avg_goals(team[:team_id])] }.to_h
+    avg_goals = @teams.map { |team| [team_name(team.team_id), calculate_avg_goals(team.team_id)] }.to_h
 
     avg_goals.send(method) { |_, avg| avg }[0]
   end
 
   def lowest_avg_team(method)
-    avg_goals = @teams.map { |team| [team_name(team[:team_id]), calculate_avg_goals(team[:team_id])] }.to_h
+    avg_goals = @teams.map { |team| [team_name(team.team_id), calculate_avg_goals(team.team_id)] }.to_h
 
     # Removing teams with 0.0 from the return
     filtered_avg = avg_goals.reject { |_, avg| avg == 0.0 }
