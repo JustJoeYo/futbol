@@ -12,28 +12,25 @@ module StatisticHelper
     count = @games.count { |game| yield(game) }
     (count.to_f / @games.size).round(2)
   end
-
   # Helper method to find the highest score in the games data
   def highest_score
-    @games.map { |game| game[:home_goals].to_i + game[:away_goals].to_i }.max
+    @games.map { |game| game.home_goals.to_i + game.away_goals.to_i }.max
   end
-
   # Helper method to find the lowest score in the games data
   def lowest_score
-    @games.map { |game| game[:home_goals].to_i + game[:away_goals].to_i }.min
+    @games.map { |game| game.home_goals.to_i + game.away_goals.to_i }.min
   end
 
   #League Statistics Helpers
 
   def team_name(team_id) # Finds the team name based on the team_id
     team_names = @teams.find do |team|
-      team[:team_id] == team_id
+      team.team_id == team_id
     end
-
     if team_names.nil?
       'Unknown Team'
     else
-      team_names[:teamname]
+      team_names.team_name
     end
   end
 
@@ -139,15 +136,14 @@ module StatisticHelper
   def games_in_season(season_id)
     game_ids = []
     @games.each do |game|
-      if game[:season] == season_id
-        game_ids << game[:game_id]
+      if game.season == season_id
+        game_ids << game.game_id
       end
     end
-
     season_games = []
     @game_teams.find_all do |games|
-      if game_ids.include?(games[:game_id])
-        season_games << games.to_h
+      if game_ids.include?(games.game_id)
+        season_games << games
       end
     end
     season_games
