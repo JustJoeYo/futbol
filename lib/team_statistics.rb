@@ -1,4 +1,4 @@
-require './lib/statistic_helper'
+require_relative 'statistic_helper'
 
 class TeamStatistics
   include StatisticHelper
@@ -11,58 +11,58 @@ class TeamStatistics
 
   # Team Statistics
 
-  def team_info(team_id)
-    team = @teams.find { |t| t[:team_id] == team_id }
+  def team_info(team_id) #Joe
+    team = @teams.find { |t| t.team_id == team_id }
     {
-      team_id: team[:team_id],
-      franchise_id: team[:franchiseid],
-      team_name: team[:teamname],
-      abbreviation: team[:abbreviation],
-      link: team[:link]
+      team_id: team.team_id,
+      franchise_id: team.franchise_id,
+      team_name: team.team_name,
+      abbreviation: team.abbreviation,
+      link: team.link
     }
   end
 
-  def best_season(team_id)
+  def best_season(team_id) #Joe
     
   end
 
-  def worst_season(team_id)
+  def worst_season(team_id) #Joe
     
   end
 
-  def average_win_percentage(team_id)
+  def average_win_percentage(team_id) #Joe
     
   end
 
-  def most_goals_scored(team_id)
+  def most_goals_scored(team_id) #Katya
     
   end
 
-  def fewest_goals_scored(team_id)
+  def fewest_goals_scored(team_id) #Katya
     
   end
 
-  def favorite_opponent(team_id)
+  def favorite_opponent(team_id) #Katya
     
   end
 
-  def rival(team_id)
+  def rival(team_id) #Andrew
     
   end
 
-  def biggest_team_blowout(team_id)
+  def biggest_team_blowout(team_id) #Andrew
     
   end
 
-  def worst_loss(team_id)
+  def worst_loss(team_id) #Andrew
     
   end
 
-  def head_to_head(team_id)
+  def head_to_head(team_id) #Katya
     
   end
 
-  def seasonal_summary(team_id)
+  def seasonal_summary(team_id) #Andrew
     
   end
 end
