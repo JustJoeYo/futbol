@@ -20,6 +20,8 @@ RSpec.describe TeamStatistics do
 
     it '#attributes' do
       expect(@team_statistics.instance_variable_get(:@teams)).not_to be_empty
+      expect(@team_statistics.instance_variable_get(:@games)).not_to be_empty
+      expect(@team_statistics.instance_variable_get(:@game_teams)).not_to be_empty
     end
   end
 
@@ -35,16 +37,16 @@ RSpec.describe TeamStatistics do
       expect(@team_statistics.team_info('1')).to eq(expected)
     end
 
-    xit '#best_season' do # make it instead of xit as we add the functionality
-        
+    it '#best_season' do
+      expect(@team_statistics.best_season("1")).to eq("20122013")
     end
 
-    xit '#worst_season' do
-        
+    it '#worst_season' do
+      expect(@team_statistics.worst_season("1")).to eq("20122013")
     end
 
-    xit '#average_win_percentage' do
-        
+    it '#average_win_percentage' do
+      expect(@team_statistics.average_win_percentage("9")).to eq(0.33)
     end
 
     xit '#most_goals_scored' do
@@ -78,9 +80,5 @@ RSpec.describe TeamStatistics do
     xit '#seasonal_summary' do
         
     end
-  end
-
-  describe 'class methods' do
-    
   end
 end
