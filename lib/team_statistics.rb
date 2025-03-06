@@ -9,21 +9,6 @@ class TeamStatistics
     @game_teams = game_teams
   end
 
-  # Helper Methods
-  def season_win_percentages(team_id)
-    seasons = @games.map { |game| game.season }.uniq
-    seasons.each_with_object({}) do |season, percentages|
-      total_games = @game_teams.count { |game_team| game_team.team_id == team_id && season(game_team) == season }
-      total_wins = @game_teams.count { |game_team| game_team.team_id == team_id && season(game_team) == season && game_team.result == "WIN" }
-      percentages[season] = total_games.zero? ? 0 : (total_wins.to_f / total_games).round(2)
-    end
-  end
-
-  def season(game_team)
-    game = @games.find { |g| g.game_id == game_team.game_id }
-    game.season
-  end
-
   # Team Statistics
   def team_info(team_id)
     team = @teams.find { |t| t.team_id == team_id }
