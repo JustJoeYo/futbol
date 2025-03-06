@@ -6,9 +6,9 @@ end
 
 RSpec.describe TeamStatistics do
   before(:each) do
-    @teams = CSV.read('./data/teams.csv', headers: true, header_converters: :symbol)
-    @games = CSV.read('./data/games.csv', headers: true, header_converters: :symbol)
-    @game_teams = CSV.read('./data/game_teams.csv', headers: true, header_converters: :symbol)
+    @teams = CSV.read('./data/teams.csv', headers: true, header_converters: :symbol).map { |row| Team.new(row) }
+    @games = CSV.read('./data/games_fixture.csv', headers: true, header_converters: :symbol).map { |row| Game.new(row) }
+    @game_teams = CSV.read('./data/game_team_fixture.csv', headers: true, header_converters: :symbol).map { |row| GameTeam.new(row) }
 
     @team_statistics = TeamStatistics.new(@teams, @games, @game_teams)
   end
