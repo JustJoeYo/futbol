@@ -26,7 +26,7 @@ RSpec.describe TeamStatistics do
   end
 
   describe 'instance methods' do
-    xit '#team_info' do
+    it '#team_info' do
       expected = {
         team_id: '1',
         franchise_id: '23',
@@ -56,7 +56,7 @@ RSpec.describe TeamStatistics do
       expect(@team_statistics.most_goals_scored('3')).to eq(2)
     end
 
-    xit '#fewest_goals_scored' do #katya
+    it '#fewest_goals_scored' do #katya
       expect(@team_statistics.fewest_goals_scored('3')).to eq(1)
     end
 

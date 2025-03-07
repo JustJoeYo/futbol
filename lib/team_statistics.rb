@@ -48,7 +48,10 @@ class TeamStatistics
   end
 
   def fewest_goals_scored(team_id) #Katya
-   
+    min_game = find_games(team_id).min_by do |game|
+      game.goals
+    end
+    min_game.goals.to_i
   end
 
   def favorite_opponent(team_id) #Katya
