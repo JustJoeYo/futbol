@@ -48,7 +48,7 @@ RSpec.describe TeamStatistics do
     xit '#average_win_percentage' do
         
     end
-    it '#find_games' do #katya helper method one
+    it '#find_teams' do #katya helper method one
       expected_games = [
         GameTeam.new({
           game_id: "2014030413",
@@ -85,8 +85,8 @@ RSpec.describe TeamStatistics do
           takeaways: '7'
         })
       ]
-      allow(@team_statistics).to receive(:find_games).with('14').and_return(expected_games)
-      expect(@team_statistics.find_games('14')).to eq(expected_games)
+      allow(@team_statistics).to receive(:find_teams).with('14').and_return(expected_games)
+      expect(@team_statistics.find_teams('14')).to eq(expected_games)
     end
 
     it '#most_goals_scored' do #katya
@@ -95,6 +95,10 @@ RSpec.describe TeamStatistics do
 
     it '#fewest_goals_scored' do #katya
       expect(@team_statistics.fewest_goals_scored('3')).to eq(1)
+    end
+
+    it "#find_games" do
+    
     end
 
     xit '#favorite_opponent' do #katya

@@ -34,7 +34,7 @@ class TeamStatistics
     
   end
   #helper method one
-  def find_games(team_id) #makes an array of rows that have a certain team_id
+  def find_teams(team_id) #makes an array of rows that have a certain team_id
     @game_teams.find_all do |game|
       team_id == game.team_id
     end
@@ -54,6 +54,14 @@ class TeamStatistics
     min_game.goals.to_i
   end
 
+  def find_games(team_id)
+    game_id_array = find_teams(team_id).map {|game| game.game_id} #takes the array of team_id rows and transforms to create array of just game_id's
+    
+    games_array = @game_teams.find_all do |games|
+      game_id_array.include?(games.game_id) #find the rows from the whole data set that have the same game_id as any game_id in the game_id_array
+    end
+  end
+  
 
   def favorite_opponent(team_id) #Katya
    
