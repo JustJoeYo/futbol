@@ -102,7 +102,12 @@ RSpec.describe TeamStatistics do
     end
 
     it '#opponent_stats' do
-      expect(@team_statistics.opponent_stats('16')).to eq()
+      expect(@team_statistics.opponent_stats('16')).to eq({
+                                "3"=>{:wins=>0, :games=>5}, 
+                                "6"=>{:wins=>4, :games=>4}, 
+                                "5"=>{:wins=>1, :games=>2}, 
+                                "14"=>{:wins=>1, :games=>2}
+                                                        })
     end
 
     xit '#favorite_opponent' do #katya
