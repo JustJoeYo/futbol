@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'pry'
+
 
 RSpec.configure do |config|
   config.formatter = :documentation
@@ -24,7 +26,7 @@ RSpec.describe TeamStatistics do
   end
 
   describe 'instance methods' do
-    it '#team_info' do
+    xit '#team_info' do
       expected = {
         team_id: '1',
         franchise_id: '23',
@@ -46,16 +48,19 @@ RSpec.describe TeamStatistics do
     xit '#average_win_percentage' do
         
     end
+    xit '#find_games' do #katya helper method one
+      expect(@team_statistics.find_games('3')).to eq()
+    end
 
-    xit '#most_goals_scored' do
+    it '#most_goals_scored' do #katya
+        expect(@team_statistics.most_goals_scored('3')).to eq(2)
+    end
+
+    xit '#fewest_goals_scored' do #katya
         
     end
 
-    xit '#fewest_goals_scored' do
-        
-    end
-
-    xit '#favorite_opponent' do
+    xit '#favorite_opponent' do #katya
         
     end
 
@@ -71,7 +76,7 @@ RSpec.describe TeamStatistics do
         
     end
 
-    xit '#head_to_head' do
+    xit '#head_to_head' do #katya
         
     end
 

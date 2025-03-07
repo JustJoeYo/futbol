@@ -33,13 +33,22 @@ class TeamStatistics
   def average_win_percentage(team_id) #Joe
     
   end
+  #helper method one
+  def find_games(team_id) #makes an array of rows that have a certain team_id
+    @game_teams.find_all do |game|
+      team_id == game.team_id
+    end
+  end
 
   def most_goals_scored(team_id) #Katya
-    
+    max_game = find_games(team_id).max_by do |game|
+      game.goals
+    end
+    max_game.goals.to_i
   end
 
   def fewest_goals_scored(team_id) #Katya
-    
+   
   end
 
   def favorite_opponent(team_id) #Katya
