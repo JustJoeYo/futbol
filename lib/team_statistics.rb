@@ -54,6 +54,13 @@ class TeamStatistics
     min_game.goals.to_i
   end
 
+  #helper method two
+  def opponent_games(team_id)
+    @game_teams.find_all do |game|
+      team_id != game.team_id
+    end
+  end
+
   def favorite_opponent(team_id) #Katya
     
   end

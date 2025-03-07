@@ -97,6 +97,10 @@ RSpec.describe TeamStatistics do
       expect(@team_statistics.fewest_goals_scored('3')).to eq(1)
     end
 
+    it '#opponent_games' do
+      expect(@team_statistics.opponent_games('16')).to eq()
+    end
+
     xit '#favorite_opponent' do #katya
         
     end
