@@ -59,8 +59,16 @@ RSpec.describe TeamStatistics do
         
     end
 
-    xit '#rival' do
-        
+    describe '#rival' do
+      it 'returns the opponent with the highest win percentage against the given team' do
+        expect(@team_statistics.rival('6')).to eq("Houston Dynamo")
+        expect(@team_statistics.rival('3')).to eq("FC Dallas")
+      end
+
+      it 'returns 'No Rival Found" if the team has no opponents" do
+        expect(@team_statistics.rival('3')).to eq("FC Dallas")
+      end
+      
     end
 
     xit '#biggest_team_blowout' do
