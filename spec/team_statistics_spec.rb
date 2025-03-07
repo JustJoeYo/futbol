@@ -48,8 +48,45 @@ RSpec.describe TeamStatistics do
     xit '#average_win_percentage' do
         
     end
-    xit '#find_games' do #katya helper method one
-      expect(@team_statistics.find_games('3')).to eq()
+    it '#find_games' do #katya helper method one
+      expected_games = [
+        GameTeam.new({
+          game_id: "2014030413",
+          team_id: "14",
+          hoa: "away",
+          result: "WIN",
+          settled_in: "REG",
+          head_coach: "Jon Cooper",
+          goals: '3',
+          shots: '8',
+          tackles: '46',
+          pim: '6',
+          powerplayopportunities: '2',
+          powerplaygoals: '0',
+          faceoffwinpercentage: '41.8',
+          giveaways: '10',
+          takeaways: '7'
+        }),
+        GameTeam.new({
+          game_id: "2014030414",
+          team_id: "14",
+          hoa: "away",
+          result: "LOSS",
+          settled_in: "REG",
+          head_coach: "Jon Cooper",
+          goals: '1',
+          shots: '6',
+          tackles: '46',
+          pim: '6',
+          powerplayopportunities: '4',
+          powerplaygoals: '0',
+          faceoffwinpercentage: '34.5',
+          giveaways: '5',
+          takeaways: '7'
+        })
+      ]
+      allow(@team_statistics).to receive(:find_games).with('14').and_return(expected_games)
+      expect(@team_statistics.find_games('14')).to eq(expected_games)
     end
 
     it '#most_goals_scored' do #katya

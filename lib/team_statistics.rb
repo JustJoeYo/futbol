@@ -42,14 +42,14 @@ class TeamStatistics
 
   def most_goals_scored(team_id) #Katya
     max_game = find_games(team_id).max_by do |game|
-      game.goals
+      game.goals.to_i
     end
     max_game.goals.to_i
   end
 
   def fewest_goals_scored(team_id) #Katya
     min_game = find_games(team_id).min_by do |game|
-      game.goals
+      game.goals.to_i
     end
     min_game.goals.to_i
   end
