@@ -7,8 +7,8 @@ end
 RSpec.describe TeamStatistics do
   before(:each) do
     @teams = CSV.read('./data/teams.csv', headers: true, header_converters: :symbol).map { |row| Team.new(row) }
-    @games = CSV.read('./data/games_fixture.csv', headers: true, header_converters: :symbol).map { |row| Game.new(row) }
-    @game_teams = CSV.read('./data/game_team_fixture.csv', headers: true, header_converters: :symbol).map { |row| GameTeam.new(row) }
+    @games = CSV.read('./data/games.csv', headers: true, header_converters: :symbol).map { |row| Game.new(row) }
+    @game_teams = CSV.read('./data/game_teams.csv', headers: true, header_converters: :symbol).map { |row| GameTeam.new(row) }
 
     @team_statistics = TeamStatistics.new(@teams, @games, @game_teams)
   end
@@ -38,15 +38,15 @@ RSpec.describe TeamStatistics do
     end
 
     it '#best_season' do
-      expect(@team_statistics.best_season("1")).to eq("20122013")
+      expect(@team_statistics.best_season("1")).to eq("20152016")
     end
 
     it '#worst_season' do
-      expect(@team_statistics.worst_season("1")).to eq("20122013")
+      expect(@team_statistics.worst_season("1")).to eq("20162017")
     end
 
     it '#average_win_percentage' do
-      expect(@team_statistics.average_win_percentage("9")).to eq(0.33)
+      expect(@team_statistics.average_win_percentage("9")).to eq(0.35)
     end
 
     xit '#most_goals_scored' do
