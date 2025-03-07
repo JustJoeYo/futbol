@@ -61,8 +61,23 @@ class TeamStatistics
     end
   end
 
+  #helper method three
+  def opponent_stats(team_id)
+    stats = {}
+    opponent_games(team_id).each do |game| #iterates through each row 
+      if stats[game.team_id].nil?
+        stats[game.team_id] = {wins: 0, games: 0}
+      end
+      stats[game.team_id][:games] += 1
+      if game.result == "WIN"
+        stats[game.team_id][:wins] += 1
+      end
+    end
+    binding.pry
+  end
+
   def favorite_opponent(team_id) #Katya
-    
+  
   end
 
   def rival(team_id) #Andrew
