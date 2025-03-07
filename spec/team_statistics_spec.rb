@@ -53,11 +53,11 @@ RSpec.describe TeamStatistics do
     end
 
     it '#most_goals_scored' do #katya
-        expect(@team_statistics.most_goals_scored('3')).to eq(2)
+      expect(@team_statistics.most_goals_scored('3')).to eq(2)
     end
 
     xit '#fewest_goals_scored' do #katya
-        
+      expect(@team_statistics.fewest_goals_scored('3')).to eq(1)
     end
 
     xit '#favorite_opponent' do #katya
