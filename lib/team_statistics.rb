@@ -54,12 +54,22 @@ class TeamStatistics
     min_game.goals.to_i
   end
 
+  #helper method two
   def find_games(team_id)
     game_id_array = find_teams(team_id).map {|game| game.game_id} #takes the array of team_id rows and transforms to create array of just game_id's
     
-    games_array = @game_teams.find_all do |games|
+    @game_teams.find_all do |games|
       game_id_array.include?(games.game_id) #find the rows from the whole data set that have the same game_id as any game_id in the game_id_array
     end
+  end
+
+  #helper method three
+  def group_teams(team_id) 
+    grouped_hash = find_games(team_id).group_by do |row|
+      row.team_id
+    end
+    grouped_hash.delete(team_id) #so we can just caclulate the opponents win percentages
+    grouped_hash #this method is returning a nested hash of only the opponents rows, grouped by team_id 
   end
   
 

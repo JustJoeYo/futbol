@@ -97,8 +97,14 @@ RSpec.describe TeamStatistics do
       expect(@team_statistics.fewest_goals_scored('3')).to eq(1)
     end
 
-    it "#find_games" do
-    
+    #helper method two
+    xit "#find_games" do #katya
+
+    end
+
+    #helper method three
+    it "#goup_teams" do #katya
+      expect(@team_statistics.group_teams('3')).to eq()
     end
 
     xit '#favorite_opponent' do #katya
