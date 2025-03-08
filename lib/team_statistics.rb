@@ -69,7 +69,26 @@ class TeamStatistics
       row.team_id
     end
     grouped_hash.delete(team_id) #so we can just caclulate the opponents win percentages
-    grouped_hash #this method is returning a nested hash of only the opponents rows, grouped by team_id 
+    grouped_hash.values #this method is returning a nested hash of only the opponents rows, grouped by team_id 
+  end
+
+  #helper method four
+  def calculate_team_statistics(team_id) #calculates number of wins and games of each team
+    grouped_array = group_teams(team_id)
+
+    team_stats = {}
+    grouped_array.each do |team_array|
+      wins = 0
+      games = 0
+      team_array.each do |row|
+        if row.result == "WIN"
+          wins += 1
+        end
+        games += 1
+        team_stats[row.team_id] = { wins: wins, games: games }
+        end
+      end
+      team_stats #returns {"6"=>{:wins=>3, :games=>3}, "5"=>{:wins=>1, :games=>2}}
   end
   
 

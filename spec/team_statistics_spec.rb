@@ -103,8 +103,13 @@ RSpec.describe TeamStatistics do
     end
 
     #helper method three
-    it "#goup_teams" do #katya
+    xit "#goup_teams" do #katya
       expect(@team_statistics.group_teams('3')).to eq()
+    end
+
+    #helper method four
+    it "#goup_teams" do #katya
+      expect(@team_statistics.calculate_team_statistics('3')).to eq()
     end
 
     xit '#favorite_opponent' do #katya
