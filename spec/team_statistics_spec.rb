@@ -90,29 +90,28 @@ RSpec.describe TeamStatistics do
     end
 
     describe '#seasonal_summary' do
-      xit 'returns a hash with season statistics for a given team' do
+      it 'returns a hash with season statistics for a given team' do
         expected_summary = {
           "20122013" => {
-            "regular_season" => {
-              win_percentage: 0.5,
-              total_goals_scored: 9,
-              total_goals_against: 6,
-              average_goals_scored: 3.0,
-              average_goals_against: 2.0
+            "regular_season" => { #No regular season games in fixture
+              win_percentage: 0.0,
+              total_goals_scored: 0,
+              total_goals_against: 0,
+              average_goals_scored: 0,
+              average_goals_against: 0
             },
             "postseason" => {
-              win_percentage: 0.67,
-              total_goals_scored: 10,
+              win_percentage: 1.0,
+              total_goals_scored: 11,
               total_goals_against: 7,
-              average_goals_scored: 2.5,
-              average_goals_against: 2.33
+              average_goals_scored: 2.75,
+              average_goals_against: 1.75
             }
           }
         }
 
         expect(@team_statistics.seasonal_summary('6')).to eq(expected_summary)
       end
-        
     end
   end
 

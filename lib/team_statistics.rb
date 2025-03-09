@@ -93,12 +93,29 @@ class TeamStatistics
     summary = {}
 
     seasons.each do |season|
-      regular_games = team_games.select do |game|
-        find_season_by_game_id(game.game_id) == season && find_game_type(game.game_id) == "Regular Season"
+      #Find all game_ids for this season
+      season_game_ids = []
+      @games.each do |game|
+        if game.season == season
+          season_game_ids << game.game_id
+        end
       end
 
-      postseason_games = team_games.select do |game|
-        find_season_by_game_id(game.game_id) == season && find_game_type(game.game_id) == "Postseason"
+      #Filter game_team records based on season
+      season_games = team_games.select do |game|
+        season_game_ids.include?(game.game_id)
+      end
+
+      #separate regular/postseason games
+      regular_games = []
+      postseason_games = []
+
+      season_games.each do |game|
+        if find_game_type(game.game_id) == "Regular Season"
+          regular_games << game
+        else
+          postseason_games << game
+        end
       end
 
       summary[season] = {
@@ -137,18 +154,18 @@ class TeamStatistics
 
     total_games = games.size
 
-    total_wins = games.count do |game|
-      game.result == "WIN"
-    end
+    total_wins = 0
+    total_goals_scored = 0
+    total_goals_against = 0
 
-    total_goals_scored = games.sum do |game|
-      game.goals.to_i
-    end
+    games.each do |game|
+      if game.result == "WIN"
+        total_wins += 1
+      end
 
-    total_goals_against = games.sum do |game|
-      find_opponent_score(game, team_id)
+      total_goals_scored += game.goals.to_i
+      total_goals_against += find_opponent_score(game, team_id)
     end
-
     #Hash creation
     {
       win_percentage: (total_wins.to_f / total_games).round(2),
