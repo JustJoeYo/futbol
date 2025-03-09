@@ -214,9 +214,9 @@ class TeamStatistics
     end
 
     if game_record.home_team_id == team_id
-      game_record.home_goals.to_i - game_record.away_goals.to_i
+      (game_record.home_goals.to_i - game_record.away_goals.to_i).abs
     elsif game_record.away_team_id == team_id
-      game_record.away_goals.to_i - game_record.home_goals.to_i
+      (game_record.away_goals.to_i - game_record.home_goals.to_i).abs
     else
       0 #Edge case guard
     end
