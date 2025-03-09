@@ -65,4 +65,14 @@ class TeamStatistics
   def seasonal_summary(team_id) #Andrew
     
   end
+
+  #Helpers AS
+
+  def games_won_by_team(team_id)
+    @game_teams.select do |game|
+      game.team_id == team_id && game.result == "WIN"
+    end
+  end
+
+  def games_lost_by_team(team_id)
 end
