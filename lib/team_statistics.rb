@@ -34,7 +34,7 @@ class TeamStatistics
     
   end
   #helper method one
-  def find_teams(team_id) #makes an array of rows that have a certain team_id
+  def find_teams(team_id) 
     @game_teams.find_all do |game|
       team_id == game.team_id
     end
@@ -56,10 +56,10 @@ class TeamStatistics
 
   #helper method two
   def find_games(team_id)
-    game_id_array = find_teams(team_id).map {|game| game.game_id} #takes the array of team_id rows and transforms to create array of just game_id's
+    game_id_array = find_teams(team_id).map {|game| game.game_id} 
     
     @game_teams.find_all do |games|
-      game_id_array.include?(games.game_id) #find the rows from the whole data set that have the same game_id as any game_id in the game_id_array
+      game_id_array.include?(games.game_id) 
     end
   end
 
@@ -68,12 +68,12 @@ class TeamStatistics
     grouped_hash = find_games(team_id).group_by do |row|
       row.team_id
     end
-    grouped_hash.delete(team_id) #so we can just caclulate the opponents win percentages
+    grouped_hash.delete(team_id) 
     grouped_hash.values #this method is returning a nested array of only the opponents rows, grouped by team_id 
   end
 
   #helper method four
-  def calculate_team_statistics(team_id) #calculates number of wins and games of each team
+  def calculate_team_statistics(team_id) 
     grouped_array = group_teams(team_id)
     team_stats = {}
     grouped_array.each do |team_array|
@@ -87,7 +87,7 @@ class TeamStatistics
         team_stats[row.team_id] = { wins: wins, games: games }
         end
       end
-      team_stats #returns {"6"=>{:wins=>3, :games=>3}, "5"=>{:wins=>1, :games=>2}}
+      team_stats 
   end
   
 
@@ -99,7 +99,7 @@ class TeamStatistics
     team_name
   end
 
-  def rival(team_id) #Andrew
+  def rival(team_id) #Katya
     rival = calculate_team_statistics(team_id).max_by do |team, stats|
       (stats[:wins].to_f / stats[:games].to_f) * 100
     end
@@ -117,7 +117,7 @@ class TeamStatistics
 
   def head_to_head(team_id) #Katya
     opponents = {}
-    opponent_stats = calculate_team_statistics(team_id) #{"6"=>{:wins=>3, :games=>3}, "5"=>{:wins=>1, :games=>2}}
+    opponent_stats = calculate_team_statistics(team_id) 
     opponent_stats.each do |team, stats|
       opponents[find_team_name(team)] = (stats[:wins].to_f / stats[:games].to_f) * 100
     end

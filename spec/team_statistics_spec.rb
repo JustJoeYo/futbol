@@ -98,16 +98,16 @@ RSpec.describe TeamStatistics do
       expect(@team_statistics.group_teams('3')[1][0].head_coach).to eq("Mike Sullivan")
     end
 
-    #helper method four
-    it "#goup_teams" do #katya
-     
+    it "#calculate_team_statistics" do #katya helper method four
+      expect(@team_statistics.calculate_team_statistics('3')).to eq({"6"=>{:wins=>3, :games=>3}, "5"=>{:wins=>1, :games=>2}})
+      expect(@team_statistics.calculate_team_statistics('16')).to eq({"14"=>{:wins=>1, :games=>1}})
     end
 
     it '#favorite_opponent' do #katya
       expect(@team_statistics.favorite_opponent('3')).to eq("Sporting Kansas City")  
     end
 
-    it '#rival' do
+    it '#rival' do #katya
       expect(@team_statistics.rival('3')).to eq("FC Dallas") 
     end
 
