@@ -69,7 +69,7 @@ class TeamStatistics
       row.team_id
     end
     grouped_hash.delete(team_id) #so we can just caclulate the opponents win percentages
-    grouped_hash.values #this method is returning a nested hash of only the opponents rows, grouped by team_id 
+    grouped_hash.values #this method is returning a nested array of only the opponents rows, grouped by team_id 
   end
 
   #helper method four

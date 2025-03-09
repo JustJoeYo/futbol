@@ -87,9 +87,15 @@ RSpec.describe TeamStatistics do
       expect(@team_statistics.find_games('3')[7].tackles).to eq('35')
     end
 
-    #helper method three
-    xit "#goup_teams" do #katya
-      
+    it "#goup_teams" do #katya helper method three
+      expect(@team_statistics.group_teams('3')).to be_a(Array)
+      expect(@team_statistics.group_teams('3')[0]).to be_a(Array)
+      expect(@team_statistics.group_teams('3')[0][0]).to be_a(GameTeam)
+      expect(@team_statistics.group_teams('3')[0][0].team_id).to eq("6")
+      expect(@team_statistics.group_teams('3')[0][0].head_coach).to eq("Claude Julien")
+      expect(@team_statistics.group_teams('3')[1][0]).to be_a(GameTeam)
+      expect(@team_statistics.group_teams('3')[1][0].team_id).to eq("5")
+      expect(@team_statistics.group_teams('3')[1][0].head_coach).to eq("Mike Sullivan")
     end
 
     #helper method four
