@@ -99,7 +99,6 @@ RSpec.describe TeamStatistics do
 
     #helper method two
     xit "#find_games" do #katya
-
     end
 
     #helper method three
@@ -130,6 +129,8 @@ RSpec.describe TeamStatistics do
 
     it '#head_to_head' do #katya
        expect(@team_statistics.head_to_head('3')).to eq({"Sporting Kansas City" => 50.0, "FC Dallas" => 100.0}) 
+       expect(@team_statistics.head_to_head('6')).to eq({"Houston Dynamo"=>0.0})
+       expect(@team_statistics.head_to_head('16')).to eq({"DC United"=>100.0})
     end
 
     xit '#seasonal_summary' do
