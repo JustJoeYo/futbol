@@ -80,5 +80,15 @@ class TeamStatistics
     end
   end
 
-  
+  def goal_difference(game, team_id)
+    game_record = @games.find do |g| #Using g instead of game due to game argument
+      g.game_id == game.game_id
+    end
+
+    if game_record.home_team_id == team_id
+      game_record.home_goals.to_i - game_record.away_goals.to_i
+    else
+      game_record.away_goals.to_i - game_record.home_goals.to_i
+    end
+  end
 end
