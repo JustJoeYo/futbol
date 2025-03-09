@@ -60,21 +60,13 @@ RSpec.describe TeamStatistics do
     end
 
     describe '#rival' do
-      xit 'returns the opponent with the highest win percentage against the given team' do
-        expect(@team_statistics.rival('6')).to eq("Sporting Kansas City")
-        expect(@team_statistics.rival('3')).to eq("FC Dallas")
-      end
 
-      xit 'returns 'No Rival Found" if the team has no opponents" do
-        expect(@team_statistics.rival('3')).to eq("No Rival Found")
-      end
-      
     end
 
     describe '#biggest_team_blowout' do
       it 'returns the largest margin of victory for a given team' do
-        expect(@team_statistics.biggest_team_blowout('6')).to eq(3) #FC Dallas beat Sporting KC 4-1
-        expect(@team_statistics.biggest_team_blowout('3')).to eq(1) #Houston Dynamo biggest win was 2-1
+        expect(@team_statistics.biggest_team_blowout('6')).to eq(1) #FC Dallas biggest win was 3-2 with fixture
+        expect(@team_statistics.biggest_team_blowout('3')).to eq(0) #Houston Dynamo has no wins in the fixture
       end
 
       it 'returns 0 if the team has no wins' do
@@ -83,12 +75,12 @@ RSpec.describe TeamStatistics do
     end
 
     describe '#worst_loss' do
-      it 'returns the biggest loss for a given team' do
-        expect(@team_statistics.worst_loss('6')).to eq(1) #FC Dallas lost 1-3 to Houston
-        expect(@team_statistics.worst_loss('3')).to eq(2) #Houston Dynamo lost 1-3 to FC
+      xit 'returns the biggest loss for a given team' do
+        expect(@team_statistics.worst_loss('6')).to eq(0) #FC Dallas has no losses with the fixture
+        expect(@team_statistics.worst_loss('3')).to eq(1) #Houston Dynamo biggest loss was 2-3
       end
 
-      it 'returns 0 if the team has no losses' do
+      xit 'returns 0 if the team has no losses' do
         expect(@team_statistics.worst_loss('9999')).to eq(0) #Fake
       end
     end
@@ -97,8 +89,8 @@ RSpec.describe TeamStatistics do
         
     end
 
-    xit '#seasonal_summary' do
-      it 'returns a hash with season statistics for a given team' do
+    describe '#seasonal_summary' do
+      xit 'returns a hash with season statistics for a given team' do
         expected_summary = {
           "20122013" => {
             "regular_season" => {

@@ -51,7 +51,15 @@ class TeamStatistics
   end
 
   def biggest_team_blowout(team_id) #Andrew
-    
+    wins = games_won_by_team(team_id)
+
+    return 0 if wins.empty? #Edge case guard
+
+    blowouts = wins.map do |game|
+      goal_difference(game, team_id)
+    end
+
+    blowouts.max
   end
 
   def worst_loss(team_id) #Andrew
@@ -87,8 +95,10 @@ class TeamStatistics
 
     if game_record.home_team_id == team_id
       game_record.home_goals.to_i - game_record.away_goals.to_i
-    else
+    elsif game_record.away_team_id == team_id
       game_record.away_goals.to_i - game_record.home_goals.to_i
+    else
+      0 #Edge case guard
     end
   end
 end
