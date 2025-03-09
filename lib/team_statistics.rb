@@ -75,7 +75,7 @@ class TeamStatistics
   #helper method four
   def calculate_team_statistics(team_id) #calculates number of wins and games of each team
     grouped_array = group_teams(team_id)
-
+    binding.pry
     team_stats = {}
     grouped_array.each do |team_array|
       wins = 0
