@@ -104,12 +104,12 @@ RSpec.describe TeamStatistics do
 
     #helper method three
     xit "#goup_teams" do #katya
-      expect(@team_statistics.group_teams('3')).to eq()
+      
     end
 
     #helper method four
     xit "#goup_teams" do #katya
-      expect(@team_statistics.calculate_team_statistics('3')).to eq()
+     
     end
 
     it '#favorite_opponent' do #katya
@@ -117,7 +117,7 @@ RSpec.describe TeamStatistics do
     end
 
     it '#rival' do
-      expect(@team_statistics.rival('3')).to eq("FC Dallas")  
+      expect(@team_statistics.rival('3')).to eq("FC Dallas") 
     end
 
     xit '#biggest_team_blowout' do
