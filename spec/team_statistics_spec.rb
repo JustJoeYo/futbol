@@ -117,7 +117,7 @@ RSpec.describe TeamStatistics do
     end
 
     xit '#rival' do
-        
+      expect(@team_statistics.rival('3')).to eq("FC Dallas")  
     end
 
     xit '#biggest_team_blowout' do
