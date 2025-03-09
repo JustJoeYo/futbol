@@ -75,7 +75,6 @@ class TeamStatistics
   #helper method four
   def calculate_team_statistics(team_id) #calculates number of wins and games of each team
     grouped_array = group_teams(team_id)
-    binding.pry
     team_stats = {}
     grouped_array.each do |team_array|
       wins = 0
@@ -117,7 +116,12 @@ class TeamStatistics
   end
 
   def head_to_head(team_id) #Katya
-    
+    opponents = {}
+    opponent_stats = calculate_team_statistics(team_id) #{"6"=>{:wins=>3, :games=>3}, "5"=>{:wins=>1, :games=>2}}
+    opponent_stats.each do |team, stats|
+      opponents[find_team_name(team)] = (stats[:wins].to_f / stats[:games].to_f) * 100
+    end
+    opponents
   end
 
   def seasonal_summary(team_id) #Andrew
