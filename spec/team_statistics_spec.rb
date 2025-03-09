@@ -72,8 +72,19 @@ RSpec.describe TeamStatistics do
       expect(@team_statistics.fewest_goals_scored('5')).to eq(2)
     end
 
-    #helper method two
-    xit "#find_games" do #katya
+    it "#find_games" do #katya helper method two
+      expect(@team_statistics.find_games('3').first).to be_a(GameTeam)
+      expect(@team_statistics.find_games('3').first.game_id).to eq("2012030221")
+      expect(@team_statistics.find_games('3').first.team_id).to eq("3")
+
+      expect(@team_statistics.find_games('3')[1]).to be_a(GameTeam)
+      expect(@team_statistics.find_games('3')[1].game_id).to eq("2012030221")
+      expect(@team_statistics.find_games('3')[1].team_id).to eq("6")
+      expect(@team_statistics.find_games('3')[1].result).to eq("WIN")
+
+      expect(@team_statistics.find_games('3')[7]).to be_a(GameTeam)
+      expect(@team_statistics.find_games('3')[7].team_id).to eq('5')
+      expect(@team_statistics.find_games('3')[7].tackles).to eq('35')
     end
 
     #helper method three
