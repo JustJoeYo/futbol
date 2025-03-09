@@ -75,4 +75,10 @@ class TeamStatistics
   end
 
   def games_lost_by_team(team_id)
+    @game_teams.select do |game|
+      game.team_id == team_id && game.result == "LOSS"
+    end
+  end
+
+  
 end
