@@ -41,14 +41,14 @@ class TeamStatistics
   end
 
   def most_goals_scored(team_id) #Katya
-    max_game = find_games(team_id).max_by do |game|
+    max_game = find_teams(team_id).max_by do |game|
       game.goals.to_i
     end
     max_game.goals.to_i
   end
 
   def fewest_goals_scored(team_id) #Katya
-    min_game = find_games(team_id).min_by do |game|
+    min_game = find_teams(team_id).min_by do |game|
       game.goals.to_i
     end
     min_game.goals.to_i
@@ -93,7 +93,11 @@ class TeamStatistics
   
 
   def favorite_opponent(team_id) #Katya
-   
+    favorite = calculate_team_statistics(team_id).min_by do |team, stats|
+      (stats[:wins].to_f / stats[:games].to_f) * 100
+    end
+    team_name = find_team_name(favorite[0])
+    team_name
   end
 
   def rival(team_id) #Andrew
