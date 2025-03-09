@@ -101,7 +101,11 @@ class TeamStatistics
   end
 
   def rival(team_id) #Andrew
-    
+    rival = calculate_team_statistics(team_id).max_by do |team, stats|
+      (stats[:wins].to_f / stats[:games].to_f) * 100
+    end
+    team_name = find_team_name(rival[0])
+    team_name
   end
 
   def biggest_team_blowout(team_id) #Andrew

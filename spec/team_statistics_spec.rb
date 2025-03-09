@@ -116,7 +116,7 @@ RSpec.describe TeamStatistics do
       expect(@team_statistics.favorite_opponent('3')).to eq("Sporting Kansas City")  
     end
 
-    xit '#rival' do
+    it '#rival' do
       expect(@team_statistics.rival('3')).to eq("FC Dallas")  
     end
 
