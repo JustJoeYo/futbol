@@ -82,11 +82,33 @@ class TeamStatistics
     #Step 1, get all games for the team
     team_games = games_involving_team(team_id)
 
-    #Step 2, group by season
-    games_by_season = team_games.map do |game|
-      #Need helper methods
+    #Step 2, get unique season
+    seasons = team_games.map do |game|
+      find_season_by_game_id(game.game_id)
     end
+
+    seasons = seasons.uniq
+
+    #Step 3, iterate through seasons and generate stats
+    summary = {}
+
+    seasons.each do |season|
+      regular_games = team_games.select do |game|
+        find_season_by_game_id(game.game_id) == season && find_game_type(game.game_id) == "Regular Season"
+      end
+
+      postseason_games = team_games.select do |game|
+        find_season_by_game_id(game.game_id) == season && find_game_type(game.game_id) == "Postseason"
+      end
+
+      summary[season] = {
+        "regular_season" => calculate_season_stats(regular_games, team_id),
+        "postseason" => calculate_season_stats(postseason_games, team_id)
+      }
     
+    end
+
+    summary
   end
 
   #Helpers AS
@@ -111,7 +133,9 @@ class TeamStatistics
       total_goals_against: 0,
       average_goals_scored: 0.0,
       average_goals_against: 0.0
-    } if games.empty?
+    } if games.empty? #Guard against zero
+
+    total_games = games.size
 
     total_wins = games.count do |game|
       game.result == "WIN"
@@ -122,23 +146,25 @@ class TeamStatistics
     end
 
     total_goals_against = games.sum do |game|
-      find_opponent_score(game,team_id)
+      find_opponent_score(game, team_id)
     end
-
-    #Math
-    total_games = games.size
-    win_percentage = (total_wins.to_f / total_games).round(2)
-    average_goals_scored = (total_goals_scored.to_f / total_games).round(2)
-    average_goals_against = (total_goals_against.to_f / total_games).round(2)
 
     #Hash creation
     {
-      win_percentage: win_percentage,
+      win_percentage: (total_wins.to_f / total_games).round(2),
       total_goals_scored: total_goals_scored,
       total_goals_against: total_goals_against,
-      average_goals_scored: average_goals_against
-      average_goals_against: average_goals_against
+      average_goals_scored: (total_goals_scored.to_f / total_games).round(2),
+      average_goals_against: (total_goals_against.to_f / total_games).round(2)
     }
+  end
+
+  def find_game_type(game_id)
+    game_record = @games.find do |game|
+      game.game_id == game_id
+    end
+
+    game_record.type
   end
 
   def find_opponent_score(game, team_id) #Finds opponents goals from the game
