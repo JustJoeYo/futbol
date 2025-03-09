@@ -125,11 +125,13 @@ class TeamStatistics
       find_opponent_score(game,team_id)
     end
 
+    #Math
     total_games = games.size
     win_percentage = (total_wins.to_f / total_games).round(2)
     average_goals_scored = (total_goals_scored.to_f / total_games).round(2)
     average_goals_against = (total_goals_against.to_f / total_games).round(2)
 
+    #Hash creation
     {
       win_percentage: win_percentage,
       total_goals_scored: total_goals_scored,
@@ -137,6 +139,18 @@ class TeamStatistics
       average_goals_scored: average_goals_against
       average_goals_against: average_goals_against
     }
+  end
+
+  def find_opponent_score(game, team_id) #Finds opponents goals from the game
+    game_record = @games.find do |g| #Using g as game is an argument
+      g.game_id == game.game_id
+    end
+
+    if game_record.home_team_id == team_id
+      game_record.away_goals.to_i
+    else
+      game_record.home_goals.to_i
+    end
   end
 
   def games_won_by_team(team_id) #finds all games where the team won
