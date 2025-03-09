@@ -97,11 +97,46 @@ class TeamStatistics
     end
   end
 
-  def find_season_by_game_id(game_id)
+  def find_season_by_game_id(game_id) #Finds the season for a given game_id
     game_record = @games.find do |game|
       game.game_id == game_id
     end
     game_record.season
+  end
+
+  def calculate_season_stats(games, team_id)
+    return {
+      win_percentage: 0.0,
+      total_goals_scored: 0,
+      total_goals_against: 0,
+      average_goals_scored: 0.0,
+      average_goals_against: 0.0
+    } if games.empty?
+
+    total_wins = games.count do |game|
+      game.result == "WIN"
+    end
+
+    total_goals_scored = games.sum do |game|
+      game.goals.to_i
+    end
+
+    total_goals_against = games.sum do |game|
+      find_opponent_score(game,team_id)
+    end
+
+    total_games = games.size
+    win_percentage = (total_wins.to_f / total_games).round(2)
+    average_goals_scored = (total_goals_scored.to_f / total_games).round(2)
+    average_goals_against = (total_goals_against.to_f / total_games).round(2)
+
+    {
+      win_percentage: win_percentage,
+      total_goals_scored: total_goals_scored,
+      total_goals_against: total_goals_against,
+      average_goals_scored: average_goals_against
+      average_goals_against: average_goals_against
+    }
   end
 
   def games_won_by_team(team_id) #finds all games where the team won
