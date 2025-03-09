@@ -79,24 +79,44 @@ class TeamStatistics
   end
 
   def seasonal_summary(team_id) #Andrew
+    #Step 1, get all games for the team
+    team_games = games_involving_team(team_id)
+
+    #Step 2, group by season
+    games_by_season = team_games.map do |game|
+      #Need helper methods
+    end
     
   end
 
   #Helpers AS
 
-  def games_won_by_team(team_id)
+  def games_involving_team(team_id) #finds all games involving team
+    @game_teams.select do |game_team|
+      game_team.team_id == team_id
+    end
+  end
+
+  def find_season_by_game_id(game_id)
+    game_record = @games.find do |game|
+      game.game_id == game_id
+    end
+    game_record.season
+  end
+
+  def games_won_by_team(team_id) #finds all games where the team won
     @game_teams.select do |game|
       game.team_id == team_id && game.result == "WIN"
     end
   end
 
-  def games_lost_by_team(team_id)
+  def games_lost_by_team(team_id) #Finds all games where the team lost
     @game_teams.select do |game|
       game.team_id == team_id && game.result == "LOSS"
     end
   end
 
-  def goal_difference(game, team_id)
+  def goal_difference(game, team_id) #Finds the goal differential
     game_record = @games.find do |g| #Using g instead of game due to game argument
       g.game_id == game.game_id
     end
