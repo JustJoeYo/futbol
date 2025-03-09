@@ -63,7 +63,15 @@ class TeamStatistics
   end
 
   def worst_loss(team_id) #Andrew
-    
+    losses = games_lost_by_team(team_id)
+
+    return 0 if losses.empty? #Edge case guard
+
+    biggest_losses = losses.map do |game|
+      goal_difference(game, team_id).abs #Absolute value as the difference will be negative
+    end
+
+    biggest_losses.max
   end
 
   def head_to_head(team_id) #Katya

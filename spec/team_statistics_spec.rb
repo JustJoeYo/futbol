@@ -75,12 +75,12 @@ RSpec.describe TeamStatistics do
     end
 
     describe '#worst_loss' do
-      xit 'returns the biggest loss for a given team' do
+      it 'returns the biggest loss for a given team' do
         expect(@team_statistics.worst_loss('6')).to eq(0) #FC Dallas has no losses with the fixture
         expect(@team_statistics.worst_loss('3')).to eq(1) #Houston Dynamo biggest loss was 2-3
       end
 
-      xit 'returns 0 if the team has no losses' do
+      it 'returns 0 if the team has no losses' do
         expect(@team_statistics.worst_loss('9999')).to eq(0) #Fake
       end
     end
