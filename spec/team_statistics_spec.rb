@@ -91,10 +91,14 @@ RSpec.describe TeamStatistics do
 
     it '#most_goals_scored' do #katya
       expect(@team_statistics.most_goals_scored('3')).to eq(2)
+      expect(@team_statistics.most_goals_scored('14')).to eq(3)
+      expect(@team_statistics.most_goals_scored('5')).to eq(3)
     end
 
     it '#fewest_goals_scored' do #katya
       expect(@team_statistics.fewest_goals_scored('3')).to eq(1)
+      expect(@team_statistics.fewest_goals_scored('14')).to eq(1)
+      expect(@team_statistics.fewest_goals_scored('5')).to eq(2)
     end
 
     #helper method two
