@@ -258,6 +258,97 @@ module StatisticHelper
         team_stats 
     end
 
+    def games_involving_team(team_id) #finds all games involving team
+      @game_teams.select do |game_team|
+        game_team.team_id == team_id
+      end
+    end
+  
+    def find_season_by_game_id(game_id) #Finds the season for a given game_id
+      game_record = @games.find do |game|
+        game.game_id == game_id
+      end
+      game_record.season
+    end
+  
+    def calculate_season_stats(games, team_id)
+      return {
+        win_percentage: 0.0,
+        total_goals_scored: 0,
+        total_goals_against: 0,
+        average_goals_scored: 0.0,
+        average_goals_against: 0.0
+      } if games.empty? #Guard against zero
+  
+      total_games = games.size
+  
+      total_wins = 0
+      total_goals_scored = 0
+      total_goals_against = 0
+  
+      games.each do |game|
+        if game.result == "WIN"
+          total_wins += 1
+        end
+  
+        total_goals_scored += game.goals.to_i
+        total_goals_against += find_opponent_score(game, team_id)
+      end
+      #Hash creation
+      {
+        win_percentage: (total_wins.to_f / total_games).round(2),
+        total_goals_scored: total_goals_scored,
+        total_goals_against: total_goals_against,
+        average_goals_scored: (total_goals_scored.to_f / total_games).round(2),
+        average_goals_against: (total_goals_against.to_f / total_games).round(2)
+      }
+    end
+  
+    def find_game_type(game_id)
+      game_record = @games.find do |game|
+        game.game_id == game_id
+      end
+  
+      game_record.type
+    end
+  
+    def find_opponent_score(game, team_id) #Finds opponents goals from the game
+      game_record = @games.find do |g| #Using g as game is an argument
+        g.game_id == game.game_id
+      end
+  
+      if game_record.home_team_id == team_id
+        game_record.away_goals.to_i
+      else
+        game_record.home_goals.to_i
+      end
+    end
+  
+    def games_won_by_team(team_id) #finds all games where the team won
+      @game_teams.select do |game|
+        game.team_id == team_id && game.result == "WIN"
+      end
+    end
+  
+    def games_lost_by_team(team_id) #Finds all games where the team lost
+      @game_teams.select do |game|
+        game.team_id == team_id && game.result == "LOSS"
+      end
+    end
+  
+    def goal_difference(game, team_id) #Finds the goal differential
+      game_record = @games.find do |g| #Using g instead of game due to game argument
+        g.game_id == game.game_id
+      end
+  
+      if game_record.home_team_id == team_id
+        (game_record.home_goals.to_i - game_record.away_goals.to_i).abs
+      elsif game_record.away_team_id == team_id
+        (game_record.away_goals.to_i - game_record.home_goals.to_i).abs
+      else
+        0 #Edge case guard
+      end
+    end
 
   # Add more helper methods below and add a comment saying what it does.
 end
