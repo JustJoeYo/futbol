@@ -104,31 +104,109 @@ RSpec.describe TeamStatistics do
       it 'returns a hash with season statistics for a given team' do
         expected_summary = {
           "20122013" => {
-            "regular_season" => { #No regular season games in fixture
-              win_percentage: 0.0,
-              total_goals_scored: 0,
-              total_goals_against: 0,
-              average_goals_scored: 0,
-              average_goals_against: 0
-            },
             "postseason" => {
-              win_percentage: 1.0,
-              total_goals_scored: 11,
-              total_goals_against: 7,
-              average_goals_scored: 2.75,
-              average_goals_against: 1.75
+              average_goals_against: 0.0,
+              average_goals_scored: 0.0,
+              total_goals_against: 0,
+              total_goals_scored: 0,
+              win_percentage: 0.0
+            },
+            "regular_season" => {
+              average_goals_against: 1.96,
+              average_goals_scored: 1.96,
+              total_goals_against: 94,
+              total_goals_scored: 94,
+              win_percentage: 0.33
+            }
+          },
+          "20132014" => {
+            "postseason" => {
+              average_goals_against: 0.0,
+              average_goals_scored: 0.0,
+              total_goals_against: 0,
+              total_goals_scored: 0,
+              win_percentage: 0.0
+            },
+            "regular_season" => {
+              average_goals_against: 2.01,
+              average_goals_scored: 1.91,
+              total_goals_against: 165,
+              total_goals_scored: 157,
+              win_percentage: 0.38
+            }
+          },
+          "20142015" => {
+            "postseason" => {
+              average_goals_against: 0.0,
+              average_goals_scored: 0.0,
+              total_goals_against: 0,
+              total_goals_scored: 0,
+              win_percentage: 0.0
+            },
+            "regular_season" => {
+              average_goals_against: 2.04,
+              average_goals_scored: 1.83,
+              total_goals_against: 167,
+              total_goals_scored: 150,
+              win_percentage: 0.34
+            }
+          },
+          "20152016" => {
+            "postseason" => {
+              average_goals_against: 0.0,
+              average_goals_scored: 0.0,
+              total_goals_against: 0,
+              total_goals_scored: 0,
+              win_percentage: 0.0
+            },
+            "regular_season" => {
+              average_goals_against: 2.0,
+              average_goals_scored: 1.85,
+              total_goals_against: 164,
+              total_goals_scored: 152,
+              win_percentage: 0.39
+            }
+          },
+          "20162017" => {
+            "postseason" => {
+              average_goals_against: 0.0,
+              average_goals_scored: 0.0,
+              total_goals_against: 0,
+              total_goals_scored: 0,
+              win_percentage: 0.0
+            },
+            "regular_season" => {
+              average_goals_against: 2.21,
+              average_goals_scored: 1.8,
+              total_goals_against: 181,
+              total_goals_scored: 148,
+              win_percentage: 0.32
+            }
+          },
+          "20172018" => {
+            "postseason" => {
+              average_goals_against: 2.8,
+              average_goals_scored: 2.0,
+              total_goals_against: 14,
+              total_goals_scored: 10,
+              win_percentage: 0.2
+            },
+            "regular_season" => {
+              average_goals_against: 2.29,
+              average_goals_scored: 2.26,
+              total_goals_against: 188,
+              total_goals_scored: 185,
+              win_percentage: 0.39
             }
           }
         }
-
-        expect(@team_statistics.seasonal_summary('6')).to eq(expected_summary)
+        expect(@team_statistics_real.seasonal_summary("1")).to eq(expected_summary)
       end
     end
   end
 
   describe 'helper methods' do
     # joe helpers
-    
     it '#season_win_percentages' do
       expected_values = {
         "20122013" => 0.36,
@@ -145,7 +223,6 @@ RSpec.describe TeamStatistics do
       game_team = @game_teams.find { |gt| gt.game_id == "2012030222" }
       expect(@team_statistics.send(:season, game_team)).to eq("20122013")
     end
-
     # joe helpers end
 
     # katya helpers
