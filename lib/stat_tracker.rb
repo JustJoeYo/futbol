@@ -108,4 +108,16 @@ class StatTracker
     @season_statistics.fewest_tackles(season_id)
   end
 
+  #Team Statistics
+  def biggest_team_blowout
+    @team_statistics.biggest_team_blowout(team_id)
+  end
+
+  def worst_loss(team_id)
+    @team_statistics.worst_loss(team_id)
+  end
+
+  def seasonal_summary(team_id)
+    @team_statistics.seasonal_summary(team_id)
+  end
 end

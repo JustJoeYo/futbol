@@ -12,7 +12,7 @@ class TeamStatistics
   # Team Statistics
 
   def team_info(team_id) #Joe
-    team = @teams.find { |t| t.team_id == team_id }
+    team = @teams.find { |t| t.team_id == team_id } #couldn't use team so I used t here
     {
       team_id: team.team_id,
       franchise_id: team.franchise_id,
