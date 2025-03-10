@@ -175,10 +175,10 @@ RSpec.describe StatTracker do
       it '#biggest_team_blowout' do
         expect(@StatTracker.("")).to eq ""
       end
-      it '#' do
+      it '#worst_loss' do
         expect(@StatTracker.("")).to eq ""
       end
-      it '#' do
+      it '#seasonal_summary' do
         expect(@StatTracker.("")).to eq ""
       end
     end
