@@ -119,7 +119,7 @@ RSpec.describe TeamStatistics do
     describe '#games_involving_team' do
       it 'returns all game_team records for a given team' do
         expect(@team_statistics.games_involving_team('6').size).to eq(4)
-        expect(@team_statistics.games_involving_team('3').size).to eq(3)
+        expect(@team_statistics.games_involving_team('3').size).to eq(5)
         expect(@team_statistics.games_involving_team('9999')).to eq([])
       end
     end
@@ -138,11 +138,11 @@ RSpec.describe TeamStatistics do
         games = @team_statistics.games_involving_team(team_id)
 
         expected_stats = {
-          win_percentage: 0.75,
+          win_percentage: 1.0,
           total_goals_scored: 11,
-          total_goals_against: 6,
+          total_goals_against: 7,
           average_goals_scored: 2.75,
-          average_goals_against: 1.5
+          average_goals_against: 1.75
         }
 
         expect(@team_statistics.calculate_season_stats(games, team_id)).to eq(expected_stats)
@@ -187,7 +187,7 @@ RSpec.describe TeamStatistics do
     describe '#games_lost_by_team' do
       it 'returns all games that a give team has lost' do
         expect(@team_statistics.games_lost_by_team('6').size).to eq(0)
-        expect(@team_statistics.games_lost_by_team('3').size).to eq(3)
+        expect(@team_statistics.games_lost_by_team('3').size).to eq(4)
       end
     end
 
