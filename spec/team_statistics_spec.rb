@@ -47,13 +47,13 @@ RSpec.describe TeamStatistics do
 
     it '#team_info' do
       expected_values = {
-        team_id: '1',
-        franchise_id: '23',
-        team_name: 'Atlanta United',
-        abbreviation: 'ATL',
-        link: '/api/v1/teams/1'
+        "team_id" => "18",
+        "franchise_id" => "34",
+        "team_name" => "Minnesota United FC",
+        "abbreviation" => "MIN",
+        "link" => "/api/v1/teams/18"
       }
-      expect(@team_statistics.team_info('1')).to eq(expected_values)
+      expect(@team_statistics.team_info('18')).to eq(expected_values)
     end
 
     it '#best_season' do
