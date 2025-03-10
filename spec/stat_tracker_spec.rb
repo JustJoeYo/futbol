@@ -10,6 +10,8 @@ RSpec.describe StatTracker do
     @game_path = './data/games.csv'
     @team_path = './data/teams.csv'
     @game_teams_path = './data/game_teams.csv'
+    @game_path_fake = './data/games_fixture.csv'
+    @game_teams_path_fake = './data/game_team_fixture.csv'
 
     @locations = {
       games: @game_path,
@@ -17,7 +19,14 @@ RSpec.describe StatTracker do
       game_teams: @game_teams_path
     }
 
+    @locations_fake = {
+      games: @game_path_fake,
+      teams: @team_path,
+      game_teams: @game_teams_path_fake
+    }
+
     @StatTracker = StatTracker.from_csv(@locations)
+    @StatTracker_Fake = StatTracker.from_csv(@locations_fake) # prefixed fake to use mock data for specific tests
   end
 
   describe 'initialization' do
@@ -145,7 +154,7 @@ RSpec.describe StatTracker do
       end
     end
 
-    describe 'Season Statistics' do
+    describe 'Team Statistics' do
       it '#team_info' do
         expect(@StatTracker.team_info("")).to eq ""
       end
@@ -180,7 +189,7 @@ RSpec.describe StatTracker do
         expect(@StatTracker.worst_loss("")).to eq ""
       end
       it '#seasonal_summary' do
-        expect(@StatTracker.seasonal_summary("")).to eq ""
+        expect(@StatTracker_Fake.seasonal_summary("")).to eq ""
       end
     end
   end
