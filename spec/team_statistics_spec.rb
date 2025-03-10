@@ -47,20 +47,24 @@ RSpec.describe TeamStatistics do
         
     end
 
-    xit '#most_goals_scored' do
-        
+    it '#most_goals_scored' do #katya
+      expect(@team_statistics.most_goals_scored('3')).to eq(2)
+      expect(@team_statistics.most_goals_scored('14')).to eq(3)
+      expect(@team_statistics.most_goals_scored('5')).to eq(3)
     end
 
-    xit '#fewest_goals_scored' do
-        
+    it '#fewest_goals_scored' do #katya
+      expect(@team_statistics.fewest_goals_scored('3')).to eq(1)
+      expect(@team_statistics.fewest_goals_scored('14')).to eq(1)
+      expect(@team_statistics.fewest_goals_scored('5')).to eq(2)
     end
 
-    xit '#favorite_opponent' do
-        
+    it '#favorite_opponent' do #katya
+      expect(@team_statistics.favorite_opponent('3')).to eq("Sporting Kansas City")  
     end
 
-    describe '#rival' do
-
+    it '#rival' do #katya
+      expect(@team_statistics.rival('3')).to eq("FC Dallas") 
     end
 
     describe '#biggest_team_blowout' do
@@ -85,8 +89,10 @@ RSpec.describe TeamStatistics do
       end
     end
 
-    xit '#head_to_head' do
-        
+    it '#head_to_head' do #katya
+       expect(@team_statistics.head_to_head('3')).to eq({"Sporting Kansas City" => 50.0, "FC Dallas" => 100.0}) 
+       expect(@team_statistics.head_to_head('6')).to eq({"Houston Dynamo"=>0.0})
+       expect(@team_statistics.head_to_head('16')).to eq({"DC United"=>100.0})
     end
 
     describe '#seasonal_summary' do
@@ -116,6 +122,53 @@ RSpec.describe TeamStatistics do
   end
 
   describe 'helper methods' do
+    # katya helpers
+
+    it '#find_teams' do #katya helper method one
+      expect(@team_statistics.find_teams('14').first).to be_a(GameTeam)
+      expect(@team_statistics.find_teams('14').first.game_id).to eq('2014030413')
+      expect(@team_statistics.find_teams('14').first.team_id).to eq('14')
+      expect(@team_statistics.find_teams('14').first.giveaways).to eq('10')
+
+      expect(@team_statistics.find_teams('14')[1]).to be_a(GameTeam)
+      expect(@team_statistics.find_teams('14')[1].game_id).to eq("2014030414")
+      expect(@team_statistics.find_teams('14')[1].head_coach).to eq("Jon Cooper")
+      expect(@team_statistics.find_teams('14')[1].takeaways).to eq("7")
+    end
+
+    it "#find_games" do #katya helper method two
+      expect(@team_statistics.find_games('3').first).to be_a(GameTeam)
+      expect(@team_statistics.find_games('3').first.game_id).to eq("2012030221")
+      expect(@team_statistics.find_games('3').first.team_id).to eq("3")
+
+      expect(@team_statistics.find_games('3')[1]).to be_a(GameTeam)
+      expect(@team_statistics.find_games('3')[1].game_id).to eq("2012030221")
+      expect(@team_statistics.find_games('3')[1].team_id).to eq("6")
+      expect(@team_statistics.find_games('3')[1].result).to eq("WIN")
+
+      expect(@team_statistics.find_games('3')[7]).to be_a(GameTeam)
+      expect(@team_statistics.find_games('3')[7].team_id).to eq('5')
+      expect(@team_statistics.find_games('3')[7].tackles).to eq('35')
+    end
+
+    it "#goup_teams" do #katya helper method three
+      expect(@team_statistics.group_teams('3')).to be_a(Array)
+      expect(@team_statistics.group_teams('3')[0]).to be_a(Array)
+      expect(@team_statistics.group_teams('3')[0][0]).to be_a(GameTeam)
+      expect(@team_statistics.group_teams('3')[0][0].team_id).to eq("6")
+      expect(@team_statistics.group_teams('3')[0][0].head_coach).to eq("Claude Julien")
+      expect(@team_statistics.group_teams('3')[1][0]).to be_a(GameTeam)
+      expect(@team_statistics.group_teams('3')[1][0].team_id).to eq("5")
+      expect(@team_statistics.group_teams('3')[1][0].head_coach).to eq("Mike Sullivan")
+    end
+
+    it "#calculate_team_statistics" do #katya helper method four
+      expect(@team_statistics.calculate_team_statistics('3')).to eq({"6"=>{:wins=>3, :games=>3}, "5"=>{:wins=>1, :games=>2}})
+      expect(@team_statistics.calculate_team_statistics('16')).to eq({"14"=>{:wins=>1, :games=>1}})
+    end
+
+    # katya helpers
+
     describe '#games_involving_team' do
       it 'returns all game_team records for a given team' do
         expect(@team_statistics.games_involving_team('6').size).to eq(4)
