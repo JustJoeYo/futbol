@@ -156,40 +156,80 @@ RSpec.describe StatTracker do
 
     describe 'Team Statistics' do
       it '#team_info' do
-        expect(@StatTracker.team_info("")).to eq ""
+        expected = {
+          team_id: '1',
+          franchise_id: '23',
+          team_name: 'Atlanta United',
+          abbreviation: 'ATL',
+          link: '/api/v1/teams/1'
+        }
+        expect(@StatTracker.team_info('1')).to eq(expected)
       end
+
       it '#best_season' do
-        expect(@StatTracker.best_season("")).to eq ""
+        expect(@StatTracker.best_season("1")).to eq("20152016")
       end
+
       it '#worst_season' do
-        expect(@StatTracker.worst_season("")).to eq ""
+        expect(@StatTracker.worst_season("1")).to eq("20162017")
       end
+
       it '#average_win_percentage' do
-        expect(@StatTracker.average_win_percentage("")).to eq ""
+        expect(@StatTracker.average_win_percentage("9")).to eq(0.35)
       end
+
       it '#most_goals_scored' do
-        expect(@StatTracker.most_goals_scored("")).to eq ""
+        expect(@StatTracker_Fake.most_goals_scored("1")).to eq(5)
       end
+
       it '#fewest_goals_scored' do
-        expect(@StatTracker.fewest_goals_scored("")).to eq ""
+        expect(@StatTracker_Fake.fewest_goals_scored("1")).to eq(1)
       end
+
       it '#favorite_opponent' do
-        expect(@StatTracker.favorite_opponent("")).to eq ""
+        expect(@StatTracker_Fake.favorite_opponent("1")).to eq("Houston Dynamo")
       end
+
       it '#rival' do
-        expect(@StatTracker.rival("")).to eq ""
+        expect(@StatTracker_Fake.rival("1")).to eq("Seattle Sounders FC")
       end
+
       it '#head_to_head' do
-        expect(@StatTracker.head_to_head("")).to eq ""
+        expected = {
+          "Houston Dynamo" => 0.75,
+          "Seattle Sounders FC" => 0.25
+        }
+        expect(@StatTracker_Fake.head_to_head("1")).to eq(expected)
       end
+
       it '#biggest_team_blowout' do
-        expect(@StatTracker.biggest_team_blowout("")).to eq ""
+        expect(@StatTracker_Fake.biggest_team_blowout("1")).to eq(3)
       end
+
       it '#worst_loss' do
-        expect(@StatTracker.worst_loss("")).to eq ""
+        expect(@StatTracker_Fake.worst_loss("1")).to eq(3)
       end
+
       it '#seasonal_summary' do
-        expect(@StatTracker_Fake.seasonal_summary("")).to eq ""
+        expected = {
+          "20132014" => {
+            regular_season: {
+              win_percentage: 0.75,
+              total_goals_scored: 50,
+              total_goals_against: 30,
+              average_goals_scored: 2.5,
+              average_goals_against: 1.5
+            },
+            postseason: {
+              win_percentage: 0.5,
+              total_goals_scored: 10,
+              total_goals_against: 10,
+              average_goals_scored: 2.0,
+              average_goals_against: 2.0
+            }
+          }
+        }
+        expect(@StatTracker_Fake.seasonal_summary("1")).to eq(expected)
       end
     end
   end
