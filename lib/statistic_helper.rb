@@ -14,7 +14,6 @@ module StatisticHelper
   end
 
   #League Statistics Helpers
-
   def team_name(team_id) # Finds the team name based on the team_id
     team_names = @teams.find do |team|
       team.team_id == team_id
