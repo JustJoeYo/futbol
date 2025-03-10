@@ -206,7 +206,6 @@ RSpec.describe TeamStatistics do
   end
 
   describe 'helper methods' do
-    # joe helpers
     it '#season_win_percentages' do
       expected_values = {
         "20122013" => 0.36,
@@ -223,11 +222,8 @@ RSpec.describe TeamStatistics do
       game_team = @game_teams.find { |gt| gt.game_id == "2012030222" }
       expect(@team_statistics.send(:season, game_team)).to eq("20122013")
     end
-    # joe helpers end
 
-    # katya helpers
-
-    it '#find_teams' do #katya helper method one
+    it '#find_teams' do
       expect(@team_statistics.find_teams('14').first).to be_a(GameTeam)
       expect(@team_statistics.find_teams('14').first.game_id).to eq('2014030413')
       expect(@team_statistics.find_teams('14').first.team_id).to eq('14')
@@ -239,7 +235,7 @@ RSpec.describe TeamStatistics do
       expect(@team_statistics.find_teams('14')[1].takeaways).to eq("7")
     end
 
-    it "#find_games" do #katya helper method two
+    it "#find_games" do
       expect(@team_statistics.find_games('3').first).to be_a(GameTeam)
       expect(@team_statistics.find_games('3').first.game_id).to eq("2012030221")
       expect(@team_statistics.find_games('3').first.team_id).to eq("3")
@@ -254,7 +250,7 @@ RSpec.describe TeamStatistics do
       expect(@team_statistics.find_games('3')[7].tackles).to eq('35')
     end
 
-    it "#goup_teams" do #katya helper method three
+    it "#goup_teams" do
       expect(@team_statistics.group_teams('3')).to be_a(Array)
       expect(@team_statistics.group_teams('3')[0]).to be_a(Array)
       expect(@team_statistics.group_teams('3')[0][0]).to be_a(GameTeam)
@@ -265,12 +261,10 @@ RSpec.describe TeamStatistics do
       expect(@team_statistics.group_teams('3')[1][0].head_coach).to eq("Mike Sullivan")
     end
 
-    it "#calculate_team_statistics" do #katya helper method four
+    it "#calculate_team_statistics" do
       expect(@team_statistics.calculate_team_statistics('3')).to eq({"6"=>{:wins=>3, :games=>3}, "5"=>{:wins=>1, :games=>2}})
       expect(@team_statistics.calculate_team_statistics('16')).to eq({"14"=>{:wins=>1, :games=>1}})
     end
-
-    # katya helpers
 
     describe '#games_involving_team' do
       it 'returns all game_team records for a given team' do

@@ -38,21 +38,21 @@ class TeamStatistics
     (total_wins.to_f / total_games).round(2)
   end
 
-  def most_goals_scored(team_id) #Katya
+  def most_goals_scored(team_id)
     max_game = find_teams(team_id).max_by do |game|
       game.goals.to_i
     end
     max_game.goals.to_i
   end
 
-  def fewest_goals_scored(team_id) #Katya
+  def fewest_goals_scored(team_id)
     min_game = find_teams(team_id).min_by do |game|
       game.goals.to_i
     end
     min_game.goals.to_i
   end
 
-  def favorite_opponent(team_id) #Katya
+  def favorite_opponent(team_id)
     favorite = calculate_team_statistics(team_id).min_by do |team, stats|
       (stats[:wins].to_f / stats[:games].to_f) * 100
     end
@@ -60,7 +60,7 @@ class TeamStatistics
     team_name
   end
 
-  def rival(team_id) #Katya
+  def rival(team_id)
     rival = calculate_team_statistics(team_id).max_by do |team, stats|
       (stats[:wins].to_f / stats[:games].to_f) * 100
     end
@@ -68,7 +68,7 @@ class TeamStatistics
     team_name
   end
 
-  def biggest_team_blowout(team_id) #Andrew
+  def biggest_team_blowout(team_id)
     wins = games_won_by_team(team_id)
 
     return 0 if wins.empty? #Edge case guard
@@ -80,7 +80,7 @@ class TeamStatistics
     blowouts.max
   end
 
-  def worst_loss(team_id) #Andrew
+  def worst_loss(team_id)
     losses = games_lost_by_team(team_id)
 
     return 0 if losses.empty? #Edge case guard
@@ -92,7 +92,7 @@ class TeamStatistics
     biggest_losses.max
   end
 
-  def head_to_head(team_id) #Katya
+  def head_to_head(team_id)
     opponents = {}
     opponent_stats = calculate_team_statistics(team_id) 
     opponent_stats.each do |team, stats|
@@ -101,7 +101,7 @@ class TeamStatistics
     opponents
   end
 
-  def seasonal_summary(team_id) #Andrew
+  def seasonal_summary(team_id)
     #Step 1, get all games for the team
     team_games = games_involving_team(team_id)
 
