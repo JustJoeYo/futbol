@@ -12,14 +12,6 @@ module StatisticHelper
     count = @games.count { |game| yield(game) }
     (count.to_f / @games.size).round(2)
   end
-  # Helper method to find the highest score in the games data
-  def highest_score
-    @games.map { |game| game.home_goals.to_i + game.away_goals.to_i }.max
-  end
-  # Helper method to find the lowest score in the games data
-  def lowest_score
-    @games.map { |game| game.home_goals.to_i + game.away_goals.to_i }.min
-  end
 
   #League Statistics Helpers
 
