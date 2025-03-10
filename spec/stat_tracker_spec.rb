@@ -32,6 +32,7 @@ RSpec.describe StatTracker do
       expect(@StatTracker.game_statistics).to be_an_instance_of(GameStatistics) # sanity checking for the instance of the class's
       expect(@StatTracker.league_statistics).to be_an_instance_of(LeagueStatistics)
       expect(@StatTracker.season_statistics).to be_an_instance_of(SeasonStatistics)
+      expect(@StatTracker.team_statistics).to be_an_instance_of(TeamStatistics)
     end
   end
 

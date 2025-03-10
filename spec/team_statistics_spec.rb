@@ -26,25 +26,6 @@ RSpec.describe TeamStatistics do
   end
 
   describe 'instance methods' do
-    describe 'helper methods' do
-      it '#season_win_percentages' do
-        expected_values = {
-          "20122013" => 0.36,
-          "20132014" => 0.29,
-          "20142015" => 0.39,
-          "20152016" => 0.35,
-          "20162017" => 0.41,
-          "20172018" => 0.28,
-        }
-        expect(@team_statistics.season_win_percentages("9")).to eq(expected_values)
-      end
-  
-      it '#season' do
-        game_team = @game_teams.find { |gt| gt.game_id == "2012030222" }
-        expect(@team_statistics.send(:season, game_team)).to eq("20122013")
-      end
-    end
-
     it '#team_info' do
       expected_values = {
         "team_id" => "18",
@@ -143,6 +124,27 @@ RSpec.describe TeamStatistics do
   end
 
   describe 'helper methods' do
+    # joe helpers
+    
+    it '#season_win_percentages' do
+      expected_values = {
+        "20122013" => 0.36,
+        "20132014" => 0.29,
+        "20142015" => 0.39,
+        "20152016" => 0.35,
+        "20162017" => 0.41,
+        "20172018" => 0.28,
+      }
+      expect(@team_statistics.season_win_percentages("9")).to eq(expected_values)
+    end
+  
+    it '#season' do
+      game_team = @game_teams.find { |gt| gt.game_id == "2012030222" }
+      expect(@team_statistics.send(:season, game_team)).to eq("20122013")
+    end
+
+    # joe helpers end
+
     # katya helpers
 
     it '#find_teams' do #katya helper method one
