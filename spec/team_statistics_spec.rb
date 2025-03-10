@@ -52,23 +52,23 @@ RSpec.describe TeamStatistics do
       expect(@team_statistics_real.average_win_percentage("9")).to eq(0.35)
     end
 
-    it '#most_goals_scored' do #katya
+    it '#most_goals_scored' do 
       expect(@team_statistics.most_goals_scored('3')).to eq(2)
       expect(@team_statistics.most_goals_scored('14')).to eq(3)
       expect(@team_statistics.most_goals_scored('5')).to eq(3)
     end
 
-    it '#fewest_goals_scored' do #katya
+    it '#fewest_goals_scored' do 
       expect(@team_statistics.fewest_goals_scored('3')).to eq(1)
       expect(@team_statistics.fewest_goals_scored('14')).to eq(1)
       expect(@team_statistics.fewest_goals_scored('5')).to eq(2)
     end
 
-    it '#favorite_opponent' do #katya
+    it '#favorite_opponent' do 
       expect(@team_statistics.favorite_opponent('3')).to eq("Sporting Kansas City")  
     end
 
-    it '#rival' do #katya
+    it '#rival' do 
       expect(@team_statistics.rival('3')).to eq("FC Dallas") 
     end
 
@@ -94,7 +94,7 @@ RSpec.describe TeamStatistics do
       end
     end
 
-    it '#head_to_head' do #katya
+    it '#head_to_head' do 
        expect(@team_statistics.head_to_head('3')).to eq({"Sporting Kansas City" => 50.0, "FC Dallas" => 100.0}) 
        expect(@team_statistics.head_to_head('6')).to eq({"Houston Dynamo"=>0.0})
        expect(@team_statistics.head_to_head('16')).to eq({"DC United"=>100.0})
