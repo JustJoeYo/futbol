@@ -7,10 +7,13 @@ end
 RSpec.describe TeamStatistics do
   before(:each) do
     @teams = CSV.read('./data/teams.csv', headers: true, header_converters: :symbol).map { |row| Team.new(row) }
-    @games = CSV.read('./data/games.csv', headers: true, header_converters: :symbol).map { |row| Game.new(row) }
-    @game_teams = CSV.read('./data/game_teams.csv', headers: true, header_converters: :symbol).map { |row| GameTeam.new(row) }
+    @games_real = CSV.read('./data/games.csv', headers: true, header_converters: :symbol).map { |row| Game.new(row) }
+    @game_teams_real = CSV.read('./data/game_teams.csv', headers: true, header_converters: :symbol).map { |row| GameTeam.new(row) }
+    @games = CSV.read('./data/games_fixture.csv', headers: true, header_converters: :symbol).map { |row| Game.new(row) }
+    @game_teams = CSV.read('./data/game_team_fixture.csv', headers: true, header_converters: :symbol).map { |row| GameTeam.new(row) }
 
     @team_statistics = TeamStatistics.new(@teams, @games, @game_teams)
+    @team_statistics_real = TeamStatistics.new(@teams, @games_real, @game_teams_real)
   end
 
   describe 'initialization' do
@@ -34,19 +37,19 @@ RSpec.describe TeamStatistics do
         "abbreviation" => "MIN",
         "link" => "/api/v1/teams/18"
       }
-      expect(@team_statistics.team_info('18')).to eq(expected_values)
+      expect(@team_statistics_real.team_info('18')).to eq(expected_values)
     end
 
     it '#best_season' do
-      expect(@team_statistics.best_season("1")).to eq("20152016")
+      expect(@team_statistics_real.best_season("1")).to eq("20152016")
     end
 
     it '#worst_season' do
-      expect(@team_statistics.worst_season("1")).to eq("20162017")
+      expect(@team_statistics_real.worst_season("1")).to eq("20162017")
     end
 
     it '#average_win_percentage' do
-      expect(@team_statistics.average_win_percentage("9")).to eq(0.35)
+      expect(@team_statistics_real.average_win_percentage("9")).to eq(0.35)
     end
 
     it '#most_goals_scored' do #katya
@@ -135,7 +138,7 @@ RSpec.describe TeamStatistics do
         "20162017" => 0.41,
         "20172018" => 0.28,
       }
-      expect(@team_statistics.season_win_percentages("9")).to eq(expected_values)
+      expect(@team_statistics_real.season_win_percentages("9")).to eq(expected_values)
     end
   
     it '#season' do
