@@ -9,51 +9,6 @@ class TeamStatistics
     @game_teams = game_teams
   end
 
-  # needs relocation to helper methods
-  # Katya
-  
-  #helper method one
-  def find_teams(team_id) 
-    @game_teams.find_all do |game|
-      team_id == game.team_id
-    end
-  end
-
-  #helper method two
-  def find_games(team_id)
-    game_id_array = find_teams(team_id).map {|game| game.game_id} 
-    
-    @game_teams.find_all do |games|
-      game_id_array.include?(games.game_id) 
-    end
-  end
-
-  #helper method three
-  def group_teams(team_id) 
-    grouped_hash = find_games(team_id).group_by do |row|
-      row.team_id
-    end
-    grouped_hash.delete(team_id) 
-    grouped_hash.values #this method is returning a nested array of only the opponents rows, grouped by team_id 
-  end
-
-  #helper method four
-  def calculate_team_statistics(team_id) 
-    grouped_array = group_teams(team_id)
-    team_stats = {}
-    grouped_array.each do |team_array|
-      wins = 0
-      games = 0
-      team_array.each do |row|
-        if row.result == "WIN"
-          wins += 1
-        end
-        games += 1
-        team_stats[row.team_id] = { wins: wins, games: games }
-        end
-      end
-      team_stats 
-  end
 
   # Katya
   # 
