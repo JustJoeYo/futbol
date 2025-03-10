@@ -157,22 +157,22 @@ RSpec.describe StatTracker do
       it '#average_win_percentage' do
         expect(@StatTracker.("")).to eq ""
       end
-      it '#' do
+      it '#most_goals_scored' do
         expect(@StatTracker.("")).to eq ""
       end
-      it '#' do
+      it '#fewest_goals_scored' do
         expect(@StatTracker.("")).to eq ""
       end
-      it '#' do
+      it '#favorite_opponent' do
         expect(@StatTracker.("")).to eq ""
       end
-      it '#' do
+      it '#rival' do
         expect(@StatTracker.("")).to eq ""
       end
-      it '#' do
+      it '#head_to_head' do
         expect(@StatTracker.("")).to eq ""
       end
-      it '#' do
+      it '#biggest_team_blowout' do
         expect(@StatTracker.("")).to eq ""
       end
       it '#' do
