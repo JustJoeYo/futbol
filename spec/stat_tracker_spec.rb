@@ -143,6 +143,45 @@ RSpec.describe StatTracker do
           expect(@StatTracker.fewest_tackles("20132014")).to eq "Atlanta United"
       end
     end
+
+    describe 'Season Statistics' do
+      it '#team_info' do
+        expect(@StatTracker.("")).to eq ""
+      end
+      it '#best_season' do
+        expect(@StatTracker.("")).to eq ""
+      end
+      it '#worst_season' do
+        expect(@StatTracker.("")).to eq ""
+      end
+      it '#average_win_percentage' do
+        expect(@StatTracker.("")).to eq ""
+      end
+      it '#' do
+        expect(@StatTracker.("")).to eq ""
+      end
+      it '#' do
+        expect(@StatTracker.("")).to eq ""
+      end
+      it '#' do
+        expect(@StatTracker.("")).to eq ""
+      end
+      it '#' do
+        expect(@StatTracker.("")).to eq ""
+      end
+      it '#' do
+        expect(@StatTracker.("")).to eq ""
+      end
+      it '#' do
+        expect(@StatTracker.("")).to eq ""
+      end
+      it '#' do
+        expect(@StatTracker.("")).to eq ""
+      end
+      it '#' do
+        expect(@StatTracker.("")).to eq ""
+      end
+    end
   end
 
   # class methods only (keyword 'self')
