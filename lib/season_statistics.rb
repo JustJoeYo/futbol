@@ -32,7 +32,7 @@ class SeasonStatistics
   def most_accurate_team(season_id)
     team_stats = calculate_team_stats(season_id, :shots, :goals)
 
-    most_accurate = team_stats.min_by do |team, stats| #higher ratio means less accurate
+    most_accurate = team_stats.min_by do |team, stats| #lower ratio means more accurate
       stats[:shots].to_f / stats[:goals].to_f
     end
 
@@ -43,7 +43,7 @@ class SeasonStatistics
   def least_accurate_team(season_id)
     team_stats = calculate_team_stats(season_id, :shots, :goals)
 
-    least_accurate = team_stats.max_by do |team, stats| #lower ratio means less accurate
+    least_accurate = team_stats.max_by do |team, stats| #higher ratio means less accurate
       stats[:shots].to_f / stats[:goals].to_f
     end
 
