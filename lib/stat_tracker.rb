@@ -2,12 +2,13 @@ require 'csv'  # Requires the CSV library to handle CSV file operations
 require_relative 'game_statistics'
 require_relative 'season_statistics'
 require_relative 'league_statistics'
+require_relative 'team_statistics'
 require_relative 'game'
 require_relative 'game_team'
 require_relative 'team'
 
 class StatTracker
-  attr_reader :games, :teams, :game_teams, :game_statistics, :season_statistics, :league_statistics
+  attr_reader :games, :teams, :game_teams, :game_statistics, :season_statistics, :league_statistics, :team_statistics
 
   # Initializes a new instance of StatTracker with games, teams, and game_teams data
   def initialize(games, teams, game_teams)
@@ -17,6 +18,7 @@ class StatTracker
     @game_statistics = GameStatistics.new(games)
     @season_statistics = SeasonStatistics.new(game_teams,games,teams)
     @league_statistics = LeagueStatistics.new(games, teams, game_teams)
+    @team_statistics = TeamStatistics.new(teams, games, game_teams)
   end
 
   # Class method to create a new instance of StatTracker from CSV files
@@ -106,6 +108,20 @@ class StatTracker
   end
   def fewest_tackles(season_id)
     @season_statistics.fewest_tackles(season_id)
+  end
+
+  #Team Statistics
+  def team_info(team_id)
+    @team_statistics.team_info(team_id)
+  end
+  def best_season(team_id)
+    @team_statistics.best_season(team_id)
+  end
+  def worst_season(team_id)
+    @team_statistics.worst_season(team_id)
+  end
+  def average_win_percentage(team_id)
+    @team_statistics.average_win_percentage(team_id)
   end
 
 end
