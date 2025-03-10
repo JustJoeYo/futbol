@@ -156,14 +156,14 @@ RSpec.describe StatTracker do
 
     describe 'Team Statistics' do
       it '#team_info' do
-        expected = {
-          team_id: '1',
-          franchise_id: '23',
-          team_name: 'Atlanta United',
-          abbreviation: 'ATL',
-          link: '/api/v1/teams/1'
+        expected_values = {
+          "team_id" => "18",
+          "franchise_id" => "34",
+          "team_name" => "Minnesota United FC",
+          "abbreviation" => "MIN",
+          "link" => "/api/v1/teams/18"
         }
-        expect(@StatTracker.team_info('1')).to eq(expected)
+        expect(@StatTracker.team_info('18')).to eq(expected_values)
       end
 
       it '#best_season' do
@@ -179,57 +179,54 @@ RSpec.describe StatTracker do
       end
 
       it '#most_goals_scored' do
-        expect(@StatTracker_Fake.most_goals_scored("1")).to eq(5)
+        expect(@StatTracker_Fake.most_goals_scored("3")).to eq(2)
       end
 
       it '#fewest_goals_scored' do
-        expect(@StatTracker_Fake.fewest_goals_scored("1")).to eq(1)
+        expect(@StatTracker_Fake.fewest_goals_scored("3")).to eq(1)
       end
 
       it '#favorite_opponent' do
-        expect(@StatTracker_Fake.favorite_opponent("1")).to eq("Houston Dynamo")
+        expect(@StatTracker_Fake.favorite_opponent("3")).to eq("Sporting Kansas City")
       end
 
       it '#rival' do
-        expect(@StatTracker_Fake.rival("1")).to eq("Seattle Sounders FC")
+        expect(@StatTracker_Fake.rival("3")).to eq("FC Dallas")
       end
 
       it '#head_to_head' do
-        expected = {
-          "Houston Dynamo" => 0.75,
-          "Seattle Sounders FC" => 0.25
-        }
-        expect(@StatTracker_Fake.head_to_head("1")).to eq(expected)
+        expect(@StatTracker_Fake.head_to_head("3")).to eq({"Sporting Kansas City" => 50.0, "FC Dallas" => 100.0})
       end
 
       it '#biggest_team_blowout' do
-        expect(@StatTracker_Fake.biggest_team_blowout("1")).to eq(3)
+        expect(@StatTracker_Fake.biggest_team_blowout("6")).to eq(1)
       end
 
       it '#worst_loss' do
-        expect(@StatTracker_Fake.worst_loss("1")).to eq(3)
+        expect(@StatTracker_Fake.worst_loss("6")).to eq(0)
       end
 
       it '#seasonal_summary' do
-        expected = {
-          "20132014" => {
-            regular_season: {
-              win_percentage: 0.75,
-              total_goals_scored: 50,
-              total_goals_against: 30,
-              average_goals_scored: 2.5,
-              average_goals_against: 1.5
+        expected_summary = {
+          "20122013" => {
+            "regular_season" => { #No regular season games in fixture
+              win_percentage: 0.0,
+              total_goals_scored: 0,
+              total_goals_against: 0,
+              average_goals_scored: 0,
+              average_goals_against: 0
             },
-            postseason: {
-              win_percentage: 0.5,
-              total_goals_scored: 10,
-              total_goals_against: 10,
-              average_goals_scored: 2.0,
-              average_goals_against: 2.0
+            "postseason" => {
+              win_percentage: 1.0,
+              total_goals_scored: 11,
+              total_goals_against: 7,
+              average_goals_scored: 2.75,
+              average_goals_against: 1.75
             }
           }
         }
-        expect(@StatTracker_Fake.seasonal_summary("1")).to eq(expected)
+
+        expect(@StatTracker_Fake.seasonal_summary('6')).to eq(expected_summary)
       end
     end
   end
