@@ -83,7 +83,6 @@ We will analyze team performance in a fictional soccer league across seasons, id
   <ol>
       <ul>
         <li><a href="https://docs.google.com/document/d/1p25a3jL93fg868aQRc19drl-PbqwYSI6V0IO3B3Sr0M/edit?tab=t.0">DTR 02/28/2025</a></li>
-        <li><a>later revision here</a></li>
       </ul>
   </ol>
 
@@ -100,7 +99,7 @@ We will analyze team performance in a fictional soccer league across seasons, id
 - [x] Top 3 things that went well during your project
   - [ ] We did a great job trouble shooting and asking for help when needed
   - [ ] Felt like the work was split up well and evenly distributed between the team members
-  - [ ] 100% test coverage  :sunglasses:
+  - [ ] 100% test coverage :sunglasses:
 - [x] Top 3 things your team would do differently next time
   - [ ] Improve planning by reading ahead and planning how we will structure the project.
   - [ ] Could have built out the Trello board more, but given the project, seemed best to get started on the coding rather than get bogged down in the planning as we already had a plan in place.
@@ -115,8 +114,8 @@ We will analyze team performance in a fictional soccer league across seasons, id
 - [x] start iteration 1 as a group
   - [x] finish iteration 2 as a group
 - [x] do the "Include link to your initial DTR" thing in readme file
-- [ ] spec harness passing
-- [ ] read raw data and make into object
+- [x] spec harness passing
+- [x] read raw data and make into object
 
 See the [open issues](https://github.com/JustJoeYo/futbol/issues) for a full list of proposed features (and known issues).
 
