@@ -213,6 +213,21 @@ module StatisticHelper
       team_row.team_name
     end
 
+    # Team statistics helpers
+    def season_win_percentages(team_id)
+      seasons = @games.map { |game| game.season }.uniq
+      seasons.each_with_object({}) do |season, percentages|
+        total_games = @game_teams.count { |game_team| game_team.team_id == team_id && season(game_team) == season }
+        total_wins = @game_teams.count { |game_team| game_team.team_id == team_id && season(game_team) == season && game_team.result == "WIN" }
+        percentages[season] = total_games.zero? ? 0 : (total_wins.to_f / total_games).round(2)
+      end
+    end
+  
+    def season(game_team)
+      game = @games.find { |g| g.game_id == game_team.game_id }
+      game.season
+    end
+
   # Add more helper methods below and add a comment saying what it does.
 end
 

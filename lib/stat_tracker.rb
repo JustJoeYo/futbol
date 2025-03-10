@@ -18,7 +18,7 @@ class StatTracker
     @game_statistics = GameStatistics.new(games)
     @season_statistics = SeasonStatistics.new(game_teams,games,teams)
     @league_statistics = LeagueStatistics.new(games, teams, game_teams)
-    @team_statistics = TeamStatistics.new(teams,games,game_teams)
+    @team_statistics = TeamStatistics.new(teams, games, game_teams)
   end
 
   # Class method to create a new instance of StatTracker from CSV files
@@ -111,6 +111,22 @@ class StatTracker
   end
 
   #Team Statistics
+  def team_info(team_id)
+    @team_statistics.team_info(team_id)
+  end
+  
+  def best_season(team_id)
+    @team_statistics.best_season(team_id)
+  end
+  
+  def worst_season(team_id)
+    @team_statistics.worst_season(team_id)
+  end
+  
+  def average_win_percentage(team_id)
+    @team_statistics.average_win_percentage(team_id)
+  end
+
   def most_goals_scored(team_id)
     @team_statistics.most_goals_scored(team_id)
   end
