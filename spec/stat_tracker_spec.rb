@@ -146,40 +146,40 @@ RSpec.describe StatTracker do
 
     describe 'Season Statistics' do
       it '#team_info' do
-        expect(@StatTracker.("")).to eq ""
+        expect(@StatTracker.team_info("")).to eq ""
       end
       it '#best_season' do
-        expect(@StatTracker.("")).to eq ""
+        expect(@StatTracker.best_season("")).to eq ""
       end
       it '#worst_season' do
-        expect(@StatTracker.("")).to eq ""
+        expect(@StatTracker.worst_season("")).to eq ""
       end
       it '#average_win_percentage' do
-        expect(@StatTracker.("")).to eq ""
+        expect(@StatTracker.average_win_percentage("")).to eq ""
       end
       it '#most_goals_scored' do
-        expect(@StatTracker.("")).to eq ""
+        expect(@StatTracker.most_goals_scored("")).to eq ""
       end
       it '#fewest_goals_scored' do
-        expect(@StatTracker.("")).to eq ""
+        expect(@StatTracker.fewest_goals_scored("")).to eq ""
       end
       it '#favorite_opponent' do
-        expect(@StatTracker.("")).to eq ""
+        expect(@StatTracker.favorite_opponent("")).to eq ""
       end
       it '#rival' do
-        expect(@StatTracker.("")).to eq ""
+        expect(@StatTracker.rival("")).to eq ""
       end
       it '#head_to_head' do
-        expect(@StatTracker.("")).to eq ""
+        expect(@StatTracker.head_to_head("")).to eq ""
       end
       it '#biggest_team_blowout' do
-        expect(@StatTracker.("")).to eq ""
+        expect(@StatTracker.biggest_team_blowout("")).to eq ""
       end
       it '#worst_loss' do
-        expect(@StatTracker.("")).to eq ""
+        expect(@StatTracker.worst_loss("")).to eq ""
       end
       it '#seasonal_summary' do
-        expect(@StatTracker.("")).to eq ""
+        expect(@StatTracker.seasonal_summary("")).to eq ""
       end
     end
   end
