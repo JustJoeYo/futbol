@@ -7,10 +7,13 @@ end
 RSpec.describe TeamStatistics do
   before(:each) do
     @teams = CSV.read('./data/teams.csv', headers: true, header_converters: :symbol).map { |row| Team.new(row) }
-    @games = CSV.read('./data/games.csv', headers: true, header_converters: :symbol).map { |row| Game.new(row) }
-    @game_teams = CSV.read('./data/game_teams.csv', headers: true, header_converters: :symbol).map { |row| GameTeam.new(row) }
+    @games_real = CSV.read('./data/games.csv', headers: true, header_converters: :symbol).map { |row| Game.new(row) }
+    @game_teams_real = CSV.read('./data/game_teams.csv', headers: true, header_converters: :symbol).map { |row| GameTeam.new(row) }
+    @games = CSV.read('./data/games_fixture.csv', headers: true, header_converters: :symbol).map { |row| Game.new(row) }
+    @game_teams = CSV.read('./data/game_team_fixture.csv', headers: true, header_converters: :symbol).map { |row| GameTeam.new(row) }
 
     @team_statistics = TeamStatistics.new(@teams, @games, @game_teams)
+    @team_statistics_real = TeamStatistics.new(@teams, @games_real, @game_teams_real)
   end
 
   describe 'initialization' do
@@ -26,25 +29,6 @@ RSpec.describe TeamStatistics do
   end
 
   describe 'instance methods' do
-    describe 'helper methods' do
-      it '#season_win_percentages' do
-        expected_values = {
-          "20122013" => 0.36,
-          "20132014" => 0.29,
-          "20142015" => 0.39,
-          "20152016" => 0.35,
-          "20162017" => 0.41,
-          "20172018" => 0.28,
-        }
-        expect(@team_statistics.season_win_percentages("9")).to eq(expected_values)
-      end
-  
-      it '#season' do
-        game_team = @game_teams.find { |gt| gt.game_id == "2012030222" }
-        expect(@team_statistics.send(:season, game_team)).to eq("20122013")
-      end
-    end
-
     it '#team_info' do
       expected_values = {
         "team_id" => "18",
@@ -53,19 +37,19 @@ RSpec.describe TeamStatistics do
         "abbreviation" => "MIN",
         "link" => "/api/v1/teams/18"
       }
-      expect(@team_statistics.team_info('18')).to eq(expected_values)
+      expect(@team_statistics_real.team_info('18')).to eq(expected_values)
     end
 
     it '#best_season' do
-      expect(@team_statistics.best_season("1")).to eq("20152016")
+      expect(@team_statistics_real.best_season("1")).to eq("20152016")
     end
 
     it '#worst_season' do
-      expect(@team_statistics.worst_season("1")).to eq("20162017")
+      expect(@team_statistics_real.worst_season("1")).to eq("20162017")
     end
 
     it '#average_win_percentage' do
-      expect(@team_statistics.average_win_percentage("9")).to eq(0.35)
+      expect(@team_statistics_real.average_win_percentage("9")).to eq(0.35)
     end
 
     it '#most_goals_scored' do #katya
@@ -120,32 +104,126 @@ RSpec.describe TeamStatistics do
       it 'returns a hash with season statistics for a given team' do
         expected_summary = {
           "20122013" => {
-            "regular_season" => { #No regular season games in fixture
-              win_percentage: 0.0,
-              total_goals_scored: 0,
-              total_goals_against: 0,
-              average_goals_scored: 0,
-              average_goals_against: 0
-            },
             "postseason" => {
-              win_percentage: 1.0,
-              total_goals_scored: 11,
-              total_goals_against: 7,
-              average_goals_scored: 2.75,
-              average_goals_against: 1.75
+              average_goals_against: 0.0,
+              average_goals_scored: 0.0,
+              total_goals_against: 0,
+              total_goals_scored: 0,
+              win_percentage: 0.0
+            },
+            "regular_season" => {
+              average_goals_against: 1.96,
+              average_goals_scored: 1.96,
+              total_goals_against: 94,
+              total_goals_scored: 94,
+              win_percentage: 0.33
+            }
+          },
+          "20132014" => {
+            "postseason" => {
+              average_goals_against: 0.0,
+              average_goals_scored: 0.0,
+              total_goals_against: 0,
+              total_goals_scored: 0,
+              win_percentage: 0.0
+            },
+            "regular_season" => {
+              average_goals_against: 2.01,
+              average_goals_scored: 1.91,
+              total_goals_against: 165,
+              total_goals_scored: 157,
+              win_percentage: 0.38
+            }
+          },
+          "20142015" => {
+            "postseason" => {
+              average_goals_against: 0.0,
+              average_goals_scored: 0.0,
+              total_goals_against: 0,
+              total_goals_scored: 0,
+              win_percentage: 0.0
+            },
+            "regular_season" => {
+              average_goals_against: 2.04,
+              average_goals_scored: 1.83,
+              total_goals_against: 167,
+              total_goals_scored: 150,
+              win_percentage: 0.34
+            }
+          },
+          "20152016" => {
+            "postseason" => {
+              average_goals_against: 0.0,
+              average_goals_scored: 0.0,
+              total_goals_against: 0,
+              total_goals_scored: 0,
+              win_percentage: 0.0
+            },
+            "regular_season" => {
+              average_goals_against: 2.0,
+              average_goals_scored: 1.85,
+              total_goals_against: 164,
+              total_goals_scored: 152,
+              win_percentage: 0.39
+            }
+          },
+          "20162017" => {
+            "postseason" => {
+              average_goals_against: 0.0,
+              average_goals_scored: 0.0,
+              total_goals_against: 0,
+              total_goals_scored: 0,
+              win_percentage: 0.0
+            },
+            "regular_season" => {
+              average_goals_against: 2.21,
+              average_goals_scored: 1.8,
+              total_goals_against: 181,
+              total_goals_scored: 148,
+              win_percentage: 0.32
+            }
+          },
+          "20172018" => {
+            "postseason" => {
+              average_goals_against: 2.8,
+              average_goals_scored: 2.0,
+              total_goals_against: 14,
+              total_goals_scored: 10,
+              win_percentage: 0.2
+            },
+            "regular_season" => {
+              average_goals_against: 2.29,
+              average_goals_scored: 2.26,
+              total_goals_against: 188,
+              total_goals_scored: 185,
+              win_percentage: 0.39
             }
           }
         }
-
-        expect(@team_statistics.seasonal_summary('6')).to eq(expected_summary)
+        expect(@team_statistics_real.seasonal_summary("1")).to eq(expected_summary)
       end
     end
   end
 
   describe 'helper methods' do
-    # katya helpers
+    it '#season_win_percentages' do
+      expected_values = {
+        "20122013" => 0.36,
+        "20132014" => 0.29,
+        "20142015" => 0.39,
+        "20152016" => 0.35,
+        "20162017" => 0.41,
+        "20172018" => 0.28,
+      }
+      expect(@team_statistics_real.season_win_percentages("9")).to eq(expected_values)
+    end
+  
+    it '#season' do
+      game_team = @game_teams.find { |gt| gt.game_id == "2012030222" }
+      expect(@team_statistics.send(:season, game_team)).to eq("20122013")
+    end
 
-    it '#find_teams' do #katya helper method one
+    it '#find_teams' do
       expect(@team_statistics.find_teams('14').first).to be_a(GameTeam)
       expect(@team_statistics.find_teams('14').first.game_id).to eq('2014030413')
       expect(@team_statistics.find_teams('14').first.team_id).to eq('14')
@@ -157,7 +235,7 @@ RSpec.describe TeamStatistics do
       expect(@team_statistics.find_teams('14')[1].takeaways).to eq("7")
     end
 
-    it "#find_games" do #katya helper method two
+    it "#find_games" do
       expect(@team_statistics.find_games('3').first).to be_a(GameTeam)
       expect(@team_statistics.find_games('3').first.game_id).to eq("2012030221")
       expect(@team_statistics.find_games('3').first.team_id).to eq("3")
@@ -172,7 +250,7 @@ RSpec.describe TeamStatistics do
       expect(@team_statistics.find_games('3')[7].tackles).to eq('35')
     end
 
-    it "#goup_teams" do #katya helper method three
+    it "#goup_teams" do
       expect(@team_statistics.group_teams('3')).to be_a(Array)
       expect(@team_statistics.group_teams('3')[0]).to be_a(Array)
       expect(@team_statistics.group_teams('3')[0][0]).to be_a(GameTeam)
@@ -183,12 +261,10 @@ RSpec.describe TeamStatistics do
       expect(@team_statistics.group_teams('3')[1][0].head_coach).to eq("Mike Sullivan")
     end
 
-    it "#calculate_team_statistics" do #katya helper method four
+    it "#calculate_team_statistics" do
       expect(@team_statistics.calculate_team_statistics('3')).to eq({"6"=>{:wins=>3, :games=>3}, "5"=>{:wins=>1, :games=>2}})
       expect(@team_statistics.calculate_team_statistics('16')).to eq({"14"=>{:wins=>1, :games=>1}})
     end
-
-    # katya helpers
 
     describe '#games_involving_team' do
       it 'returns all game_team records for a given team' do

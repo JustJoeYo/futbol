@@ -1,28 +1,10 @@
 module StatisticHelper
-  # Define all the helper methods here (primarily calculations etc, this is just a demo of usage)
-
-  # Example helper method to find a team name by team_id
-  # def find_team_name(teams, team_id)
-  #   team = teams.find { |row| row[:team_id].to_s == team_id.to_s }
-  #   team[:teamname]
-  # end
-  #Game Statistics
-  # Helper method to calculate the percentage of games that meet a certain condition (yield)
   def calculate_percentage
     count = @games.count { |game| yield(game) }
     (count.to_f / @games.size).round(2)
   end
-  # Helper method to find the highest score in the games data
-  def highest_score
-    @games.map { |game| game.home_goals.to_i + game.away_goals.to_i }.max
-  end
-  # Helper method to find the lowest score in the games data
-  def lowest_score
-    @games.map { |game| game.home_goals.to_i + game.away_goals.to_i }.min
-  end
 
   #League Statistics Helpers
-
   def team_name(team_id) # Finds the team name based on the team_id
     team_names = @teams.find do |team|
       team.team_id == team_id
@@ -228,18 +210,132 @@ module StatisticHelper
       game.season
     end
 
-  # Add more helper methods below and add a comment saying what it does.
+    def find_teams(team_id) 
+      @game_teams.find_all do |game|
+        team_id == game.team_id
+      end
+    end
+   
+    def find_games(team_id)
+      game_id_array = find_teams(team_id).map {|game| game.game_id} 
+      
+      @game_teams.find_all do |games|
+        game_id_array.include?(games.game_id) 
+      end
+    end
+
+    def group_teams(team_id) 
+      grouped_hash = find_games(team_id).group_by do |row|
+        row.team_id
+      end
+      grouped_hash.delete(team_id) 
+      grouped_hash.values 
+    end
+
+    def calculate_team_statistics(team_id) 
+      grouped_array = group_teams(team_id)
+      team_stats = {}
+      grouped_array.each do |team_array|
+        wins = 0
+        games = 0
+        team_array.each do |row|
+          if row.result == "WIN"
+            wins += 1
+          end
+          games += 1
+          team_stats[row.team_id] = { wins: wins, games: games }
+          end
+        end
+        team_stats 
+    end
+
+    def games_involving_team(team_id) #finds all games involving team
+      @game_teams.select do |game_team|
+        game_team.team_id == team_id
+      end
+    end
+  
+    def find_season_by_game_id(game_id) #Finds the season for a given game_id
+      game_record = @games.find do |game|
+        game.game_id == game_id
+      end
+      game_record.season
+    end
+  
+    def calculate_season_stats(games, team_id)
+      return {
+        win_percentage: 0.0,
+        total_goals_scored: 0,
+        total_goals_against: 0,
+        average_goals_scored: 0.0,
+        average_goals_against: 0.0
+      } if games.empty? #Guard against zero
+  
+      total_games = games.size
+  
+      total_wins = 0
+      total_goals_scored = 0
+      total_goals_against = 0
+  
+      games.each do |game|
+        if game.result == "WIN"
+          total_wins += 1
+        end
+  
+        total_goals_scored += game.goals.to_i
+        total_goals_against += find_opponent_score(game, team_id)
+      end
+      #Hash creation
+      {
+        win_percentage: (total_wins.to_f / total_games).round(2),
+        total_goals_scored: total_goals_scored,
+        total_goals_against: total_goals_against,
+        average_goals_scored: (total_goals_scored.to_f / total_games).round(2),
+        average_goals_against: (total_goals_against.to_f / total_games).round(2)
+      }
+    end
+  
+    def find_game_type(game_id)
+      game_record = @games.find do |game|
+        game.game_id == game_id
+      end
+  
+      game_record.type
+    end
+  
+    def find_opponent_score(game, team_id) #Finds opponents goals from the game
+      game_record = @games.find do |g| #Using g as game is an argument
+        g.game_id == game.game_id
+      end
+  
+      if game_record.home_team_id == team_id
+        game_record.away_goals.to_i
+      else
+        game_record.home_goals.to_i
+      end
+    end
+  
+    def games_won_by_team(team_id) #finds all games where the team won
+      @game_teams.select do |game|
+        game.team_id == team_id && game.result == "WIN"
+      end
+    end
+  
+    def games_lost_by_team(team_id) #Finds all games where the team lost
+      @game_teams.select do |game|
+        game.team_id == team_id && game.result == "LOSS"
+      end
+    end
+  
+    def goal_difference(game, team_id) #Finds the goal differential
+      game_record = @games.find do |g| #Using g instead of game due to game argument
+        g.game_id == game.game_id
+      end
+  
+      if game_record.home_team_id == team_id
+        (game_record.home_goals.to_i - game_record.away_goals.to_i).abs
+      elsif game_record.away_team_id == team_id
+        (game_record.away_goals.to_i - game_record.home_goals.to_i).abs
+      end
+    end
 end
-
-# you can check my class out or look at this below
-# this is how you would use this in your classes:
-
-
-
-#require './lib/statistic_helper'
-
-# class ExampleStatistics
-#   include StatisticHelper # within the class in order to use the helper methods
-
-#   # class methods here
-# end

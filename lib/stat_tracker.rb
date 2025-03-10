@@ -147,7 +147,7 @@ class StatTracker
     @team_statistics.head_to_head(team_id)
   end
 
-  def biggest_team_blowout
+  def biggest_team_blowout(team_id)
     @team_statistics.biggest_team_blowout(team_id)
   end
 

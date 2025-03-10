@@ -9,11 +9,11 @@ class GameStatistics
   
   # Game Statistics
   def highest_total_score
-    highest_score
+    @games.map { |game| game.home_goals.to_i + game.away_goals.to_i }.max
   end
 
   def lowest_total_score
-    lowest_score
+    @games.map { |game| game.home_goals.to_i + game.away_goals.to_i }.min
   end
 
   def percentage_home_wins

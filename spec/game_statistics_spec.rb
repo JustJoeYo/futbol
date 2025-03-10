@@ -40,18 +40,12 @@ RSpec.describe GameStatistics do
 
     describe '#highest_total_score' do
       it '#highest_score' do
-        expect(@game_statistics.highest_score).to eq(11) 
-      end
-      it 'highest sum of the winning/losing teams scores' do
         expect(@game_statistics.highest_total_score).to eq(11) 
       end
     end
 
     describe '#lowest_total_score' do
       it '#lowest_score' do
-        expect(@game_statistics.lowest_score).to eq(0) 
-      end
-      it 'lowest sum of the winning/losing teams scores' do
         expect(@game_statistics.lowest_total_score).to eq(0) 
       end
     end
