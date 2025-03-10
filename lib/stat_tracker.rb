@@ -111,7 +111,6 @@ class StatTracker
   end
 
   #Team Statistics
-
   def most_goals_scored(team_id)
     @team_statistics.most_goals_scored(team_id)
   end
@@ -132,4 +131,15 @@ class StatTracker
     @team_statistics.head_to_head(team_id)
   end
 
+  def biggest_team_blowout
+    @team_statistics.biggest_team_blowout(team_id)
+  end
+
+  def worst_loss(team_id)
+    @team_statistics.worst_loss(team_id)
+  end
+
+  def seasonal_summary(team_id)
+    @team_statistics.seasonal_summary(team_id)
+  end
 end
